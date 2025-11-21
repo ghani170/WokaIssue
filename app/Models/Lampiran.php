@@ -13,4 +13,8 @@ class Lampiran extends Model
         'laporan_id',
         'dokumentasi',
     ];
+
+    public function laporan() {
+        return $this->belongsTo(Laporan::class, 'laporan_id');
+    }
 }

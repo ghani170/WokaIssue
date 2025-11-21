@@ -14,4 +14,8 @@ class Comment extends Model
         'user_id',
         'comment'
     ];
+
+    public function laporan() {
+        return $this->belongsTo(Laporan::class, 'laporan_id');
+    }
 }

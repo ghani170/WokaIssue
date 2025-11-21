@@ -20,4 +20,24 @@ class Laporan extends Model
         'status',
         'deadline',
     ];
+
+    public function client() {
+        return $this->belongsTo(User::class, 'client_id');
+    }
+
+    public function developer() {
+        return $this->belongsTo(User::class, 'developer_id');
+    }
+
+    public function project() {
+        return $this->belongsTo(Project::class, 'project_id');
+    }
+
+    public function lampiran() {
+        return $this->hasMany(Lampiran::class, 'laporan_id');
+    }
+
+    public function comments() {
+        return $this->hasMany(Comment::class, 'laporan_id');
+    }
 }

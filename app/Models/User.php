@@ -21,7 +21,20 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role',
+        'company_id',
     ];
+
+    public function company() {
+        return $this->belongsTo(Company::class, 'company_id');
+    }
+    
+    public function client() {
+        return $this->hasMany(Laporan::class, 'client_id');
+    }
+    public function developer() {
+        return $this->hasMany(Laporan::class, 'developer_id');
+    }
 
     /**
      * The attributes that should be hidden for serialization.

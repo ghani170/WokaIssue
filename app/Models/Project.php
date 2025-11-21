@@ -14,4 +14,19 @@ class Project extends Model
         'deskripsi',
         'status',
     ];
+
+    public function company() {
+        return $this->belongsTo(Company::class, 'company_id');
+    }
+
+    public function laporan() {
+        return $this->hasMany(Laporan::class, 'project_id');
+    }
+
+    public function client() {
+        return $this->belongsTo(Laporan::class, 'client_id');
+    }
+    public function developer() {
+        return $this->belongsTo(Laporan::class, 'developer_id');
+    }
 }

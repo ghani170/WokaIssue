@@ -14,4 +14,12 @@ class Company extends Model
         'alamat',
         'telepon',
     ];
+
+    public function user() {
+        return $this->hasOne(User::class, 'company_id');
+    }
+
+    public function project() {
+        return $this->hasMany(Project::class, 'company_id');
+    }
 }
