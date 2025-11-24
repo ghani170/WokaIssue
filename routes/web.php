@@ -7,7 +7,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::resource('laporan', LaporanController::class);
 });
+
 Route::prefix('client')->name('client.')->middleware(['auth', 'role:client'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/laporan', [LaporanController::class, 'laporan'])->name('laporan');
