@@ -38,15 +38,15 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="flex items-center p-2 rounded hover:bg-blue-700">
+                        <a href="{{ route('admin.project.index') }}" class="flex items-center p-2 rounded hover:bg-blue-700">
                             <i class="fas fa-shopping-cart mr-3"></i>
-                            Produk
+                            Project
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="flex items-center p-2 rounded hover:bg-blue-700">
+                        <a href="{{ route('admin.company.index') }}" class="flex items-center p-2 rounded hover:bg-blue-700">
                             <i class="fas fa-cog mr-3"></i>
-                            Pengaturan
+                            Company
                         </a>
                     </li>
                 @endif
