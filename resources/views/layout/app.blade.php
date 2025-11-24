@@ -25,7 +25,7 @@
             <nav class="flex-1 p-4">
                 <ul class="space-y-2">
                     <li>
-                        <a href="#" class="flex items-center p-2 rounded hover:bg-blue-700 bg-blue-700">
+                        <a href="{{ route('admin.dashboard') }}" class="flex items-center p-2 rounded hover:bg-blue-700 {{ request()->routeIs('admin.dashboard*') ? 'rounded bg-blue-700' : '' }}">
                             <i class="fas fa-home mr-3"></i>
                             Dashboard
                         </a>
@@ -34,19 +34,31 @@
                     <!-- Sidebar admin -->
                     @if (auth()->user()->role === 'admin')
                     <li>
-                        <a href="{{route('admin.laporan.index')}}" class="flex items-center p-2 rounded hover:bg-blue-700">
+                        <a href="{{route('admin.developer.index')}}" class="flex items-center p-2 rounded hover:bg-blue-700 {{ request()->routeIs('admin.developer*') ? 'rounded bg-blue-700' : '' }}">
+                            <i class="fa-solid fa-people-group mr-3"></i>
+                            Kelola Developer
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{route('admin.client.index')}}" class="flex items-center p-2 rounded hover:bg-blue-700 {{ request()->routeIs('admin.client*') ? 'rounded bg-blue-700' : '' }}">
+                            <i class="fa-solid fa-people-group mr-3"></i>
+                            Kelola Client
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{route('admin.laporan.index')}}" class="flex items-center p-2 rounded hover:bg-blue-700 {{ request()->routeIs('admin.laporan*') ? 'rounded bg-blue-700' : '' }}">
                             <i class="fa-solid fa-folder-open mr-3"></i>
                             Laporan client
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('admin.project.index') }}" class="flex items-center p-2 rounded hover:bg-blue-700">
+                        <a href="{{ route('admin.project.index') }}" class="flex items-center p-2 rounded hover:bg-blue-700 {{ request()->routeIs('admin.project*') ? 'rounded bg-blue-700' : '' }}">
                             <i class="fa-solid fa-bars-progress mr-3"></i>
                             Project
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('admin.company.index') }}" class="flex items-center p-2 rounded hover:bg-blue-700">
+                        <a href="{{ route('admin.company.index') }}" class="flex items-center p-2 rounded hover:bg-blue-700 {{ request()->routeIs('admin.company*') ? 'rounded bg-blue-700' : '' }}">
                             <i class="fa-solid fa-building mr-3"></i>
                             Company
                         </a>
@@ -56,7 +68,7 @@
                     <!-- Sidebar client -->
                     @if (auth()->user()->role === 'client')
                     <li>
-                        <a href="{{route('client.laporan')}}" class="flex items-center p-2 rounded hover:bg-blue-700">
+                        <a href="{{route('client.laporan')}}" class="flex items-center p-2 rounded hover:bg-blue-700 {{ request()->routeIs('client.laporan*') ? 'rounded  bg-blue-700' : '' }}">
                             <i class="fas fa-chart-bar mr-3"></i>
                             Laporan
                         </a>
