@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\LaporanController;
 use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\Developer\LaporanController as DeveloperLaporanController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin'])->group(function () {
@@ -36,4 +37,5 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middl
 
 Route::prefix('dev')->name('dev.')->middleware(['auth', 'role:developer'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::resource('laporan', DeveloperLaporanController::class);
 });
