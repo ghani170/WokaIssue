@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Laporan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LaporanController extends Controller
 {
@@ -62,4 +64,12 @@ class LaporanController extends Controller
     {
         //
     }
+
+    public function laporan(){
+        $laporan = Laporan::where('client_id', Auth::id())->get();
+
+        return view('clients.laporan.index', compact('laporan'));
+    }
+
+
 }

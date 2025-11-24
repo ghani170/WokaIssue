@@ -1,12 +1,17 @@
 <?php
 
-
+use App\Http\Controllers\Admin\LaporanController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+});
+Route::prefix('client')->name('client.')->middleware(['auth', 'role:client'])->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/laporan', [LaporanController::class, 'laporan'])->name('laporan');
+
 });
 
 Route::middleware('guest')->group(function () {

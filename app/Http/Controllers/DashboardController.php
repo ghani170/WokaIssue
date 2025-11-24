@@ -16,7 +16,7 @@ class DashboardController extends Controller
         } else if ($user->role === 'developer') {
             return view('developer.dashboard');
         } else if ($user->role === 'client') {
-            return view('client.dashboard');
+            return view('clients.dashboard');
         } else {
             abort(403, 'Role pengguna tidak diketahui');
         }

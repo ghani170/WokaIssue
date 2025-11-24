@@ -24,6 +24,7 @@
             <!-- Menu Navigasi -->
             <nav class="flex-1 p-4">
                 <ul class="space-y-2">
+                @if (auth()->user()->role === 'client')
                     <li>
                         <a href="#" class="flex items-center p-2 rounded hover:bg-blue-700 bg-blue-700">
                             <i class="fas fa-home mr-3"></i>
@@ -31,9 +32,9 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="flex items-center p-2 rounded hover:bg-blue-700">
-                            <i class="fas fa-users mr-3"></i>
-                            Pengguna
+                        <a href="{{route('client.laporan')}}" class="flex items-center p-2 rounded hover:bg-blue-700">
+                            <i class="fas fa-chart-bar mr-3"></i>
+                            Laporan
                         </a>
                     </li>
                     <li>
@@ -44,16 +45,11 @@
                     </li>
                     <li>
                         <a href="#" class="flex items-center p-2 rounded hover:bg-blue-700">
-                            <i class="fas fa-chart-bar mr-3"></i>
-                            Laporan
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="flex items-center p-2 rounded hover:bg-blue-700">
                             <i class="fas fa-cog mr-3"></i>
                             Pengaturan
                         </a>
                     </li>
+                @endif
                     <li>
                         <form action="{{ route('logout') }}" method="POST">
                             @csrf
@@ -64,7 +60,9 @@
                         </form>
                     </li>
                 </ul>
+                
             </nav>
+
 
             <!-- User Profile -->
             <div class="p-4 border-t border-blue-700">
