@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Laporan;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -16,7 +17,9 @@ class LaporanController extends Controller
     {
         //
         $laporans = Laporan::all();
-        return view('admin.laporans.index', compact('laporans'));
+        $client = User::where('role', 'client')->get();
+        $developer = User::where('role', 'developer')->get();
+        return view('admin.laporans.index', compact('laporans', 'client', 'developer'));
     }
 
     /**

@@ -20,15 +20,15 @@
 
             <tbody class="divide-y divide-gray-200">
 
-                <!-- @foreach ($laporans as $l)
+                @foreach ($laporans as $l)
                     <tr class="hover:bg-gray-50 transition">
                     <td class="px-4 py-3 text-center text-gray-800">{{ $loop->iteration }}</td>
                     <td class="px-4 py-3 text-center text-gray-800">{{ $l->project_name }}</td>
-                    <td class="px-4 py-3 text-center text-gray-800">{{ $l->users->name }}</td>
+                    <td class="px-4 py-3 text-center text-gray-800">{{ $l->client->name }}</td>
                     <td class="px-4 py-3 text-center text-gray-800">
                         <select name="" id="">
                             <option value="">Pilih developer</option>
-                            <option value="critical">{{ $l->users->name }}</option>
+                            <option value="critical">{{ $l->developer->name }}</option>
                         </select>
                     </td>
                     <td class="px-4 py-3 text-center text-gray-800">{{ $l->title }}</td>
@@ -43,7 +43,7 @@
                         @endif
                     </td>
                 </tr>
-                @endforeach -->
+                @endforeach
 
                     <!-- Dummy 1
                     <tr class="hover:bg-gray-50 transition">
