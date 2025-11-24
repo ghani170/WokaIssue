@@ -15,13 +15,13 @@ return new class extends Migration
             $table->id();
             $table->foreignId('project_id')->constrained('projects')->cascadeOnDelete();
             $table->foreignId('client_id')->constrained('users')->cascadeOnDelete();
-            $table->foreignId('developer_id')->constrained('users');
+            $table->foreignId('developer_id')->constrained('users')->nullable();
             $table->string('title', 255);
             $table->text('deskripsi');
             $table->enum('tipe', ['Bug', 'Feature', 'Support']);
             $table->enum('prioritas', ['Low', 'Medium', 'High', 'Critical']);
-            $table->enum('status', ['Pending', 'Working', 'Done', 'Closed', 'Rejected']);
-            $table->date('deadline');
+            $table->enum('status', ['Pending', 'Working', 'Done', 'Closed', 'Rejected'])->default('Pending');
+            $table->date('deadline')->nullable();
             $table->timestamps();
         });
     }

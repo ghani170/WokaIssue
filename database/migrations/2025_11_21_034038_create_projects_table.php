@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('company_id')->constrained('companies');
             $table->string('nama_project', 255);
             $table->text('deskripsi');
-            $table->enum('status', ['active', 'maintenance', 'stop']);
+            $table->enum('status', ['Active', 'Maintenance', 'Stop'])->default('Active');
             $table->timestamps();
         });
     }

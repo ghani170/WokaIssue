@@ -18,19 +18,39 @@
             <!-- Logo -->
             <div class="p-4 text-xl font-bold border-b border-blue-700">
                 <i class="fas fa-chart-line mr-2"></i>
-                Dashboard
+                WokaIssue
             </div>
 
             <!-- Menu Navigasi -->
             <nav class="flex-1 p-4">
                 <ul class="space-y-2">
-                @if (auth()->user()->role === 'client')
-                    <li>
+                <li>
                         <a href="#" class="flex items-center p-2 rounded hover:bg-blue-700 bg-blue-700">
                             <i class="fas fa-home mr-3"></i>
                             Dashboard
                         </a>
                     </li>
+                @if (auth()->user()->role === 'admin')
+                    <li>
+                        <a href="{{route('admin.laporan.index')}}" class="flex items-center p-2 rounded hover:bg-blue-700">
+                            <i class="fas fa-chart-bar mr-3"></i>
+                            Laporan
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="flex items-center p-2 rounded hover:bg-blue-700">
+                            <i class="fas fa-shopping-cart mr-3"></i>
+                            Produk
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="flex items-center p-2 rounded hover:bg-blue-700">
+                            <i class="fas fa-cog mr-3"></i>
+                            Pengaturan
+                        </a>
+                    </li>
+                @endif
+                @if (auth()->user()->role === 'client')
                     <li>
                         <a href="{{route('client.laporan')}}" class="flex items-center p-2 rounded hover:bg-blue-700">
                             <i class="fas fa-chart-bar mr-3"></i>
@@ -86,7 +106,6 @@
                         <button id="sidebarToggle" class="text-gray-500 focus:outline-none lg:hidden">
                             <i class="fas fa-bars"></i>
                         </button>
-                        <h1 class="ml-4 text-xl font-semibold">Dashboard Utama</h1>
                     </div>
                     <div class="flex items-center space-x-4">
                         <button class="text-gray-500 hover:text-gray-700">
