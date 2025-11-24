@@ -8,7 +8,7 @@ use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin'])->group(function () {
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/dashboards', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('client', ClientController::class);
     Route::resource('developer', DeveloperController::class);
     Route::resource('laporan', LaporanController::class);
