@@ -51,9 +51,9 @@
                     </li>
                 @endif
                     <li>
-                        <form action="{{ route('logout') }}" method="POST">
+                        <form action="{{ route('logout') }}" method="POST" class="flex items-center p-2 rounded hover:bg-blue-700">
                             @csrf
-                            <button type="submit" class="flex items-center p-2 rounded hover:bg-blue-700">
+                            <button type="submit">
                                 <i class="fa-solid fa-arrow-right-from-bracket mr-3"></i>
                                 Logout
                             </button>
