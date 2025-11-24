@@ -16,7 +16,7 @@ class LaporanController extends Controller
     {
         //
         $laporans = Laporan::all();
-        return view('admin.laporans.index', compact('laporans'));
+        return view('admin.laporans.index', compact('laporan'));
     }
 
     /**

@@ -45,33 +45,33 @@
                 </tr>
                 @endforeach -->
 
-                <!-- Dummy 1 -->
-                <tr class="hover:bg-gray-50 transition">
-                    <td class="px-4 py-3 text-center text-gray-800">1</td>
-                    <td class="px-4 py-3 text-center text-gray-800">Sistem Inventaris</td>
-                    <td class="px-4 py-3 text-center text-gray-800">PT Maju Jaya</td>
-                    <td class="px-4 py-3 text-center text-gray-800">
-                        <select name="" id="">
-                            <option value="">Pilih developer</option>
-                            <option value="critical">jamal</option>
-                        </select>
-                    </td>
-                    <td class="px-4 py-3 text-center text-gray-800">Bug Fixing</td>
-                    <td class="px-4 py-3 text-center text-gray-800">Tombol submit tidak berfungsi</td>
-                    <td class="px-4 py-3 text-center text-gray-800">Task</td>
-                    <td class="px-4 py-3 text-center text-gray-800">
-                        <select name="" id="">
-                            <option value="">Pilih prioritas</option>
-                            <option value="critical">Critical</option>
-                            <option value="high">High</option>
-                            <option value="medium">Medium</option>
-                            <option value="low">Low</option>
-                        </select>
-                    </td>
-                    <td class="px-4 py-3 text-center text-gray-800">
-                        <input type="date" name="deadline">
-                    </td>
-                </tr>
+                    <!-- Dummy 1
+                    <tr class="hover:bg-gray-50 transition">
+                        <td class="px-4 py-3 text-center text-gray-800">1</td>
+                        <td class="px-4 py-3 text-center text-gray-800">Sistem Inventaris</td>
+                        <td class="px-4 py-3 text-center text-gray-800">PT Maju Jaya</td>
+                        <td class="px-4 py-3 text-center text-gray-800">
+                            <select name="" id="">
+                                <option value="">Pilih developer</option>
+                                <option value="critical">jamal</option>
+                            </select>
+                        </td>
+                        <td class="px-4 py-3 text-center text-gray-800">Bug Fixing</td>
+                        <td class="px-4 py-3 text-center text-gray-800">Tombol submit tidak berfungsi</td>
+                        <td class="px-4 py-3 text-center text-gray-800">Task</td>
+                        <td class="px-4 py-3 text-center text-gray-800">
+                            <select name="" id="">
+                                <option value="">Pilih prioritas</option>
+                                <option value="critical">Critical</option>
+                                <option value="high">High</option>
+                                <option value="medium">Medium</option>
+                                <option value="low">Low</option>
+                            </select>
+                        </td>
+                        <td class="px-4 py-3 text-center text-gray-800">
+                            <input type="date" name="deadline">
+                        </td>
+                    </tr> -->
             </tbody>
         </table>
     </div>
