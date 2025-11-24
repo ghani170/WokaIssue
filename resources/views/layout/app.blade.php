@@ -45,7 +45,7 @@
                     </li>
                     <li>
                         <a href="{{ route('admin.company.index') }}" class="flex items-center p-2 rounded hover:bg-blue-700">
-                            <i class="fas fa-cog mr-3"></i>
+                            <i class="fa-solid fa-building mr-3"></i>
                             Company
                         </a>
                     </li>
