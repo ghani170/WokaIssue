@@ -24,15 +24,14 @@
             <!-- Menu Navigasi -->
             <nav class="flex-1 p-4">
                 <ul class="space-y-2">
+                    <!-- Sidebar admin -->
+                    @if (auth()->user()->role === 'admin')
                     <li>
                         <a href="{{ route('admin.dashboard') }}" class="flex items-center p-2 rounded hover:bg-blue-700 {{ request()->routeIs('admin.dashboard*') ? 'rounded bg-blue-700' : '' }}">
                             <i class="fas fa-home mr-3"></i>
                             Dashboard
                         </a>
                     </li>
-
-                    <!-- Sidebar admin -->
-                    @if (auth()->user()->role === 'admin')
                     <li>
                         <a href="{{route('admin.developer.index')}}" class="flex items-center p-2 rounded hover:bg-blue-700 {{ request()->routeIs('admin.developer*') ? 'rounded bg-blue-700' : '' }}">
                             <i class="fa-solid fa-people-group mr-3"></i>
@@ -89,6 +88,12 @@
 
                     <!-- Sidebar developer -->
                     @if (auth()->user()->role === 'developer')
+                    <li>
+                        <a href="{{ route('dev.dashboard') }}" class="flex items-center p-2 rounded hover:bg-blue-700 {{ request()->routeIs('dev.dashboard*') ? 'rounded bg-blue-700' : '' }}">
+                            <i class="fas fa-home mr-3"></i>
+                            Dashboard
+                        </a>
+                    </li>
                     <li>
                         <a href="{{route('dev.laporan.index')}}" class="flex items-center p-2 rounded hover:bg-blue-700">
                             <i class="fa-solid fa-folder-open mr-3"></i>
