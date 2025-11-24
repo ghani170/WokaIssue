@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Company;
 use Illuminate\Http\Request;
 
 class CompanyController extends Controller
@@ -13,6 +14,8 @@ class CompanyController extends Controller
     public function index()
     {
         //
+        $company = Company::all();
+        return  view('admin.company.index',compact('company'));
     }
 
     /**
@@ -21,6 +24,7 @@ class CompanyController extends Controller
     public function create()
     {
         //
+        return view('admin.company.create');
     }
 
     /**
@@ -29,6 +33,16 @@ class CompanyController extends Controller
     public function store(Request $request)
     {
         //
+        $data = $request->validate([
+            'name' => 'required|string|max:255',
+            'alamat' => 'required|string',
+            'telepon' => 'required|string',
+        ]);
+       
+
+       Company::create($data);
+
+        return redirect()->route('admin.company.index')->with('success', 'Company Berhasil ditambahkan');
     }
 
     /**
