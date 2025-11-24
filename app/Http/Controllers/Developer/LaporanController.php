@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Developer;
 
 use App\Http\Controllers\Controller;
 use App\Models\Laporan;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class LaporanController extends Controller
 {
@@ -19,7 +18,7 @@ class LaporanController extends Controller
         $laporans = Laporan::all();
         $client = User::where('role', 'client')->get();
         $developer = User::where('role', 'developer')->get();
-        return view('admin.laporans.index', compact('laporans', 'client', 'developer'));
+        return view('dev.laporans.index', compact('laporans', 'client', 'developer'));
     }
 
     /**
@@ -68,12 +67,5 @@ class LaporanController extends Controller
     public function destroy(string $id)
     {
         //
-    }
-
-    public function laporan()
-    {
-        $laporan = Laporan::where('client_id', Auth::id())->get();
-
-        return view('clients.laporan.index', compact('laporan'));
     }
 }

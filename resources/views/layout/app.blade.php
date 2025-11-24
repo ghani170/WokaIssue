@@ -24,13 +24,15 @@
             <!-- Menu Navigasi -->
             <nav class="flex-1 p-4">
                 <ul class="space-y-2">
-                <li>
+                    <li>
                         <a href="#" class="flex items-center p-2 rounded hover:bg-blue-700 bg-blue-700">
                             <i class="fas fa-home mr-3"></i>
                             Dashboard
                         </a>
                     </li>
-                @if (auth()->user()->role === 'admin')
+
+                    <!-- Sidebar admin -->
+                    @if (auth()->user()->role === 'admin')
                     <li>
                         <a href="{{route('admin.laporan.index')}}" class="flex items-center p-2 rounded hover:bg-blue-700">
                             <i class="fa-solid fa-folder-open mr-3"></i>
@@ -49,8 +51,10 @@
                             Company
                         </a>
                     </li>
-                @endif
-                @if (auth()->user()->role === 'client')
+                    @endif
+
+                    <!-- Sidebar client -->
+                    @if (auth()->user()->role === 'client')
                     <li>
                         <a href="{{route('client.laporan')}}" class="flex items-center p-2 rounded hover:bg-blue-700">
                             <i class="fas fa-chart-bar mr-3"></i>
@@ -69,7 +73,23 @@
                             Pengaturan
                         </a>
                     </li>
-                @endif
+                    @endif
+
+                    <!-- Sidebar developer -->
+                    @if (auth()->user()->role === 'developer')
+                    <li>
+                        <a href="{{route('dev.laporan.index')}}" class="flex items-center p-2 rounded hover:bg-blue-700">
+                            <i class="fa-solid fa-folder-open mr-3"></i>
+                            Laporan Client Masuk
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{route('dev.laporan.index')}}" class="flex items-center p-2 rounded hover:bg-blue-700">
+                            <i class="fa-solid fa-folder-closed mr-3"></i>
+                            Laporan Client Selesai
+                        </a>
+                    </li>
+                    @endif
                     <li>
                         <form action="{{ route('logout') }}" method="POST" class="flex items-center p-2 rounded hover:bg-blue-700">
                             @csrf
@@ -80,7 +100,7 @@
                         </form>
                     </li>
                 </ul>
-                
+
             </nav>
 
 

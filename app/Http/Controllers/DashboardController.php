@@ -22,7 +22,11 @@ class DashboardController extends Controller
 
             return view('admin.dashboard', compact('totalLM', 'totalLK', 'totalCompany', 'totalProject'));
         } else if ($user->role === 'developer') {
-            return view('dev.dashboard');
+
+            $totalLM = Laporan::count();
+            $totalLK = Laporan::where('status', 'Done')->count();
+
+            return view('dev.dashboard', compact('totalLM', 'totalLK'));
         } else if ($user->role === 'client') {
             return view('clients.dashboard');
         } else {
