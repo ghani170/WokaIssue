@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\ClientController;
+use App\Http\Controllers\Admin\DeveloperController;
 use App\Http\Controllers\Admin\LaporanController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
@@ -7,6 +9,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::resource('client', ClientController::class);
+    Route::resource('developer', DeveloperController::class);
 });
 Route::prefix('client')->name('client.')->middleware(['auth', 'role:client'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
