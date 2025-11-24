@@ -15,6 +15,8 @@ class LaporanController extends Controller
     public function index()
     {
         //
+        $laporans = Laporan::all();
+        return view('admin.laporans.index', compact('laporans'));
     }
 
     /**

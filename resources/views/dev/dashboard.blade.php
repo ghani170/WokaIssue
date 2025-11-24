@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="p-6">
-        <h1 class="text-3xl font-bold mb-4">Admin Dashboard</h1>
-        <p>Welcome to the admin dashboard. Here you can manage users, view reports, and configure settings.</p>
+        <h1 class="text-3xl font-bold mb-4"> Developers Dashboard</h1>
+        <p>Welcome to the Developers dashboard. Here you can manage users, view reports, and configure settings.</p>
     </div>  
 @endsection
