@@ -12,6 +12,9 @@
             <thead>
                 <tr class="bg-gray-100">
                     <th class="px-4 py-3 text-center text-gray-600 font-semibold uppercase text-xs">
+                        No
+                    </th>
+                    <th class="px-4 py-3 text-center text-gray-600 font-semibold uppercase text-xs">
                         Nama Perusahaan
                     </th>
                     <th class="px-4 py-3 text-center text-gray-600 font-semibold uppercase text-xs">
@@ -32,23 +35,22 @@
             <tbody class="divide-y divide-gray-200">
                 @forelse ($project as $data)
                 <tr>
-                    <td>{{ $loop->iteration }}</td>
-                    <td>{{ $data->company_id }}</td>
-                    <td>{{ $data->project_id }}</td>
-                    <td>{{ $data->deskripsi }}</td>
-                    <td>{{ $data->status }}</td>
-                    <td class="text-center">
-                        <a href="" class="btn btn-sm btn-warning me-2">
-                            <i class="bi bi-pencil-square"></i> Edit
-                        </a>
-                        <form action="" method="POST" class="d-inline"
-                            onsubmit="return confirm('Yakin ingin menghapus dudi ini?');">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-sm btn-danger">
-                                <i class="bi bi-trash"></i> Hapus
+                    <td class="text text-center">{{ $loop->iteration }}</td>
+                    <td class="text text-center">{{ $data->company->name }}</td>
+                    <td class="text text-center">{{ $data->nama_project }}</td>
+                    <td class="text text-center">{{ $data->deskripsi }}</td>
+                    <td class="text text-center">{{ $data->status }}</td>
+                    <td class="px-4 py-3">
+                        <div class="flex justify-center items-center gap-2">
+                            <a href="{{ route('admin.project.edit', $data->id) }}"
+                                class="px-3 py-1 bg-yellow-400 hover:bg-yellow-500 text-white rounded-md text-xs font-medium transition">
+                                Edit
+                            </a>
+                            <button
+                                class="px-3 py-1 bg-red-500 hover:bg-red-600 text-white rounded-md text-xs font-medium transition">
+                                Hapus
                             </button>
-                        </form>
+                        </div>
                     </td>
                 </tr>
                 @empty
