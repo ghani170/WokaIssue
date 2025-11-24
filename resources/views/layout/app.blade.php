@@ -34,7 +34,7 @@
                     <li>
                         <a href="{{route('admin.laporan.index')}}" class="flex items-center p-2 rounded hover:bg-blue-700">
                             <i class="fa-solid fa-folder-open mr-3"></i>
-                            Laporan
+                            Laporan client
                         </a>
                     </li>
                     <li>
