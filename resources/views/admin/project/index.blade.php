@@ -39,7 +39,18 @@
                     <td class="text text-center">{{ $data->company->name }}</td>
                     <td class="text text-center">{{ $data->nama_project }}</td>
                     <td class="text text-center">{{ $data->deskripsi }}</td>
-                    <td class="text text-center">{{ $data->status }}</td>
+                    <td class="text text-center">
+                        <form action="{{ route('admin.project.update', $data->id ) }}" method="POST">
+                            @csrf
+                            @method('PUT')
+                            <select name="status" onchange="this.form.submit()" class="w-30 border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2
+                focus:ring-black focus:border-black transition">
+                                <option value="Active" {{ $data->status == 'Active' ? 'selected' : '' }}>Active</option>
+                                <option value="Maintenance" {{ $data->status == 'Maintenance' ? 'selected' : '' }}>Maintenance</option>
+                                <option value="Stop" {{ $data->status == 'Stop' ? 'selected' : '' }}>Stop</option>
+                            </select>
+                        </form>
+                    </td>
                     <td class="px-4 py-3">
                         <div class="flex justify-center items-center gap-2">
                             <a href="{{ route('admin.project.edit', $data->id) }}"

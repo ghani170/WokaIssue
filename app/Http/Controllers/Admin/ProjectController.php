@@ -97,6 +97,16 @@ class ProjectController extends Controller
 
     }
 
+    public function updateStatus(Request $request, Project $project){
+        $request->validate([
+            'status' => 'required|in:Active,Maintenance,Stop'
+        ]);
+
+        $project->status = $request->status;
+        $project->save();
+        return redirect()->route('admin.project.index')->with('success', 'Status berhasil diupdate');
+    }
+
     /**
      * Remove the specified resource from storage.
      */
