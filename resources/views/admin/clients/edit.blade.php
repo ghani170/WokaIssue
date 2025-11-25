@@ -3,13 +3,14 @@
 @section('title', 'Create Data Client')
 
 @section('content')
-<div class="mx-auto mt-6">
+<div class="mx-auto mt-1">
 
-    <h2 class="text-2xl font-semibold mb-4">Tambah Client</h2>
+    <h2 class="text-2xl font-semibold mb-4">Edit Client</h2>
 
-    <form action="{{ route('admin.client.store') }}" method="POST"
+    <form action="{{ route('admin.client.update', $clients->id) }}" method="POST"
         class="bg-white shadow-md rounded-xl p-6">
         @csrf
+        @method('PUT')
 
         <div class="mb-4">
             <label for="name" class="block text-sm font-medium text-gray-700 mb-2">Nama</label>
@@ -17,7 +18,7 @@
             <input type="text" id="name" name="name"
                 class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2
                 focus:ring-black focus:border-black transition"
-                value="{{ old('name') }}">
+                value="{{ $clients->name }}" placeholder="Masukan Nama">
 
             @error('name')
                 <small class="text-red-600">{{ $message }}</small>
@@ -26,10 +27,10 @@
         <div class="mb-4">
             <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email</label>
 
-            <input type="text" id="email" name="email"
+            <input type="email" id="email" name="email"
                 class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2
                 focus:ring-black focus:border-black transition"
-                value="{{ old('email') }}">
+                value="{{ $clients->email }}" placeholder="Masukan Email">
 
             @error('email')
                 <small class="text-red-600">{{ $message }}</small>
@@ -38,14 +39,12 @@
         <div class="mb-4">
             <label for="password" class="block text-sm font-medium text-gray-700 mb-2">Password</label>
 
-            <input type="text" id="password" name="password"
+            <input type="password" id="password" name="password"
                 class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2
                 focus:ring-black focus:border-black transition"
-                value="{{ old('password') }}">
+                value="{{ old('password') }}" placeholder="Ganti Password (Opsional)">
 
-            @error('password')
-                <small class="text-red-600">{{ $message }}</small>
-            @enderror
+            
         </div>
         <div class="mb-4">
             <label for="company_id" class="block text-sm font-medium text-gray-700 mb-2">Nama Perusahaan</label>
@@ -55,7 +54,7 @@
                 <option value="">Pilih Perusahaan</option>
                 @isset($company)
                     @foreach($company as $c)
-                        <option value="{{ $c->id }}" {{ old('company_id') == $c->id ? 'selected' : '' }}>
+                        <option value="{{ $c->id }}" {{ (string) old('company_id', $clients->company_id ?? '') === (string) $c->id ? 'selected' : '' }}>
                             {{ $c->name }}
                         </option>
                     @endforeach
