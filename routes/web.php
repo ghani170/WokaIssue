@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\DeveloperController;
 use App\Http\Controllers\Admin\LaporanController;
 use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Client\LaporanController as ClientLaporanController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Developer\LaporanController as DeveloperLaporanController;
 use Illuminate\Support\Facades\Route;
@@ -21,7 +22,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin'])->grou
 
 Route::prefix('client')->name('client.')->middleware(['auth', 'role:client'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    Route::get('/laporan', [LaporanController::class, 'laporan'])->name('laporan');
+    Route::resource('laporan', ClientLaporanController::class);
 
 });
 

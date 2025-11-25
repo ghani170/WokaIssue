@@ -1,10 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
 use App\Models\Laporan;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -16,10 +15,9 @@ class LaporanController extends Controller
     public function index()
     {
         //
-        $laporans = Laporan::all();
-        $client = User::where('role', 'client')->get();
-        $developer = User::where('role', 'developer')->get();
-        return view('admin.laporans.index', compact('laporans', 'client', 'developer'));
+        $laporans = Laporan::where('client_id', Auth::id())->get();
+
+        return view('clients.laporan.index', compact('laporans'));
     }
 
     /**
@@ -28,6 +26,8 @@ class LaporanController extends Controller
     public function create()
     {
         //
+        return view('clients.laporan.create');
+       
     }
 
     /**
@@ -38,7 +38,7 @@ class LaporanController extends Controller
         //
     }
 
-    /**
+    /** 
      * Display the specified resource.
      */
     public function show(string $id)
