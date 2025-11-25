@@ -67,7 +67,7 @@
                             <i class="fas fa-lock absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
 
                             <input type="password" id="password" name="password"
-                                class="pl-10 pr-10 w-full border rounded-lg p-3">
+                                class="pl-10 w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors duration-200 outline-none" placeholder="Enter your passwword">
 
                             <button type="button" id="togglePassword"
                                 class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500">
