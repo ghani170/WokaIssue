@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('project_id')->constrained('projects')->cascadeOnDelete();
             $table->foreignId('client_id')->constrained('users')->cascadeOnDelete();
-            $table->foreignId('developer_id')->constrained('users')->nullable();
+            $table->foreignId('developer_id')->nullable()->constrained('users')->cascadeOnDelete();
             $table->string('title', 255);
             $table->text('deskripsi');
             $table->enum('tipe', ['Bug', 'Feature', 'Support']);
