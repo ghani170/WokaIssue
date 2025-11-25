@@ -76,8 +76,8 @@
                 focus:ring-2 focus:ring-black focus:border-black transition">
                 <option value="" disabled selected>-- Pilih Tipe --</option>
                 <option value="Bug">Bug</option>
-                <option value="Request">Request</option>
-                <option value="Update">Update</option>
+                <option value="Feature">Feature</option>
+                <option value="Support">Support</option>
             </select>
 
             @error('tipe')

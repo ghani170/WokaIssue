@@ -15,7 +15,7 @@ class LaporanController extends Controller
      */
     public function index()
     {
-        //
+        //  
         $laporans = Laporan::all();
         $client = User::where('role', 'client')->get();
         $developer = User::where('role', 'developer')->get();
