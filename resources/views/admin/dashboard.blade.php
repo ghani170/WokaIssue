@@ -13,7 +13,7 @@
                 <p class="text-sm text-gray-600">Total Laporan Masuk</p>
                 <h4 class="text-2xl font-semibold">{{ $totalLM }}</h4>
             </div>
-            <div class="bg-black text-white p-3 rounded-lg shadow">
+            <div class="bg-blue-800 text-white p-3 rounded-lg shadow">
                 <i class="fa-solid fa-folder-open px-1 py-1"></i>
             </div>
         </div>
@@ -32,7 +32,7 @@
                 <p class="text-sm text-gray-600">Total Laporan Selesai</p>
                 <h4 class="text-2xl font-semibold">{{ $totalLK }}</h4>
             </div>
-            <div class="bg-black text-white p-3 rounded-lg shadow">
+            <div class="bg-blue-800 text-white p-3 rounded-lg shadow">
                 <i class="fa-solid fa-folder-open px-1 py-1"></i>
             </div>
         </div>
@@ -51,7 +51,7 @@
                 <p class="text-sm text-gray-600">Total Project</p>
                 <h4 class="text-2xl font-semibold">{{ $totalProject }}</h4>
             </div>
-            <div class="bg-black text-white p-3 rounded-lg shadow">
+            <div class="bg-blue-800 text-white p-3 rounded-lg shadow">
                 <i class="fa-solid fa-bars-progress px-1 py-1"></i>
             </div>
         </div>
@@ -70,7 +70,7 @@
                 <p class="text-sm text-gray-600">Total Company</p>
                 <h4 class="text-2xl font-semibold">{{ $totalCompany }}</h4>
             </div>
-            <div class="bg-black text-white p-3 rounded-lg shadow">
+            <div class="bg-blue-800 text-white p-3 rounded-lg shadow">
                 <i class="fa-solid fa-building px-1 py-1"></i>
             </div>
         </div>
