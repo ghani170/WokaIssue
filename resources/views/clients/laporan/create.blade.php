@@ -18,7 +18,7 @@
             <input type="text" name="name"
                 class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none 
                 focus:ring-2 focus:ring-black focus:border-black transition"
-                value="{{ old('name') }}">
+                value="{{ $user->name }}" disabled>
 
             @error('name')
             <small class="text-red-600">{{ $message }}</small>
@@ -44,7 +44,7 @@
             <input type="text" name="company_id"
                 class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none 
                 focus:ring-2 focus:ring-black focus:border-black transition"
-                value="{{ old('company_id') }}">
+                value="" disabled>
 
             @error('company_id')
             <small class="text-red-600">{{ $message }}</small>
