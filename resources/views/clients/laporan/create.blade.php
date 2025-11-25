@@ -7,7 +7,7 @@
 
     <h2 class="text-2xl font-semibold mb-4">Tambah Project</h2>
 
-    <form action="{{ route('admin.project.store') }}" method="POST"
+    <form action="{{ route('client.laporan.store') }}" method="POST"
         class="bg-white shadow-md rounded-xl p-6">
         @csrf
 
@@ -19,6 +19,7 @@
                 class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none 
                 focus:ring-2 focus:ring-black focus:border-black transition"
                 value="{{ $user->name }}" disabled>
+            <input type="hidden" name="client_id" value="{{ $user->id }}">
 
             @error('name')
             <small class="text-red-600">{{ $message }}</small>
@@ -28,25 +29,16 @@
         <div class="mb-4">
             <label class="block text-sm font-medium text-gray-700 mb-2">Nama Project</label>
 
-            <input type="text" name="nama_project"
+            <select type="text" name="project_id"
                 class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none 
-                focus:ring-2 focus:ring-black focus:border-black transition"
-                value="{{ old('nama_project') }}">
+                focus:ring-2 focus:ring-black focus:border-black transition">
+                <option value="" disabled selected>-- Pilih Project --</option>
+                @foreach ( $projects as $p)
+                <option value="{{ $p->id }}">{{ $p->nama_project }}</option>
+                @endforeach
+            </select>
 
             @error('nama_project')
-            <small class="text-red-600">{{ $message }}</small>
-            @enderror
-        </div>
-
-        <div class="mb-4">
-            <label class="block text-sm font-medium text-gray-700 mb-2">Company</label>
-
-            <input type="text" name="company_id"
-                class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none 
-                focus:ring-2 focus:ring-black focus:border-black transition"
-                value="" disabled>
-
-            @error('company_id')
             <small class="text-red-600">{{ $message }}</small>
             @enderror
         </div>
