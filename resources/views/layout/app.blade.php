@@ -6,9 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title')</title>
     @vite('resources/css/app.css')
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
         crossorigin="anonymous" />
+
+    <script src="https://cdn.jsdelivr.net/npm/tailgrids@2.3.0/plugin.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/tailgrids@2.3.0/assets/css/tailwind.min.css" rel="stylesheet" />
 </head>
 
 <body class="bg-gray-100">
@@ -26,94 +28,106 @@
                 <ul class="space-y-2">
                     <!-- Sidebar admin -->
                     @if (auth()->user()->role === 'admin')
-                    <li>
-                        <a href="{{ route('admin.dashboard') }}" class="flex items-center p-2 rounded hover:bg-blue-700 {{ request()->routeIs('admin.dashboard*') ? 'rounded bg-blue-700' : '' }}">
-                            <i class="fas fa-home mr-3"></i>
-                            Dashboard
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{route('admin.developer.index')}}" class="flex items-center p-2 rounded hover:bg-blue-700 {{ request()->routeIs('admin.developer*') ? 'rounded bg-blue-700' : '' }}">
-                            <i class="fa-solid fa-people-group mr-3"></i>
-                            Kelola Developer
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{route('admin.client.index')}}" class="flex items-center p-2 rounded hover:bg-blue-700 {{ request()->routeIs('admin.client*') ? 'rounded bg-blue-700' : '' }}">
-                            <i class="fa-solid fa-people-group mr-3"></i>
-                            Kelola Client
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{route('admin.laporan.index')}}" class="flex items-center p-2 rounded hover:bg-blue-700 {{ request()->routeIs('admin.laporan*') ? 'rounded bg-blue-700' : '' }}">
-                            <i class="fa-solid fa-folder-open mr-3"></i>
-                            Laporan client
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ route('admin.project.index') }}" class="flex items-center p-2 rounded hover:bg-blue-700 {{ request()->routeIs('admin.project*') ? 'rounded bg-blue-700' : '' }}">
-                            <i class="fa-solid fa-bars-progress mr-3"></i>
-                            Project
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ route('admin.company.index') }}" class="flex items-center p-2 rounded hover:bg-blue-700 {{ request()->routeIs('admin.company*') ? 'rounded bg-blue-700' : '' }}">
-                            <i class="fa-solid fa-building mr-3"></i>
-                            Company
-                        </a>
-                    </li>
+                        <li>
+                            <a href="{{ route('admin.dashboard') }}"
+                                class="flex items-center p-2 rounded hover:bg-blue-700 {{ request()->routeIs('admin.dashboard*') ? 'rounded bg-blue-700' : '' }}">
+                                <i class="fas fa-home mr-3"></i>
+                                Dashboard
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{route('admin.developer.index')}}"
+                                class="flex items-center p-2 rounded hover:bg-blue-700 {{ request()->routeIs('admin.developer*') ? 'rounded bg-blue-700' : '' }}">
+                                <i class="fa-solid fa-people-group mr-3"></i>
+                                Kelola Developer
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{route('admin.client.index')}}"
+                                class="flex items-center p-2 rounded hover:bg-blue-700 {{ request()->routeIs('admin.client*') ? 'rounded bg-blue-700' : '' }}">
+                                <i class="fa-solid fa-people-group mr-3"></i>
+                                Kelola Client
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{route('admin.laporan.index')}}"
+                                class="flex items-center p-2 rounded hover:bg-blue-700 {{ request()->routeIs('admin.laporan*') ? 'rounded bg-blue-700' : '' }}">
+                                <i class="fa-solid fa-folder-open mr-3"></i>
+                                Laporan client
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('admin.project.index') }}"
+                                class="flex items-center p-2 rounded hover:bg-blue-700 {{ request()->routeIs('admin.project*') ? 'rounded bg-blue-700' : '' }}">
+                                <i class="fa-solid fa-bars-progress mr-3"></i>
+                                Project
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('admin.company.index') }}"
+                                class="flex items-center p-2 rounded hover:bg-blue-700 {{ request()->routeIs('admin.company*') ? 'rounded bg-blue-700' : '' }}">
+                                <i class="fa-solid fa-building mr-3"></i>
+                                Company
+                            </a>
+                        </li>
                     @endif
 
                     <!-- Sidebar client -->
                     @if (auth()->user()->role === 'client')
-                    <li>
-                        <a href="{{ route('client.dashboard') }}" class="flex items-center p-2 rounded hover:bg-blue-700 {{ request()->routeIs('client.dashboard*') ? 'rounded bg-blue-700' : '' }}">
-                            <i class="fas fa-home mr-3"></i>
-                            Dashboard
-                        </a>
-                    </li>
-                        <a href="{{route('client.laporan.index')}}" class="flex items-center p-2 rounded hover:bg-blue-700 {{ request()->routeIs('client.laporan*') ? 'rounded  bg-blue-700' : '' }}">
+                        <li>
+                            <a href="{{ route('client.dashboard') }}"
+                                class="flex items-center p-2 rounded hover:bg-blue-700 {{ request()->routeIs('client.dashboard*') ? 'rounded bg-blue-700' : '' }}">
+                                <i class="fas fa-home mr-3"></i>
+                                Dashboard
+                            </a>
+                        </li>
+                        <a href="{{route('client.laporan.index')}}"
+                            class="flex items-center p-2 rounded hover:bg-blue-700 {{ request()->routeIs('client.laporan*') ? 'rounded  bg-blue-700' : '' }}">
                             <i class="fas fa-bars-progress mr-3"></i>
                             Laporan
                         </a>
-                    </li>
-                    <li>
-                        <a href="#" class="flex items-center p-2 rounded hover:bg-blue-700">
-                            <i class="fas fa-shopping-cart mr-3"></i>
-                            Produk
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="flex items-center p-2 rounded hover:bg-blue-700">
-                            <i class="fas fa-cog mr-3"></i>
-                            Pengaturan
-                        </a>
-                    </li>
+                        </li>
+                        <li>
+                            <a href="#" class="flex items-center p-2 rounded hover:bg-blue-700">
+                                <i class="fas fa-shopping-cart mr-3"></i>
+                                Produk
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="flex items-center p-2 rounded hover:bg-blue-700">
+                                <i class="fas fa-cog mr-3"></i>
+                                Pengaturan
+                            </a>
+                        </li>
                     @endif
 
                     <!-- Sidebar developer -->
                     @if (auth()->user()->role === 'developer')
-                    <li>
-                        <a href="{{ route('dev.dashboard') }}" class="flex items-center p-2 rounded hover:bg-blue-700 {{ request()->routeIs('dev.dashboard*') ? 'rounded bg-blue-700' : '' }}">
-                            <i class="fas fa-home mr-3"></i>
-                            Dashboard
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{route('dev.laporan.index')}}" class="flex items-center p-2 rounded hover:bg-blue-700">
-                            <i class="fa-solid fa-folder-open mr-3"></i>
-                            Laporan Client Masuk
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{route('dev.laporan.selesai')}}" class="flex items-center p-2 rounded hover:bg-blue-700">
-                            <i class="fa-solid fa-folder-closed mr-3"></i>
-                            Laporan Client Selesai
-                        </a>
-                    </li>
+                        <li>
+                            <a href="{{ route('dev.dashboard') }}"
+                                class="flex items-center p-2 rounded hover:bg-blue-700 {{ request()->routeIs('dev.dashboard*') ? 'rounded bg-blue-700' : '' }}">
+                                <i class="fas fa-home mr-3"></i>
+                                Dashboard
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{route('dev.laporan.index')}}"
+                                class="flex items-center p-2 rounded hover:bg-blue-700">
+                                <i class="fa-solid fa-folder-open mr-3"></i>
+                                Laporan Client Masuk
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{route('dev.laporan.selesai')}}"
+                                class="flex items-center p-2 rounded hover:bg-blue-700">
+                                <i class="fa-solid fa-folder-closed mr-3"></i>
+                                Laporan Client Selesai
+                            </a>
+                        </li>
                     @endif
                     <li>
-                        <form action="{{ route('logout') }}" method="POST" class="flex items-center p-2 rounded hover:bg-blue-700">
+                        <form action="{{ route('logout') }}" method="POST"
+                            class="flex items-center p-2 rounded hover:bg-blue-700">
                             @csrf
                             <button type="submit">
                                 <i class="fa-solid fa-arrow-right-from-bracket mr-3"></i>
@@ -129,8 +143,8 @@
             <!-- User Profile -->
             <div class="p-4 border-t border-blue-700">
                 <div class="flex items-center">
-                    <img src="https://ui-avatars.com/api/?name=Admin+User&background=0D8ABC&color=fff"
-                        alt="Profile" class="w-10 h-10 rounded-full">
+                    <img src="https://ui-avatars.com/api/?name=Admin+User&background=0D8ABC&color=fff" alt="Profile"
+                        class="w-10 h-10 rounded-full">
                     <div class="ml-3">
                         <p class="font-medium">Admin User</p>
                         <p class="text-sm text-blue-200">admin@example.com</p>
@@ -176,7 +190,7 @@
 
     <script>
         // Toggle sidebar on mobile
-        document.getElementById('sidebarToggle').addEventListener('click', function() {
+        document.getElementById('sidebarToggle').addEventListener('click', function () {
             const sidebar = document.querySelector('.w-64');
             sidebar.classList.toggle('hidden');
             sidebar.classList.toggle('absolute');

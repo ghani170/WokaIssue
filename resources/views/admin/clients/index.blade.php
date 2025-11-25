@@ -1,12 +1,12 @@
 @extends('layout.app')
 @section('title', 'Client Management')
 @section('content')
-    <div class="py-3 mb-3 flex justify-end">
-        <a href="{{ route('admin.developer.create') }}"
+    <div class="py-3 mb-2 flex justify-end">
+        <a href="{{ route('admin.client.create') }}"
             class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">Create</a>
     </div>
     @if (session('success'))
-    <div class="container py-16">
+    <div class="container mb-3">
     <div class="inline-flex rounded-lg bg-green-light-6 px-[18px] py-4">
       <p class="flex items-center text-sm font-medium text-[#004434]">
         <span class="mr-3 flex h-5 w-5 items-center justify-center rounded-full bg-green">
