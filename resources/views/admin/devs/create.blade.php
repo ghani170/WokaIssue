@@ -51,11 +51,11 @@
         <!-- Tombol -->
         <div class="flex items-center gap-3 mt-5">
             <button type="submit"
-                class="bg-black text-white px-5 py-2 rounded-lg hover:bg-gray-900 transition">
+                class="bg-blue-500 text-white px-5 py-2 rounded-lg hover:bg-gray-900 transition">
                 Simpan
             </button>
 
-            <a href="{{ route('admin.client.index') }}"
+            <a href="{{ route('admin.developer.index') }}"
                 class="px-5 py-2 border border-gray-400 rounded-lg text-gray-700 hover:bg-gray-100 transition">
                 Kembali
             </a>
