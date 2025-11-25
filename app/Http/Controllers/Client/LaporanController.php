@@ -26,8 +26,9 @@ class LaporanController extends Controller
     public function create()
     {
         //
-        return view('clients.laporan.create');
-       
+        $user = Auth::user();
+        $client = $user->client ? $user->client->load(['companies']) : null;
+        return view('clients.laporan.create', compact('user', 'client'));
     }
 
     /**
@@ -36,6 +37,11 @@ class LaporanController extends Controller
     public function store(Request $request)
     {
         //
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+
+        ]);
     }
 
     /** 
