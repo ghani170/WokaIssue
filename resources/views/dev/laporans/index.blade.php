@@ -30,7 +30,14 @@
                     <td class="px-4 py-3 text-center text-gray-800">{{ $l->tipe }}</td>
                     <td class="px-4 py-3 text-center text-gray-800">{{ $l->prioritas }}</td>
                     <td class="px-4 py-3 text-center text-gray-800">{{ $l->deadline }}</td>
-                    <td class="px-4 py-3 text-center text-gray-800">{{ $l->status }}</td>
+                    <td class="px-4 py-3 text-center text-gray-800">
+                        <select name="status" id="">
+                            <option value="Pending">Pending</option>
+                            <option value="Working">Working</option>
+                            <option value="In Progress">In Progress</option>
+                            <option value="Done">Done</option>
+                        </select>
+                    </td>
                 </tr>
                 @endforeach
 
