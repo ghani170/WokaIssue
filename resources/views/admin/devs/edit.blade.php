@@ -54,7 +54,7 @@
                 Simpan
             </button>
 
-            <a href="{{ route('admin.client.index') }}"
+            <a href="{{ route('admin.developer.index') }}"
                 class="px-5 py-2 border border-gray-400 rounded-lg text-gray-700 hover:bg-gray-100 transition">
                 Kembali
             </a>

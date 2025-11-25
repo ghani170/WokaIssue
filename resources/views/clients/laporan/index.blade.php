@@ -46,16 +46,16 @@
                 @foreach ($laporans as $data)
                 <tr>
                     <td class="text-center">{{ $loop->iteration }}</td>
-                    <td class="text-center">{{ $data->name}}</td>
-                    <td class="text-center">{{ $data->nama_project }}</td>
-                    <td class="text-center">{{ $data->company->name }}</td>
+                    <td class="text-center">{{ $data->client->name }}</td>
+                    <td class="text-center">{{ $data->project->nama_project }}</td>
+                    <td class="text-center">{{ $data->project->company->name }}</td>
                     <td class="text-center">{{ $data->title }}</td>
                     <td class="text-center">{{ $data->deskripsi }}</td>
                     <td class="text-center">{{ $data->tipe }}</td>
                     <td class="text-center">{{ $data->status }}</td>
                     <td class="px-4 py-3">
                         <div class="flex justify-center items-center gap-2">
-                            <a href="{{ route('clients.laporan.edit', $data->id ) }}"
+                            <a href=""
                                 class="px-3 py-1 bg-yellow-400 hover:bg-yellow-500 text-white rounded-md text-xs font-medium transition">
                                 Edit
                             </a>

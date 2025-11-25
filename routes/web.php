@@ -12,6 +12,15 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Developer\LaporanController as DeveloperLaporanController;
 use Illuminate\Support\Facades\Route;
 
+Route::middleware('guest')->group(function () {
+    Route::get('/', function () {
+        return redirect()->route('login');
+    });
+    Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+    Route::post('/login', [AuthController::class, 'login'])->name('login.store');
+});
+
+
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     route::resource('project', ProjectController::class)->parameters(['project' => 'project',]);
