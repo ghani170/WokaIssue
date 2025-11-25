@@ -67,7 +67,6 @@
                     <!-- Sidebar client -->
                     @if (auth()->user()->role === 'client')
                     <li>
-                    <li>
                         <a href="{{ route('client.dashboard') }}" class="flex items-center p-2 rounded hover:bg-blue-700 {{ request()->routeIs('client.dashboard*') ? 'rounded bg-blue-700' : '' }}">
                             <i class="fas fa-home mr-3"></i>
                             Dashboard
@@ -107,7 +106,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{route('dev.laporan.index')}}" class="flex items-center p-2 rounded hover:bg-blue-700">
+                        <a href="{{route('dev.laporan.selesai')}}" class="flex items-center p-2 rounded hover:bg-blue-700">
                             <i class="fa-solid fa-folder-closed mr-3"></i>
                             Laporan Client Selesai
                         </a>

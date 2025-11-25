@@ -17,8 +17,15 @@ class LaporanController extends Controller
         //
         $laporans = Laporan::all();
         $client = User::where('role', 'client')->get();
-        $developer = User::where('role', 'developer')->get();
-        return view('dev.laporans.index', compact('laporans', 'client', 'developer'));
+        return view('dev.laporans.index', compact('laporans', 'client'));
+    }
+
+    public function selesai()
+    {
+        //
+        $laporans = Laporan::all();
+        $client = User::where('role', 'client')->get();
+        return view('dev.laporans.selesai', compact('laporans', 'client'));
     }
 
     /**

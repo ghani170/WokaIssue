@@ -1,6 +1,9 @@
 @extends('layout.app')
-@section('title', 'Laporan Client')
+
+@section('title', 'Laporan Client Selesai')
+
 @section('content')
+
 <div class="bg-white shadow-md rounded-xl p-4">
     <div class="overflow-x-auto">
         <table class="min-w-full text-sm" id="kelas">
