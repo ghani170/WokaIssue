@@ -146,8 +146,8 @@
                     <img src="https://ui-avatars.com/api/?name=Admin+User&background=0D8ABC&color=fff" alt="Profile"
                         class="w-10 h-10 rounded-full">
                     <div class="ml-3">
-                        <p class="font-medium">Admin User</p>
-                        <p class="text-sm text-blue-200">admin@example.com</p>
+                        <p class="font-medium">{{ Auth::user()->name }}</p>
+                        <p class="text-sm text-blue-200">{{ Auth::user()->email }}</p>
                     </div>
                 </div>
             </div>
