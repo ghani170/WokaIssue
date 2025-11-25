@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Developer;
+namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
 use App\Models\Laporan;
-use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LaporanController extends Controller
 {
@@ -15,17 +15,9 @@ class LaporanController extends Controller
     public function index()
     {
         //
-        $laporans = Laporan::all();
-        $client = User::where('role', 'client')->get();
-        return view('dev.laporans.index', compact('laporans', 'client'));
-    }
+        $laporans = Laporan::where('client_id', Auth::id())->get();
 
-    public function selesai()
-    {
-        //
-        $laporans = Laporan::all();
-        $client = User::where('role', 'client')->get();
-        return view('dev.laporans.selesai', compact('laporans', 'client'));
+        return view('clients.laporan.index', compact('laporans'));
     }
 
     /**
@@ -34,6 +26,8 @@ class LaporanController extends Controller
     public function create()
     {
         //
+        return view('clients.laporan.create');
+       
     }
 
     /**
@@ -44,7 +38,7 @@ class LaporanController extends Controller
         //
     }
 
-    /**
+    /** 
      * Display the specified resource.
      */
     public function show(string $id)

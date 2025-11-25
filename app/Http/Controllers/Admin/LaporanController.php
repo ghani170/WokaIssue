@@ -69,11 +69,4 @@ class LaporanController extends Controller
     {
         //
     }
-
-    public function laporan()
-    {
-        $laporan = Laporan::where('client_id', Auth::id())->get();
-
-        return view('clients.laporan.index', compact('laporan'));
-    }
 }

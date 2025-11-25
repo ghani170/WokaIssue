@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Company;
 use App\Models\Project;
 use Illuminate\Http\Request;
 
@@ -24,7 +25,11 @@ class ProjectController extends Controller
     public function create()
     {
         //
-        return view('admin.project.create');
+        $project = Project::all();
+        $company = Company::all();
+        return view('admin.project.create', compact([
+            'company'
+        ]));
     }
 
     /**
@@ -33,6 +38,19 @@ class ProjectController extends Controller
     public function store(Request $request)
     {
         //
+        $data = $request->validate([
+            'company_id' => 'required',
+            'nama_project' => 'required|string',
+            'deskripsi' =>'required|string',
+        ]);
+
+        Project::create([
+            'company_id' => $data['company_id'],
+            'nama_project' => $data['nama_project'],
+            'deskripsi' => $data['deskripsi'],
+        ]);
+        return redirect()->route('admin.project.index')->with('success','Project berhasil ditambahkan');
+        
     }
 
     /**
@@ -49,6 +67,7 @@ class ProjectController extends Controller
     public function edit(string $id)
     {
         //
+        return view('admin.project.edit', compact('project'));
     }
 
     /**
@@ -57,6 +76,23 @@ class ProjectController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        $data = $request->validate([
+            'company_id' => 'required',
+            'nama_project' => 'required|string',
+            'deskripsi' => 'required|string',
+        ]);
+
+        $project = Project::findOrFail($id);
+
+        Project::update([
+            'company_id' => $data['company_id'],
+            'nama_project' => $data['nama_project'],
+            'deskripsi' => $data['deskripsi'],
+        ]);
+        return redirect()->route('admin.project.index')->with('success','Project berhasil diupdate');
+
+
+
     }
 
     /**
@@ -65,5 +101,6 @@ class ProjectController extends Controller
     public function destroy(string $id)
     {
         //
+        
     }
 }

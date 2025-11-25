@@ -39,7 +39,7 @@
                     <td class="text-center">{{ $data->telepon }}</td>
                     <td class="px-4 py-3">
                         <div class="flex justify-center items-center gap-2">
-                            <a href="#"
+                            <a href="{{ route('admin.company.edit', $data->id ) }}"
                                 class="px-3 py-1 bg-yellow-400 hover:bg-yellow-500 text-white rounded-md text-xs font-medium transition">
                                 Edit
                             </a>
@@ -49,7 +49,6 @@
                             </button>
                         </div>
                     </td>
-
                 </tr>
 
                 @endforeach
