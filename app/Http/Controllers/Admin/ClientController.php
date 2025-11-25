@@ -82,6 +82,7 @@ class ClientController extends Controller
             return redirect()->route('admin.client.index')->with('success', 'User bukan client');
         }
 
+        $client->delete();
         return redirect()->route('admin.client.index')->with('success', 'client berhasil dihapus');
     }
 }

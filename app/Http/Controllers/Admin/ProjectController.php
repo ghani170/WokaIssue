@@ -66,29 +66,31 @@ class ProjectController extends Controller
      */
     public function edit(string $id)
     {
-        //
-        return view('admin.project.edit', compact('project'));
+        $project = Project::findOrFail($id);
+        $company = Company::all();
+        return view('admin.project.edit', compact('project','company'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        //
+        $project = Project::findOrFail($id);
+
         $data = $request->validate([
             'company_id' => 'required',
             'nama_project' => 'required|string',
             'deskripsi' => 'required|string',
         ]);
 
-        $project = Project::findOrFail($id);
+        $data = [
+            'company_id' => $request->company_id,
+            'nama_project' => $request->nama_project,
+            'deskripsi' => $request->deskripsi,
+        ];
 
-        Project::update([
-            'company_id' => $data['company_id'],
-            'nama_project' => $data['nama_project'],
-            'deskripsi' => $data['deskripsi'],
-        ]);
+        $project->update($data);
         return redirect()->route('admin.project.index')->with('success','Project berhasil diupdate');
 
 
