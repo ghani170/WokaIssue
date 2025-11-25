@@ -1,37 +1,39 @@
 @extends('layout.app')
 
-@section('title', 'Create Project')
+@section('title', 'Edit Project')
 
 @section('content')
 <div class="mt-6">
 
-    <h2 class="text-2xl font-semibold mb-4">Tambah Project</h2>
+    <h2 class="text-2xl font-semibold mb-4">Edit Project</h2>
 
-    <form action="{{ route('admin.project.store') }}" method="POST"
+    <form action="{{ route('admin.project.update', $project->id) }}" method="POST"
         class="bg-white shadow-md rounded-xl p-6">
         @csrf
+        @method('PUT')
+
         <div class="mb-4">
-            <label for="company_id" class="block text-sm font-medium text-gray-700 mb-2">
-                Nama Perusahaan
-            </label>
+            <label class="block text-sm font-medium text-gray-700 mb-2">Nama Perusahaan</label>
 
-            <select name="company_id" id="company_id"
+            <select name="company_id"
                 class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none 
-        focus:ring-2 focus:ring-black focus:border-black transition
-        @error('company_id') border-red-500 focus:ring-red-500 @enderror">
+                focus:ring-2 focus:ring-black focus:border-black transition
+                @error('company_id') border-red-500 focus:ring-red-500 @enderror">
 
-                <option value="" disabled selected>-- Pilih Perusahaan --</option>
+                <option value="" disabled>-- Pilih Perusahaan --</option>
 
                 @foreach ($company as $c)
-                <option value="{{ $c->id }}">{{ $c->name }}</option>
+                <option value="{{ $c->id }}"
+                    {{ old('company_id', $project->company_id) == $c->id ? 'selected' : '' }}>
+                    {{ $c->name }}
+                </option>
                 @endforeach
             </select>
 
             @error('company_id')
-            <small class="text-red-600">{{ $message }}</small>
+                <small class="text-red-600">{{ $message }}</small>
             @enderror
         </div>
-
 
         <div class="mb-4">
             <label class="block text-sm font-medium text-gray-700 mb-2">Nama Project</label>
@@ -39,10 +41,10 @@
             <input type="text" name="nama_project"
                 class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2
                 focus:ring-black focus:border-black transition"
-                value="{{ old('nama_project') }}">
+                value="{{ old('nama_project', $project->nama_project) }}">
 
             @error('nama_project')
-            <small class="text-red-600">{{ $message }}</small>
+                <small class="text-red-600">{{ $message }}</small>
             @enderror
         </div>
 
@@ -51,16 +53,17 @@
 
             <textarea name="deskripsi" rows="4"
                 class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2
-                focus:ring-black focus:border-black transition">{{ old('deskripsi') }}</textarea>
+                focus:ring-black focus:border-black transition">{{ old('deskripsi', $project->deskripsi) }}</textarea>
 
             @error('deskripsi')
-            <small class="text-red-600">{{ $message }}</small>
+                <small class="text-red-600">{{ $message }}</small>
             @enderror
         </div>
+
         <div class="flex items-center gap-3 mt-5">
             <button type="submit"
                 class="bg-black text-white px-5 py-2 rounded-lg hover:bg-gray-900 transition">
-                Simpan
+                Update
             </button>
 
             <a href="{{ route('admin.project.index') }}"

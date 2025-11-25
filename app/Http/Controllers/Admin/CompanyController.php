@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Company;
+use App\Models\Project;
 use Illuminate\Http\Request;
 
 class CompanyController extends Controller
@@ -51,14 +52,17 @@ class CompanyController extends Controller
     public function show(string $id)
     {
         //
+     
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Company $company)
     {
         //
+        
+        return view('admin.company.edit',compact('company'));
     }
 
     /**
@@ -67,6 +71,19 @@ class CompanyController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        $data = $request->validate([
+            'name' => 'required|string|max:255',
+            'alamat' => 'required|string',
+            'telepon' => 'required|string',
+        ]);
+       
+
+        $company = Company::findOrFail($id);
+
+        $company->update($data);
+
+        return redirect()->route('admin.company.index')->with('success', 'Company Berhasil diupdate');
+
     }
 
     /**
@@ -75,5 +92,6 @@ class CompanyController extends Controller
     public function destroy(string $id)
     {
         //
+
     }
 }
