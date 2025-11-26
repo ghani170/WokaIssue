@@ -24,6 +24,7 @@ Route::middleware('guest')->group(function () {
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     route::resource('project', ProjectController::class)->parameters(['project' => 'project',]);
+    Route::put('/admin/project/status/{project}', [ProjectController::class, 'updateStatus'])->name('project.updateStatus');
     route::resource('company', CompanyController::class);
     Route::resource('client', ClientController::class);
     Route::resource('developer', DeveloperController::class);
