@@ -23,14 +23,26 @@
                 @foreach ($laporans as $l)
                     <tr class="hover:bg-gray-50 transition">
                     <td class="px-4 py-3 text-center text-gray-800">{{ $loop->iteration }}</td>
-                    <td class="px-4 py-3 text-center text-gray-800">{{ $l->project_name }}</td>
+                    <td class="px-4 py-3 text-center text-gray-800">{{ $l->project->nama_project }}</td>
                     <td class="px-4 py-3 text-center text-gray-800">{{ $l->client->name }}</td>
                     <td class="px-4 py-3 text-center text-gray-800">{{ $l->title }}</td>
                     <td class="px-4 py-3 text-center text-gray-800">{{ $l->deskripsi }}</td>
                     <td class="px-4 py-3 text-center text-gray-800">{{ $l->tipe }}</td>
                     <td class="px-4 py-3 text-center text-gray-800">{{ $l->prioritas }}</td>
-                    <td class="px-4 py-3 text-center text-gray-800">{{ $l->deadline }}</td>
-                    <td class="px-4 py-3 text-center text-gray-800">{{ $l->status }}</td>
+                    <td class="px-4 py-3 text-center text-gray-800">{{ $l->deadline ?? '--,--' }}</td>
+                    <td class="px-4 py-3 text-center text-gray-800">
+                                <form action="{{ route('dev.laporan.updateStatus', $l->id) }}" method="POST">
+                                    @csrf
+                                    @method('PUT')
+                                    <select name="status" onchange="this.form.submit()" class="w-30 border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-black focus:border-black transition">
+                                        <option value="Pending" {{ $l->status == 'Pending' ? 'selected' : '' }}>Pending</option>
+                                        <option value="Working" {{ $l->status == 'Working' ? 'selected' : '' }}>
+                                            Working</option>
+                                        <option value="Done" {{ $l->status == 'Done' ? 'selected' : '' }}>Done</option>
+                                        <option value="Rejected" {{ $l->status == 'Rejected' ? 'selected' : '' }}>Reject</option>
+                                    </select>
+                                </form>
+                            </td>
                 </tr>
                 @endforeach
 

@@ -19,8 +19,8 @@ return new class extends Migration
             $table->string('title', 255);
             $table->text('deskripsi');
             $table->enum('tipe', ['Bug', 'Feature', 'Support']);
-            $table->enum('prioritas', ['Low', 'Medium', 'High', 'Critical']);
-            $table->enum('status', ['Pending', 'Working', 'Done', 'Closed', 'Rejected'])->default('Pending');
+            $table->enum('prioritas', ['Low', 'Medium', 'High', 'Critical'])->nullable();
+            $table->enum('status', ['Pending', 'Working', 'Done', 'Rejected'])->default('Pending');
             $table->date('deadline')->nullable();
             $table->timestamps();
         });

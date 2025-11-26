@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Laporan;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LaporanController extends Controller
 {
@@ -15,17 +16,27 @@ class LaporanController extends Controller
     public function index()
     {
         //
-        $laporans = Laporan::all();
+        $developerId = Auth::id();
+        $laporans = Laporan::where('developer_id', $developerId)->get();
         $client = User::where('role', 'client')->get();
+
         return view('dev.laporans.index', compact('laporans', 'client'));
     }
 
     public function selesai()
     {
-        //
-        $laporans = Laporan::all();
+        $developerId = Auth::id();
+        $laporans = Laporan::where('developer_id', $developerId)->get();
         $client = User::where('role', 'client')->get();
         return view('dev.laporans.selesai', compact('laporans', 'client'));
+    }
+
+    public function ditolak()
+    {
+        $developerId = Auth::id();
+        $laporans = Laporan::where('developer_id', $developerId)->get();
+        $client = User::where('role', 'client')->get();
+        return view('dev.laporans.ditolak', compact('laporans', 'client'));
     }
 
     /**
@@ -71,6 +82,18 @@ class LaporanController extends Controller
     /**
      * Remove the specified resource from storage.
      */
+
+    public function updateStatus(Request $request, Laporan $laporan)
+    {
+        $request->validate([
+            'status' => 'required|in:Pending,Working,Done,Rejected'
+        ]);
+
+        $laporan->status = $request->status;
+        $laporan->save();
+        return redirect()->route('dev.laporan.index')->with('success', 'Status berhasil diupdate');
+    }
+
     public function destroy(string $id)
     {
         //

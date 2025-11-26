@@ -23,7 +23,7 @@
 
             <tbody class="divide-y divide-gray-200">
                 @foreach ($laporans as $l)
-                @if ($l->status === 'Done')
+                @if ($l->status === 'Done' || $l->status === 'Rejected')
                 <tr class="hover:bg-gray-50 transition">
                     <td class="px-4 py-3 text-center text-gray-800">{{ $loop->iteration }}</td>
                     <td class="px-4 py-3 text-center text-gray-800">{{ $l->project->nama_project }}</td>
