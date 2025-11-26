@@ -44,8 +44,6 @@
                     </td>
                 </tr>
                 @endforeach
-
-                    <!-- Dummy 1
                     <tr class="hover:bg-gray-50 transition">
                         <td class="px-4 py-3 text-center text-gray-800">1</td>
                         <td class="px-4 py-3 text-center text-gray-800">Sistem Inventaris</td>

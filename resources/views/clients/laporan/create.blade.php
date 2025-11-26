@@ -8,7 +8,7 @@
     <h2 class="text-2xl font-semibold mb-4">Tambah Project</h2>
 
     <form action="{{ route('client.laporan.store') }}" method="POST"
-        class="bg-white shadow-md rounded-xl p-6">
+        class="bg-white shadow-md rounded-xl p-6" enctype="multipart/form-data">
         @csrf
 
 
