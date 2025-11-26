@@ -40,18 +40,12 @@ Route::prefix('client')->name('client.')->middleware(['auth', 'role:client'])->g
 
 });
 
-Route::middleware('guest')->group(function () {
-    Route::get('/', function () {
-        return redirect()->route('login');
-    });
-    Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
-    Route::post('/login', [AuthController::class, 'login'])->name('login.store');
-});
-
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');
 
 Route::prefix('dev')->name('dev.')->middleware(['auth', 'role:developer'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::put('/dev/laporan/status/{laporan}', [DeveloperLaporanController::class, 'updateStatus'])->name('laporan.updateStatus');
     Route::get('/laporan/selesai', [DeveloperLaporanController::class, 'selesai'])->name('laporan.selesai');
+    Route::get('/laporan/ditolak', [DeveloperLaporanController::class, 'ditolak'])->name('laporan.ditolak');
     Route::resource('laporan', DeveloperLaporanController::class);
 });

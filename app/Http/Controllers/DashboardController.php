@@ -24,9 +24,10 @@ class DashboardController extends Controller
         } else if ($user->role === 'developer') {
 
             $totalLM = Laporan::count();
-            $totalLK = Laporan::where('status', 'Done')->count();
+            $totalLS = Laporan::where('status', 'Done')->count();
+            $totalLD = Laporan::where('status', 'Rejected')->count();
 
-            return view('dev.dashboard', compact('totalLM', 'totalLK'));
+            return view('dev.dashboard', compact('totalLM', 'totalLS', 'totalLD'));
         } else if ($user->role === 'client') {
             return view('clients.dashboard');
         } else {
