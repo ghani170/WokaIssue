@@ -23,14 +23,21 @@
                 @foreach ($laporans as $l)
                     <tr class="hover:bg-gray-50 transition">
                     <td class="px-4 py-3 text-center text-gray-800">{{ $loop->iteration }}</td>
-                    <td class="px-4 py-3 text-center text-gray-800">{{ $l->project_name }}</td>
+                    <td class="px-4 py-3 text-center text-gray-800">{{ $l->project->nama_project }}</td>
                     <td class="px-4 py-3 text-center text-gray-800">{{ $l->client->name }}</td>
                     <td class="px-4 py-3 text-center text-gray-800">{{ $l->title }}</td>
                     <td class="px-4 py-3 text-center text-gray-800">{{ $l->deskripsi }}</td>
                     <td class="px-4 py-3 text-center text-gray-800">{{ $l->tipe }}</td>
                     <td class="px-4 py-3 text-center text-gray-800">{{ $l->prioritas }}</td>
                     <td class="px-4 py-3 text-center text-gray-800">{{ $l->deadline }}</td>
-                    <td class="px-4 py-3 text-center text-gray-800">{{ $l->status }}</td>
+                    <td class="px-4 py-3 text-center text-gray-800">
+                        <select name="status" id="">
+                            <option value="Pending">Pending</option>
+                            <option value="Working">Working</option>
+                            <option value="In Progress">In Progress</option>
+                            <option value="Done">Done</option>
+                        </select>
+                    </td>
                 </tr>
                 @endforeach
 

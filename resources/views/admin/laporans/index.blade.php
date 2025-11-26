@@ -23,23 +23,31 @@
                 @foreach ($laporans as $l)
                     <tr class="hover:bg-gray-50 transition">
                     <td class="px-4 py-3 text-center text-gray-800">{{ $loop->iteration }}</td>
-                    <td class="px-4 py-3 text-center text-gray-800">{{ $l->project_name }}</td>
+                    <td class="px-4 py-3 text-center text-gray-800">{{ $l->project->nama_project }}</td>
                     <td class="px-4 py-3 text-center text-gray-800">{{ $l->client->name }}</td>
                     <td class="px-4 py-3 text-center text-gray-800">
-                        <select name="" id="">
-                            <option value="">Pilih developer</option>
-                            <option value="critical">{{ $l->developer->name }}</option>
+                        <select name="developer_id" id="">
+                            <option value="" disabled selected>Pilih developer</option>
+                            @foreach ($developer as $dev)
+                            <option value="{{ $dev->id }}">{{ $dev->name }}</option>
+                            @endforeach
                         </select>
                     </td>
                     <td class="px-4 py-3 text-center text-gray-800">{{ $l->title }}</td>
                     <td class="px-4 py-3 text-center text-gray-800">{{ $l->deskripsi }}</td>
                     <td class="px-4 py-3 text-center text-gray-800">{{ $l->tipe }}</td>
-                    <td class="px-4 py-3 text-center text-gray-800">{{ $l->prioritas }}</td>
-                    <td class="px-4 py-3 text-center">
-                        @if ($item->prioritas == 'high' || $item->prioritas == 'critical')
-                        <input type="date" name="deadline">
-                        @else
-                        -
+                    <td class="px-4 py-3 text-center text-gray-800">
+                        <select name="prioritas" id="">
+                            <option value="" disabled selected>Pilih prioritas</option>
+                            <option value="Critical">Critical</option>
+                            <option value="High">High</option>
+                            <option value="Medium">Medium</option>
+                            <option value="Low">Low</option>
+                        </select>
+                    </td>
+                    <td class="px-4 py-3 text-center text-gray-800">
+                        @if ($l->status == 'High' || $l->status == 'Critical'  )
+                        <input type="date" name="deadline" value="{{ $l->deadline ?? '' }}">
                         @endif
                     </td>
                 </tr>
