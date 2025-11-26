@@ -118,6 +118,13 @@
                             Laporan Client Selesai
                         </a>
                     </li>
+                    <li>
+                        <a href="{{route('dev.laporan.ditolak')}}"
+                            class="flex items-center p-2 rounded hover:bg-blue-700">
+                            <i class="fa-solid fa-folder-closed mr-3"></i>
+                            Laporan Client Ditolak
+                        </a>
+                    </li>
                     @endif
                     <li>
                         <form action="{{ route('logout') }}" method="POST"

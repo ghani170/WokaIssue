@@ -26,7 +26,7 @@
                     <td class="px-4 py-3 text-center text-gray-800">{{ $l->project->nama_project }}</td>
                     <td class="px-4 py-3 text-center text-gray-800">{{ $l->client->name }}</td>
                     <td class="px-4 py-3 text-center text-gray-800">
-                        <select name="developer_id" id="">
+                        <select name="developer_id" class="w-40 border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-black focus:border-black transition">
                             <option value="" disabled selected>Pilih developer</option>
                             @foreach ($developer as $dev)
                             <option value="{{ $dev->id }}">{{ $dev->name }}</option>
@@ -37,7 +37,7 @@
                     <td class="px-4 py-3 text-center text-gray-800">{{ $l->deskripsi }}</td>
                     <td class="px-4 py-3 text-center text-gray-800">{{ $l->tipe }}</td>
                     <td class="px-4 py-3 text-center text-gray-800">
-                        <select name="prioritas" id="">
+                        <select name="prioritas" class="w-35 border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-black focus:border-black transition">
                             <option value="" disabled selected>Pilih prioritas</option>
                             <option value="Critical">Critical</option>
                             <option value="High">High</option>

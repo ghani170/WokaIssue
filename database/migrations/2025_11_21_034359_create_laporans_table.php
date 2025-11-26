@@ -20,7 +20,7 @@ return new class extends Migration
             $table->text('deskripsi');
             $table->enum('tipe', ['Bug', 'Feature', 'Support']);
             $table->enum('prioritas', ['Low', 'Medium', 'High', 'Critical'])->nullable();
-            $table->enum('status', ['Pending', 'Working', 'Done', 'Closed', 'Rejected'])->default('Pending');
+            $table->enum('status', ['Pending', 'Working', 'Done', 'Rejected'])->default('Pending');
             $table->date('deadline')->nullable();
             $table->timestamps();
         });
