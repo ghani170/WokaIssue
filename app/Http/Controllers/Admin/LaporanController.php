@@ -35,7 +35,7 @@ class LaporanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
     }
 
     /**
@@ -57,9 +57,45 @@ class LaporanController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Laporan $laporan)
     {
-        //
+        $request->validate([
+            'deadline' => 'required|date',
+        ]);
+
+        $laporan->deadline = $request->deadline;
+        $laporan->save();
+        return redirect()->route('admin.laporan.index')->with('success', 'Deadline berhasil diupdate');
+    }
+
+    public function updatePrioritas(Request $request, Laporan $laporan)
+    {
+        $request->validate([
+            'prioritas' => 'required|in:Low,Medium,High,Critical',
+        ]);
+
+        $laporan->prioritas = $request->prioritas;
+
+        if ($request->prioritas == 'Low' | $request->prioritas == 'Medium') {
+            $laporan->deadline = null;
+        }
+       
+        $laporan->save();
+
+        return redirect()->route('admin.laporan.index')->with('success', 'Prioritas berhasil diupdate');
+    }
+
+    public function updateDeveloper(Request $request, Laporan $laporan){
+        $request->validate([
+            'developer_id' => 'nullable|exists:users,id',
+        ]);
+
+        $developerId = $request->developer_id;
+
+        $laporan->developer_id = $developerId;
+
+        $laporan->save();
+        return redirect()->route('admin.laporan.index')->with('success', 'Developer Berhasil diupdate');
     }
 
     /**

@@ -29,6 +29,8 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin'])->grou
     Route::resource('client', ClientController::class);
     Route::resource('developer', DeveloperController::class);
     Route::resource('laporan', LaporanController::class);
+    Route::put('/admin/laporan/prioritas/{laporan}', [LaporanController::class, 'updatePrioritas'])->name('laporan.updatePrioritas');
+    Route::put('/admin/laporan/developer/{laporan}', [LaporanController::class, 'updateDeveloper'])->name('laporan.updateDeveloper');
 });
 
 Route::prefix('client')->name('client.')->middleware(['auth', 'role:client'])->group(function () {
