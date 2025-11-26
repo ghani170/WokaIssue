@@ -7,7 +7,7 @@
 
     <h2 class="text-2xl font-semibold mb-4">Tambah Project</h2>
 
-    <form action="{{ route('client.laporan.store') }}" method="POST"
+    <form action="{{ route('client.laporan.store') }}" method="POST" enctype="multipart/form-data"
         class="bg-white shadow-md rounded-xl p-6">
         @csrf
 
@@ -86,12 +86,23 @@
         </div>
 
         <div class="mb-4">
-            <label class="block text-sm font-medium text-gray-700 mb-2">Dokumentasi (Foto/ File)</label>
+            <label class="block text-sm font-medium text-gray-700 mb-2">
+                Dokumentasi (Foto / File)
+            </label>
 
-            <input type="file" name="dokumentasi"
-                class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none 
-                focus:ring-2 focus:ring-black focus:border-black transition
-                @error('dokumentasi') border-red-500 focus:ring-red-500 @enderror">
+            <div id="file-wrapper" class="space-y-3">
+                <input
+                    type="file"
+                    name="dokumentasi[]"
+                    multiple
+                    accept="image/*,video/*,.pdf,.doc,.docx,.txt"
+                    class="w-full border border-gray-300 rounded-lg px-3 py-2" />
+            </div>
+
+            <button type="button" id="add-file"
+                class="mt-3 px-4 py-2 bg-gray-200 rounded-lg hover:bg-gray-300 transition">
+                + Tambah Lampiran
+            </button>
 
             @error('dokumentasi')
             <small class="text-red-600">{{ $message }}</small>
@@ -114,4 +125,17 @@
     </form>
 
 </div>
+<script>
+    document.getElementById('add-file').addEventListener('click', function() {
+        let wrapper = document.getElementById('file-wrapper');
+
+        let input = document.createElement('input');
+        input.type = "file";
+        input.name = "dokumentasi[]";
+        input.className = "w-full border border-gray-300 rounded-lg px-3 py-2";
+
+        wrapper.appendChild(input);
+    });
+</script>
+
 @endsection

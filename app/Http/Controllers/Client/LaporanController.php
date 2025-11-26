@@ -17,7 +17,7 @@ class LaporanController extends Controller
     public function index()
     {
         //
-        $user = Auth::user(); 
+        $user = Auth::user();
         $laporans = Laporan::where('client_id', $user->id)->get();
 
         return view('clients.laporan.index', compact('laporans', 'user'));
@@ -27,14 +27,14 @@ class LaporanController extends Controller
      * Show the form for creating a new resource.
      */
     public function create()
-{
-    $user = Auth::user(); // client login
+    {
+        $user = Auth::user(); // client login
 
-    // ambil semua project yang company_id nya sama dengan client
-    $projects = Project::where('company_id', $user->company_id)->get();
+        // ambil semua project yang company_id nya sama dengan client
+        $projects = Project::where('company_id', $user->company_id)->get();
 
-    return view('clients.laporan.create', compact('user', 'projects'));
-}
+        return view('clients.laporan.create', compact('user', 'projects'));
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -47,7 +47,12 @@ class LaporanController extends Controller
             'title' => 'required|string|max:255',
             'deskripsi' => 'required|string',
             'tipe' => 'required',
+            // wajib upload minimal 1 file
             'dokumentasi' => 'required',
+
+            // validasi semua file termasuk video
+            'dokumentasi.*' => 'file|max:204800|mimes:jpg,jpeg,png,pdf,doc,docx,txt,mp4,mov,avi,mkv'
+            // max 200MB per file (204800 KB)
         ]);
 
         $data =  Laporan::create([
@@ -58,17 +63,21 @@ class LaporanController extends Controller
             'tipe' => $request->tipe,
         ]);
 
-        $gambar = [
-            'laporan_id' => $data->id,
-            'dokumentasi' => $request->dokumentasi,
-        ];
-
         if ($request->hasFile('dokumentasi')) {
-            $imagePath = $request->file('dokumentasi')->store('dokumentasi', 'public');
-            $gambar['dokumentasi'] = $imagePath;
-        }
 
-        Lampiran::create($gambar);
+        foreach ($request->file('dokumentasi') as $file) {
+
+            $filename = time() . '_' . uniqid() . '.' . $file->getClientOriginalExtension();
+
+            // File disimpan di storage/app/public/lampiran
+            $path = $file->storeAs('lampiran', $filename, 'public');
+
+            Lampiran::create([
+                'laporan_id' => $data->id,
+                'dokumentasi' => $path,
+            ]);
+        }
+    }
 
         return redirect()->route('client.laporan.index')->with('success', 'Laporan berhasil dibuat.');
     }
