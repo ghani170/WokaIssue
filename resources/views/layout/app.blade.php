@@ -61,10 +61,10 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{route('admin.laporan.selesai')}}"
-                            class="flex items-center p-3 rounded-lg transition-all duration-200 hover:bg-blue-700 hover:shadow-md {{ request()->routeIs('admin.laporan.selesai') ? 'bg-blue-700 shadow-md' : '' }}">
+                        <a href="{{route('admin.laporan.activity')}}"
+                            class="flex items-center p-3 rounded-lg transition-all duration-200 hover:bg-blue-700 hover:shadow-md {{ request()->routeIs('admin.laporan.activity') ? 'bg-blue-700 shadow-md' : '' }}">
                             <i class="fa-solid fa-folder-open mr-3 w-5 text-center"></i>
-                            Laporan Selesai
+                            Laporan Activity
                         </a>
                     </li>
                     <li>

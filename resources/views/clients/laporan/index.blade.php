@@ -53,25 +53,21 @@
                     <td class="text-center">{{ $data->deskripsi }}</td>
                     <td class="text-center">{{ $data->tipe }}</td>
                     <td class="text-center">
-                        @if ($data->status == 'active')
-                        <span class="px-3 py-1 bg-green-500 text-white rounded-lg text-xs">
-                            Active
-                        </span>
-                        @elseif ($data->status == 'pending')
-                        <span class="px-3 py-1 bg-yellow-500 text-white rounded-lg text-xs">
+                        @if ($data->status == 'Pending')
+                        <span class="px-3 py-1 bg-gray-500 text-white rounded-lg text-xs">
                             Pending
                         </span>
-                        @elseif ($data->status == 'rejected')
-                        <span class="px-3 py-1 bg-red-500 text-white rounded-lg text-xs">
+                        @elseif ($data->status == 'Working')
+                        <span class="px-3 py-1 bg-green-500 text-white rounded-lg text-xs">
+                            Working
+                        </span>
+                        @elseif ($data->status == 'Done')
+                        <span class="px-3 py-1 bg-cyan-500 text-white rounded-lg text-xs">
+                            Done
+                        </span>
+                        @elseif ($data->status == 'Rejected')
+                        <span class="px-3 py-1 bg-orange-500 text-white rounded-lg text-xs">
                             Rejected
-                        </span>
-                        @elseif ($data->status == 'in progress')
-                        <span class="px-3 py-1 bg-blue-500 text-white rounded-lg text-xs">
-                            In Progress
-                        </span>
-                        @else
-                        <span class="px-3 py-1 bg-gray-500 text-white rounded-lg text-xs">
-                            {{ ucfirst($data->status) }}
                         </span>
                         @endif
                     </td>

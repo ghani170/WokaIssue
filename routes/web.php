@@ -25,7 +25,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin'])->grou
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     route::resource('project', ProjectController::class)->parameters(['project' => 'project',]);
     Route::put('/admin/project/status/{project}', [ProjectController::class, 'updateStatus'])->name('project.updateStatus');
-    Route::get('/laporan/selesai', [LaporanController::class, 'selesai'])->name('laporan.selesai');
+    Route::get('/laporan/activity', [LaporanController::class, 'activity'])->name('laporan.activity');
     route::resource('company', CompanyController::class);
     Route::resource('client', ClientController::class);
     Route::resource('developer', DeveloperController::class);
