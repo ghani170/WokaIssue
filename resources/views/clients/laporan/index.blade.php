@@ -15,9 +15,6 @@
                         No
                     </th>
                     <th class="px-4 py-3 text-center text-gray-600 font-semibold uppercase text-xs">
-                        Nama
-                    </th>
-                    <th class="px-4 py-3 text-center text-gray-600 font-semibold uppercase text-xs">
                         Nama Project
                     </th>
                     <th class="px-4 py-3 text-center text-gray-600 font-semibold uppercase text-xs">
@@ -25,9 +22,6 @@
                     </th>
                     <th class="px-4 py-3 text-center text-gray-600 font-semibold uppercase text-xs">
                         Title
-                    </th>
-                    <th class="px-4 py-3 text-center text-gray-600 font-semibold uppercase text-xs">
-                        Deskripsi
                     </th>
                     <th class="px-4 py-3 text-center text-gray-600 font-semibold uppercase text-xs">
                         Tipe
@@ -46,34 +40,22 @@
                 @foreach ($laporans as $data)
                 <tr>
                     <td class="text-center">{{ $loop->iteration }}</td>
-                    <td class="text-center">{{ $data->client->name }}</td>
                     <td class="text-center">{{ $data->project->nama_project }}</td>
                     <td class="text-center">{{ $data->project->company->name }}</td>
                     <td class="text-center">{{ $data->title }}</td>
-                    <td class="text-center">{{ $data->deskripsi }}</td>
                     <td class="text-center">{{ $data->tipe }}</td>
-                    <td class="text-center">
-                        @if ($data->status == 'Pending')
-                        <span class="px-3 py-1 bg-gray-500 text-white rounded-lg text-xs">
-                            Pending
+                    <td class="text-center font-bold">
+                        <span
+                            class="px-3 py-1 {{ $data->status == 'Pending' ? 'bg-gray-500 inline-block w-20' : ($data->status == 'Working' ? 'bg-green-500 inline-block w-20' : ($data->status == 'Done' ? 'bg-cyan-500 inline-block w-20' : 'bg-orange-500 inline-block w-20')) }} text-white rounded-lg text-xs">
+                            {{ $data->status }}
                         </span>
-                        @elseif ($data->status == 'Working')
-                        <span class="px-3 py-1 bg-green-500 text-white rounded-lg text-xs">
-                            Working
-                        </span>
-                        @elseif ($data->status == 'Done')
-                        <span class="px-3 py-1 bg-cyan-500 text-white rounded-lg text-xs">
-                            Done
-                        </span>
-                        @elseif ($data->status == 'Rejected')
-                        <span class="px-3 py-1 bg-orange-500 text-white rounded-lg text-xs">
-                            Rejected
-                        </span>
-                        @endif
-                    </td>
 
                     <td class="px-4 py-3">
                         <div class="flex justify-center items-center gap-2">
+                            <a href="{{ route('client.laporan.show', $data->id) }}"
+                                class="px-3 py-1 bg-yellow-400 hover:bg-yellow-500 text-white rounded-md text-xs font-medium transition">
+                                Detail
+                            </a>
                             <a href="{{ route('client.laporan.edit', $data->id) }}"
                                 class="px-3 py-1 bg-yellow-400 hover:bg-yellow-500 text-white rounded-md text-xs font-medium transition">
                                 Edit

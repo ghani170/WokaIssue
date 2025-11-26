@@ -56,8 +56,8 @@
                     <li>
                         <a href="{{route('admin.laporan.index')}}"
                             class="flex items-center p-3 rounded-lg transition-all duration-200 hover:bg-blue-700 hover:shadow-md {{ request()->routeIs('admin.laporan.index') ? 'bg-blue-700 shadow-md' : '' }}">
-                            <i class="fa-solid fa-folder-open mr-3 w-5 text-center"></i>
-                            Laporan Client
+                            <i class="fa-solid fa-folder-plus mr-3 w-5 text-center"></i>
+                            Laporan Masuk Client
                         </a>
                     </li>
                     <li>

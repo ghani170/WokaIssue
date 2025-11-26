@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Company;
+use App\Models\Laporan;
 use App\Models\Project;
 use Illuminate\Http\Request;
 
@@ -41,7 +42,7 @@ class ProjectController extends Controller
         $data = $request->validate([
             'company_id' => 'required',
             'nama_project' => 'required|string',
-            'deskripsi' =>'required|string',
+            'deskripsi' => 'required|string',
         ]);
 
         Project::create([
@@ -49,8 +50,7 @@ class ProjectController extends Controller
             'nama_project' => $data['nama_project'],
             'deskripsi' => $data['deskripsi'],
         ]);
-        return redirect()->route('admin.project.index')->with('success','Project berhasil ditambahkan');
-        
+        return redirect()->route('admin.project.index')->with('success', 'Project berhasil ditambahkan');
     }
 
     /**
@@ -68,7 +68,7 @@ class ProjectController extends Controller
     {
         $project = Project::findOrFail($id);
         $company = Company::all();
-        return view('admin.project.edit', compact('project','company'));
+        return view('admin.project.edit', compact('project', 'company'));
     }
 
     /**
@@ -91,19 +91,28 @@ class ProjectController extends Controller
         ];
 
         $project->update($data);
-        return redirect()->route('admin.project.index')->with('success','Project berhasil diupdate');
-
-
-
+        return redirect()->route('admin.project.index')->with('success', 'Project berhasil diupdate');
     }
 
-    public function updateStatus(Request $request, Project $project){
+    public function updateStatus(Request $request, Project $project)
+    {
         $request->validate([
             'status' => 'required|in:Active,Maintenance,Stop'
         ]);
 
         $project->status = $request->status;
         $project->save();
+
+        // Jika project di STOP → reject semua laporan terkait
+        if ($project->status == 'Stop') {
+            Laporan::where('project_id', $project->id)
+                ->update(['status' => 'Rejected']);
+        }elseif ($project->status == 'Active' || $project->status == 'Maintenance') {
+            Laporan::where('project_id', $project->id)
+                ->where('status', 'Rejected')
+                ->update(['status' => 'Pending']);
+        }
+
         return redirect()->route('admin.project.index')->with('success', 'Status berhasil diupdate');
     }
 

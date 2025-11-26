@@ -75,11 +75,8 @@
 
         <div class="mb-5">
             <label class="block text-sm font-medium text-gray-700 mb-2">Dokumentasi</label>
-            @foreach ($lampiran as $lam)
-            <img src="{{ asset('storage/' . $lam->dokumentasi) }}"
+            <img src="{{ asset('storage/' . $laporan->dokumentasi) }}"
                 class="w-32 h-32 object-cover rounded-lg mb-3 border">
-            @endforeach
-
 
             <input type="file"
                 name="dokumentasi"

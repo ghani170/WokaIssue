@@ -88,6 +88,15 @@ class LaporanController extends Controller
     public function show(string $id)
     {
         //
+        $user = auth()->user();
+        $laporan = Laporan::findOrFail($id);
+        $lampiran = Lampiran::where('laporan_id', $laporan->id)->get();
+
+        // Pastikan hanya pemilik kegiatan yang bisa lihat
+        if ($laporan->client_id != Auth::user()->id) {
+            abort(403);
+        }
+        return view('clients.laporan.show', compact('laporan', 'lampiran'));
     }
 
     /**
@@ -98,7 +107,6 @@ class LaporanController extends Controller
         //
         $user = Auth::user();
         $lampiran = Lampiran::where('laporan_id', $laporan->id)->get();
-
         $projects = Project::where('company_id', $user->company_id)->get();
 
         return view('clients.laporan.edit',compact('laporan','projects', 'lampiran'));

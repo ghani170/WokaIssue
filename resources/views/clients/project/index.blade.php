@@ -23,7 +23,7 @@
                     <td class="px-4 py-3 text-center text-gray-800">{{ $l->nama_project }}</td>
                     <td class="px-4 py-3 text-center text-gray-800">{{ $l->deskripsi }}</td>
                     <td class="text-center">
-                        <span class="px-3 py-1 bg-green-500 text-white rounded-lg text-xs">
+                        <span class="px-3 py-1 {{ $l->status == 'Active' ? 'bg-green-500' : ($l->status == 'Maintenance' ? 'bg-yellow-500' : 'bg-red-500') }} text-white rounded-lg text-xs">
                             {{ $l->status }}
                         </span>
                     </td>

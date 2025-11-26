@@ -33,46 +33,15 @@
                     <td class="px-4 py-3 text-center text-gray-800">{{ $l->deskripsi }}</td>
                     <td class="px-4 py-3 text-center text-gray-800">{{ $l->tipe }}</td>
                     <td class="text-center">
-                        @if ($l->prioritas == 'Low')
-                        <span class="inline-block w-20 font-bold text-center px-3 py-1 bg-yellow-500 text-white rounded-lg text-xs">
-                            Low
+                        <span class="px-3 py-1 {{ $l->prioritas == 'Low' ? 'bg-yellow-500 inline-block w-20' : ($l->prioritas == 'Medium' ? 'bg-orange-500 inline-block w-20' : ($l->prioritas == 'High' ? 'bg-red-500 inline-block w-20' : 'bg-red-700 inline-block w-20')) }} text-white font-bold rounded-lg text-xs">
+                            {{ $l->prioritas }}
                         </span>
-
-                        @elseif ($l->prioritas == 'Medium')
-                        <span class="inline-block w-20 font-bold text-center px-3 py-1 bg-orange-500 text-white rounded-lg text-xs">
-                            Medium
-                        </span>
-
-                        @elseif ($l->prioritas == 'High')
-                        <span class="inline-block w-20 font-bold text-center px-3 py-1 bg-red-500 text-white rounded-lg text-xs">
-                            High
-                        </span>
-
-                        @elseif ($l->prioritas == 'Critical')
-                        <span class="inline-block w-20 font-bold text-center px-3 py-1 bg-red-700 text-white rounded-lg text-xs">
-                            Critical
-                        </span>
-                        @endif
                     </td>
                     <td class="px-4 py-3 text-center text-gray-800">{{ $l->deadline ?? '--,--' }}</td>
                     <td class="text-center">
-                        @if ($l->status == 'Pending')
-                        <span class="inline-block w-20 font-bold text-center px-3 py-1 bg-gray-500 text-white rounded-lg text-xs">
-                            Pending
+                        <span class="px-3 py-1 {{ $l->status == 'Pending' ? 'bg-gray-500 inline-block w-20' : ($l->status == 'Working' ? 'bg-green-500 inline-block w-20' : ($l->status == 'Done' ? 'bg-cyan-500 inline-block w-20' : 'bg-orange-500 inline-block w-20')) }} text-white font-bold rounded-lg text-xs">
+                            {{ $l->status }}
                         </span>
-                        @elseif ($l->status == 'Working')
-                        <span class="inline-block w-20 font-bold text-center px-3 py-1 bg-green-500 text-white rounded-lg text-xs">
-                            Working
-                        </span>
-                        @elseif ($l->status == 'Done')
-                        <span class="inline-block w-20 font-bold text-center px-3 py-1 bg-cyan-500 text-white rounded-lg text-xs">
-                            Done
-                        </span>
-                        @elseif ($l->status == 'Rejected')
-                        <span class="inline-block w-20 font-bold text-center px-3 py-1 bg-orange-500 text-white rounded-lg text-xs">
-                            Rejected
-                        </span>
-                        @endif
                     </td>
                 </tr>
                 @endforeach

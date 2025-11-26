@@ -31,9 +31,17 @@
                     <td class="px-4 py-3 text-center text-gray-800">{{ $l->title }}</td>
                     <td class="px-4 py-3 text-center text-gray-800">{{ $l->deskripsi }}</td>
                     <td class="px-4 py-3 text-center text-gray-800">{{ $l->tipe }}</td>
-                    <td class="px-4 py-3 text-center text-gray-800">{{ $l->prioritas }}</td>
+                    <td class="px-4 py-3 text-center text-gray-800">
+                        <span class="px-3 py-1 {{ $l->prioritas == 'Low' ? 'bg-yellow-500 inline-block w-20' : ($l->prioritas == 'Medium' ? 'bg-orange-500 inline-block w-20' : ($l->prioritas == 'High' ? 'bg-red-500 inline-block w-20' : 'bg-red-700 inline-block w-20')) }} text-white font-bold rounded-lg text-xs">
+                            {{ $l->prioritas }}
+                        </span>
+                    </td>
                     <td class="px-4 py-3 text-center text-gray-800">{{ $l->deadline ?? '--,--' }}</td>
-                    <td class="px-4 py-3 text-center text-gray-800">{{ $l->status }}</td>
+                    <td class="px-4 py-3 text-center text-gray-800">
+                        <span class="px-3 py-1 {{ $l->status == 'Pending' ? 'bg-gray-500 inline-block w-20' : ($l->status == 'Working' ? 'bg-green-500 inline-block w-20' : ($l->status == 'Done' ? 'bg-cyan-500 inline-block w-20' : 'bg-orange-500 inline-block w-20')) }} text-white font-bold rounded-lg text-xs">
+                            {{ $l->status }}
+                        </span>
+                    </td>
                 </tr>
                 @endif
                 @endforeach

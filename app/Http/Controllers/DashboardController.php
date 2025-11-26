@@ -23,9 +23,9 @@ class DashboardController extends Controller
             return view('admin.dashboard', compact('totalLM', 'totalLK', 'totalCompany', 'totalProject'));
         } else if ($user->role === 'developer') {
 
-            $totalLM = Laporan::count();
-            $totalLS = Laporan::where('status', 'Done')->count();
-            $totalLD = Laporan::where('status', 'Rejected')->count();
+            $totalLM = Laporan::where('developer_id', Auth::user()->id)->count();
+            $totalLS = Laporan::where('status', 'Done')->where('developer_id', Auth::user()->id)->count();
+            $totalLD = Laporan::where('status', 'Rejected')->where('developer_id', Auth::user()->id)->count();
 
             return view('dev.dashboard', compact('totalLM', 'totalLS', 'totalLD'));
         } else if ($user->role === 'client') {
