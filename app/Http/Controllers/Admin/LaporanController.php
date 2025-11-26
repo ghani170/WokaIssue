@@ -22,6 +22,14 @@ class LaporanController extends Controller
         return view('admin.laporans.index', compact('laporans', 'client', 'developer'));
     }
 
+    public function selesai()
+    {
+        //
+        $laporans = Laporan::all();
+        $client = User::where('role', 'client')->get();
+        return view('admin.laporans.selesai', compact('laporans', 'client'));
+    }
+
     /**
      * Show the form for creating a new resource.
      */

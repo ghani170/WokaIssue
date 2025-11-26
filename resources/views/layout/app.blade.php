@@ -51,9 +51,16 @@
                     </li>
                     <li>
                         <a href="{{route('admin.laporan.index')}}"
-                            class="flex items-center p-2 rounded hover:bg-blue-700 {{ request()->routeIs('admin.laporan*') ? 'rounded bg-blue-700' : '' }}">
+                            class="flex items-center p-2 rounded hover:bg-blue-700 {{ request()->routeIs('admin.laporan.index') ? 'rounded bg-blue-700' : '' }}">
                             <i class="fa-solid fa-folder-open mr-3"></i>
-                            Laporan client
+                            Laporan Client
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{route('admin.laporan.selesai')}}"
+                            class="flex items-center p-2 rounded hover:bg-blue-700 {{ request()->routeIs('admin.laporan.selesai') ? 'rounded bg-blue-700' : '' }}">
+                            <i class="fa-solid fa-folder-open mr-3"></i>
+                            Laporan Selesai
                         </a>
                     </li>
                     <li>
