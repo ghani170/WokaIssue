@@ -74,7 +74,8 @@ class ClientController extends Controller
     }
 
     public function destroy(User $client){
-        if ($client->client()->count() > 0) {
+        if ($client->client()->count() >0) {    
+            $client->client = null;
             return redirect()->route('admin.client.index')->with('success', 'Client tidak bisa dihapus karena masih memiliki laporan');
         }
 

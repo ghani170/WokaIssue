@@ -78,7 +78,7 @@
                                     {{ $loop->iteration }}
                                 </td>
                                 <td class="px-6 py-4 text-sm text-gray-500">
-                                    {{ $report->developer->name }}
+                                    {{ $report->developer->name ?? '--//--' }}
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                     {{ $report->project->nama_project }}

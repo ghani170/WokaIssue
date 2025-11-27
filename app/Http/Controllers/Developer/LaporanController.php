@@ -66,6 +66,11 @@ class LaporanController extends Controller
         $laporan = Laporan::findOrFail($id);
         $lampiran = Lampiran::where('laporan_id', $laporan->id)->get();
 
+        // Pastikan hanya pemilik kegiatan yang bisa lihat
+        if ($laporan->developer_id != Auth::user()->id) {
+            abort(403);
+        }
+
         return view('dev.laporans.show', compact('laporan', 'lampiran'));
     }
 

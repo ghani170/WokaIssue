@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Client;
 use App\Http\Controllers\Controller;
 use App\Models\Project;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProjectController extends Controller
 {
@@ -12,12 +13,12 @@ class ProjectController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
-        //
-        $project = Project::with('company')->latest()->get();
+{
+    $project = Project::with('company')->where('company_id', Auth::user()->company_id)->get();
 
-        return view('clients.project.index', compact('project'));
-    }
+    return view('clients.project.index', compact('project'));
+}
+
 
     /**
      * Show the form for creating a new resource.

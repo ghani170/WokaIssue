@@ -21,7 +21,7 @@ class Laporan extends Model
         'deadline',
     ];
 
-    public function client() {
+z    public function client() {
         return $this->belongsTo(User::class, 'client_id');
     }
 
