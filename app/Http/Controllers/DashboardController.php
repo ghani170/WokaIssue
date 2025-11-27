@@ -25,7 +25,7 @@ class DashboardController extends Controller
             $laporanMedium = Laporan::where('prioritas', 'Medium')->count();
             $laporanHigh = Laporan::where('prioritas', 'High')->count();
             $laporanCritical = Laporan::where('prioritas', 'Critical')->count();
-            $laporanLatest = Laporan::latest()->take(10)->get();
+            $laporanLatest = Laporan::latest()->take(5)->get();
             return view('admin.dashboard', compact('totalLM', 'totalLK', 'totalCompany', 'totalProject', 'totalLaporan', 'laporanLow', 'laporanMedium', 'laporanHigh', 'laporanCritical', 'laporanLatest'));
         } else if ($user->role === 'developer') {
 
@@ -37,13 +37,18 @@ class DashboardController extends Controller
             $laporanMedium = Laporan::where('prioritas', 'Medium')->where('developer_id', Auth::user()->id)->count();
             $laporanHigh = Laporan::where('prioritas', 'High')->where('developer_id', Auth::user()->id)->count();
             $laporanCritical = Laporan::where('prioritas', 'Critical')->where('developer_id', Auth::user()->id)->count();
-            $laporanLatest = Laporan::latest()->take(10)->where('developer_id', Auth::user()->id)->get();
+            $laporanLatest = Laporan::latest()->take(5)->where('developer_id', Auth::user()->id)->get();
             return view('dev.dashboard', compact('totalLM', 'totalLS', 'totalLD', 'laporanLow', 'laporanMedium', 'laporanHigh', 'laporanCritical', 'laporanLatest'));
         } else if ($user->role === 'client') {
             $totalLaporan = Laporan::where('client_id', $user->id)->count();
             $totalProject = Project::where('company_id', $user->company->id)->count();
 
-            return view('clients.dashboard',compact('totalLaporan', 'totalProject'));
+            $laporanPending = Laporan::where('status', 'Pending')->where('client_id', Auth::user()->id)->count();
+            $laporanWorking = Laporan::where('status', 'Working')->where('client_id', Auth::user()->id)->count();
+            $laporanDone = Laporan::where('status', 'Done')->where('client_id', Auth::user()->id)->count();
+            $laporanRejected = Laporan::where('status', 'Rejected')->where('client_id', Auth::user()->id)->count();
+            $laporanLatest = Laporan::latest()->take(5)->where('client_id', Auth::user()->id)->get();
+            return view('clients.dashboard',compact('totalLaporan', 'totalProject', 'laporanPending', 'laporanWorking', 'laporanDone', 'laporanRejected', 'laporanLatest'));
         } else {
             abort(403, 'Role pengguna tidak diketahui');
         }
