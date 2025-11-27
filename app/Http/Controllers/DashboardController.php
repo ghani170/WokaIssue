@@ -29,7 +29,10 @@ class DashboardController extends Controller
 
             return view('dev.dashboard', compact('totalLM', 'totalLS', 'totalLD'));
         } else if ($user->role === 'client') {
-            return view('clients.dashboard');
+            $totalLaporan = Laporan::where('client_id', $user->id)->count();
+            $totalProject = Project::where('company_id', $user->company->id)->count();
+
+            return view('clients.dashboard',compact('totalLaporan', 'totalProject'));
         } else {
             abort(403, 'Role pengguna tidak diketahui');
         }

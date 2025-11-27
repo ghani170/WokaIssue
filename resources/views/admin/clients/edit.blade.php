@@ -1,6 +1,6 @@
 @extends('layout.app')
 
-@section('title', 'Create Data Client')
+@section('title', 'Edit Client')
 
 @section('content')
 <div class="mx-auto mt-1">
