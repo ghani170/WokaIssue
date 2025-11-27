@@ -22,7 +22,7 @@
             <hr class="my-3">
 
             <p class="text-sm">
-                Lihat <span class="font-semibold text-yellow-600">Laporan</span> Client
+                Lihat <span class="font-semibold text-yellow-600"><a href="{{ route('admin.laporan.index') }}">Laporan</a></span> Client
             </p>
         </div>
 
@@ -41,7 +41,7 @@
             <hr class="my-3">
 
             <p class="text-sm">
-                Lihat <span class="font-semibold text-green-600">Laporan Client</span> Selesai
+                Lihat <span class="font-semibold text-green-600"><a href="{{ route('admin.laporan.activity') }}">Laporan Client</a></span> Selesai
             </p>
         </div>
 
@@ -60,7 +60,7 @@
             <hr class="my-3">
 
             <p class="text-sm">
-                Lihat Daftar <span class="font-semibold text-cyan-600">Project</span>
+                Lihat Daftar <span class="font-semibold text-cyan-600"><a href="{{ route('admin.project.index') }}">Project</a></span>
             </p>
         </div>
 
@@ -79,7 +79,7 @@
             <hr class="my-3">
 
             <p class="text-sm">
-                LIhat <span class="font-semibold text-red-600">Company</span>
+                LIhat <span class="font-semibold text-red-600"><a href="{{ route('admin.company.index') }}">Company</a></span>
             </p>
         </div>
 

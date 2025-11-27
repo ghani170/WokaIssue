@@ -17,7 +17,7 @@
         <hr class="my-3">
 
         <p class="text-sm">
-            Lihat <span class="font-semibold text-yellow-600"><a href="{{ route('client.laporan.index') }}"></a>Laporan</span> 
+            Lihat <span class="font-semibold text-yellow-600"><a href="{{ route('client.laporan.index') }}">Laporan</a></span> 
         </p>
     </div>
 
@@ -36,7 +36,7 @@
         <hr class="my-3">
 
         <p class="text-sm">
-            Lihat <span class="font-semibold text-green-600"><a href="{{ route('client.project.index') }}"></a>Project</span>
+            Lihat <span class="font-semibold text-green-600"><a href="{{ route('client.project.index') }}">Project</a></span>
         </p>
     </div>
 </div>
