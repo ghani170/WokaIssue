@@ -3,16 +3,16 @@
 @section('content')
 
 <div class="w-full mt-6">
-    <div class="bg-gray-900 rounded-xl p-6 shadow-lg text-white">
+    <div class="bg-blue-600 rounded-xl p-6 shadow-lg text-white">
         <div class="flex justify-between items-start">
             <div>
                 <h2 class="text-xl font-semibold">{{ $laporan->title }}</h2>
                 <div class="flex gap-2 mt-2">
-                    <span class="px-3 py-1 bg-gray-700 rounded text-sm">{{ $laporan->client->name }}</span>
+                    <span class="px-3 py-1 bg-blue-800 rounded text-sm">{{ $laporan->client->name }}</span>
                 </div>
             </div>
             <div>
-                <span class="px-4 py-1 bg-gray-700 rounded text-sm">{{ $laporan->project->company->name }}</span>
+                <span class="px-4 py-1 bg-blue-800 rounded text-sm">{{ $laporan->project->company->name }}</span>
             </div>
         </div>
     </div>
