@@ -22,12 +22,12 @@ class LaporanController extends Controller
         return view('admin.laporans.index', compact('laporans', 'client', 'developer'));
     }
 
-    public function selesai()
+    public function activity()
     {
         //
         $laporans = Laporan::all();
         $client = User::where('role', 'client')->get();
-        return view('admin.laporans.selesai', compact('laporans', 'client'));
+        return view('admin.laporans.activity', compact('laporans', 'client'));
     }
 
     /**

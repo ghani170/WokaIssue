@@ -8,6 +8,7 @@ use App\Models\Laporan;
 use App\Models\Project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class LaporanController extends Controller
 {
@@ -19,6 +20,7 @@ class LaporanController extends Controller
         //
         $user = Auth::user();
         $laporans = Laporan::where('client_id', $user->id)->get();
+       
 
         return view('clients.laporan.index', compact('laporans', 'user'));
     }
@@ -88,46 +90,89 @@ class LaporanController extends Controller
     public function show(string $id)
     {
         //
+        $user = auth()->user();
+        $laporan = Laporan::findOrFail($id);
+        $lampiran = Lampiran::where('laporan_id', $laporan->id)->get();
+
+        // Pastikan hanya pemilik kegiatan yang bisa lihat
+        if ($laporan->client_id != Auth::user()->id) {
+            abort(403);
+        }
+        return view('clients.laporan.show', compact('laporan', 'lampiran'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Laporan $laporan)
+    public function edit( Laporan $laporan)
     {
-        //
         $user = Auth::user();
         $lampiran = Lampiran::where('laporan_id', $laporan->id)->get();
-
         $projects = Project::where('company_id', $user->company_id)->get();
-
-        return view('clients.laporan.edit',compact('laporan','projects', 'lampiran'));
-
+    
+        // ambil semua lampiran laporan
+        $lampiran = Lampiran::where('laporan_id', $laporan->id)->get();
+    
+        return view('clients.laporan.edit', compact('laporan', 'projects', 'lampiran'));
     }
+    
+    
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        //
         $laporan = Laporan::findOrFail($id);
-
+    
         $request->validate([
             'project_id' => 'required',
             'title' => 'required|string|max:255',
             'deskripsi' => 'required|string',
             'tipe' => 'required',
+    
+            // multiple file input
+            'dokumentasi.*' => 'nullable|file|max:204800|mimes:jpg,jpeg,png,pdf,doc,docx,txt,mp4,mov,avi,mkv'
         ]);
-
+    
+        // update laporan
         $laporan->update([
             'project_id' => $request->project_id,
             'title' => $request->title,
             'deskripsi' => $request->deskripsi,
             'tipe' => $request->tipe,
         ]);
-
-        return redirect()->route('client.laporan.index')->with('success','laporan berhasil diperbarui');
+    
+        // HAPUS LAMPIRAN TERTENTU (berdasarkan checkbox)
+        if ($request->has('delete_lampiran')) {
+            foreach ($request->delete_lampiran as $lampiran_id) {
+                $lamp = Lampiran::find($lampiran_id);
+    
+                if ($lamp) {
+                    if (Storage::disk('public')->exists($lamp->dokumentasi)) {
+                        Storage::disk('public')->delete($lamp->dokumentasi);
+                    }
+    
+                    $lamp->delete();
+                }
+            }
+        }
+    
+        // TAMBAHKAN FILE BARU
+        if ($request->hasFile('dokumentasi')) {
+            foreach ($request->file('dokumentasi') as $file) {
+                $filename = time() . '_' . uniqid() . '.' . $file->getClientOriginalExtension();
+                $path = $file->storeAs('lampiran', $filename, 'public');
+    
+                Lampiran::create([
+                    'laporan_id' => $laporan->id,
+                    'dokumentasi' => $path,
+                ]);
+            }
+        }
+    
+        return redirect()->route('client.laporan.index')
+            ->with('success', 'Laporan berhasil diperbarui.');
     }
 
     /**

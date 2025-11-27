@@ -21,58 +21,35 @@
             <tbody class="divide-y divide-gray-200">
 
                 @foreach ($laporans as $l)
-                    <tr class="hover:bg-gray-50 transition">
+                @if ($l->status === 'Pending' || $l->status === 'Working')
+                <tr class="hover:bg-gray-50 transition">
                     <td class="px-4 py-3 text-center text-gray-800">{{ $loop->iteration }}</td>
                     <td class="px-4 py-3 text-center text-gray-800">{{ $l->project->nama_project }}</td>
                     <td class="px-4 py-3 text-center text-gray-800">{{ $l->client->name }}</td>
                     <td class="px-4 py-3 text-center text-gray-800">{{ $l->title }}</td>
                     <td class="px-4 py-3 text-center text-gray-800">{{ $l->deskripsi }}</td>
                     <td class="px-4 py-3 text-center text-gray-800">{{ $l->tipe }}</td>
-                    <td class="px-4 py-3 text-center text-gray-800">{{ $l->prioritas }}</td>
+                    <td class="text-center">
+                        <span class="px-3 py-1 {{ $l->prioritas == 'Low' ? 'bg-yellow-500 inline-block w-20' : ($l->prioritas == 'Medium' ? 'bg-orange-500 inline-block w-20' : ($l->prioritas == 'High' ? 'bg-red-500 inline-block w-20' : 'bg-red-700 inline-block w-20')) }} text-white font-bold rounded-lg text-xs">
+                            {{ $l->prioritas }}
+                        </span>
+                    </td>
                     <td class="px-4 py-3 text-center text-gray-800">{{ $l->deadline ?? '--,--' }}</td>
                     <td class="px-4 py-3 text-center text-gray-800">
-                                <form action="{{ route('dev.laporan.updateStatus', $l->id) }}" method="POST">
-                                    @csrf
-                                    @method('PUT')
-                                    <select name="status" onchange="this.form.submit()" class="w-30 border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-black focus:border-black transition">
-                                        <option value="Pending" {{ $l->status == 'Pending' ? 'selected' : '' }}>Pending</option>
-                                        <option value="Working" {{ $l->status == 'Working' ? 'selected' : '' }}>
-                                            Working</option>
-                                        <option value="Done" {{ $l->status == 'Done' ? 'selected' : '' }}>Done</option>
-                                        <option value="Rejected" {{ $l->status == 'Rejected' ? 'selected' : '' }}>Reject</option>
-                                    </select>
-                                </form>
-                            </td>
+                        <form action="{{ route('dev.laporan.updateStatus', $l->id) }}" method="POST">
+                            @csrf
+                            @method('PUT')
+                            <select name="status" onchange="this.form.submit()" class="w-30 border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-black focus:border-black transition">
+                                <option value="Pending" {{ $l->status == 'Pending' ? 'selected' : '' }}>Pending</option>
+                                <option value="Working" {{ $l->status == 'Working' ? 'selected' : '' }}>Working</option>
+                                <option value="Done" {{ $l->status == 'Done' ? 'selected' : '' }}>Done</option>
+                                <option value="Rejected" {{ $l->status == 'Rejected' ? 'selected' : '' }}>Reject</option>
+                            </select>
+                        </form>
+                    </td>
                 </tr>
+                @endif
                 @endforeach
-
-                    <!-- Dummy 1
-                    <tr class="hover:bg-gray-50 transition">
-                        <td class="px-4 py-3 text-center text-gray-800">1</td>
-                        <td class="px-4 py-3 text-center text-gray-800">Sistem Inventaris</td>
-                        <td class="px-4 py-3 text-center text-gray-800">PT Maju Jaya</td>
-                        <td class="px-4 py-3 text-center text-gray-800">
-                            <select name="" id="">
-                                <option value="">Pilih developer</option>
-                                <option value="critical">jamal</option>
-                            </select>
-                        </td>
-                        <td class="px-4 py-3 text-center text-gray-800">Bug Fixing</td>
-                        <td class="px-4 py-3 text-center text-gray-800">Tombol submit tidak berfungsi</td>
-                        <td class="px-4 py-3 text-center text-gray-800">Task</td>
-                        <td class="px-4 py-3 text-center text-gray-800">
-                            <select name="" id="">
-                                <option value="">Pilih prioritas</option>
-                                <option value="critical">Critical</option>
-                                <option value="high">High</option>
-                                <option value="medium">Medium</option>
-                                <option value="low">Low</option>
-                            </select>
-                        </td>
-                        <td class="px-4 py-3 text-center text-gray-800">
-                            <input type="date" name="deadline">
-                        </td>
-                    </tr> -->
             </tbody>
         </table>
     </div>
