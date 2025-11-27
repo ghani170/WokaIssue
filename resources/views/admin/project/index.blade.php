@@ -99,8 +99,7 @@
                         <form action="{{ route('admin.project.updateStatus', $data->id) }}" method="POST">
                             @csrf
                             @method('PUT')
-                            <select name="status" onchange="this.form.submit()" class="w-30 border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2
-                        focus:ring-black focus:border-black transition">
+                            <select name="status" onchange="this.form.submit()" class="w-30 border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-black focus:border-black transition">
                                 <option value="Active" {{ $data->status == 'Active' ? 'selected' : '' }}>Active</option>
                                 <option value="Maintenance" {{ $data->status == 'Maintenance' ? 'selected' : '' }}>
                                     Maintenance</option>
