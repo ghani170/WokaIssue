@@ -99,7 +99,7 @@
                     <td class="text-center">{{ $data->tipe }}</td>
                     <td class="text-center font-bold">
                         <span
-                            class="px-3 py-1 {{ $data->status == 'Pending' ? 'bg-gray-500 inline-block w-20' : ($data->status == 'Working' ? 'bg-green-500 inline-block w-20' : ($data->status == 'Done' ? 'bg-cyan-500 inline-block w-20' : 'bg-orange-500 inline-block w-20')) }} text-white rounded-lg text-xs">
+                            class="px-3 py-1 {{ $data->status == 'Pending' ? 'bg-gray-500 inline-block w-20' : ($data->status == 'Working' ? 'bg-yellow-500 inline-block w-20' : ($data->status == 'Done' ? 'bg-green-500 inline-block w-20' : 'bg-orange-500 inline-block w-20')) }} text-white rounded-lg text-xs">
                             {{ $data->status }}
                         </span>
 
