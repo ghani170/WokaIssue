@@ -28,7 +28,7 @@
                     <td class="px-4 py-3 text-center text-gray-800">{{ $l->tipe }}</td>
                     <td class="text-center">
                         <span class="px-3 py-1 {{ $l->prioritas == 'Low' ? 'bg-yellow-500 inline-block w-20' : ($l->prioritas == 'Medium' ? 'bg-orange-500 inline-block w-20' : ($l->prioritas == 'High' ? 'bg-red-500 inline-block w-20' : 'bg-red-700 inline-block w-20')) }} text-white font-bold rounded-lg text-xs">
-                            {{ $l->prioritas }}
+                            {{ $l->prioritas ?? '--//--' }}
                         </span>
                     </td>
                     <td class="px-4 py-3 text-center text-gray-800">{{ $l->deadline ?? '--,--' }}</td>

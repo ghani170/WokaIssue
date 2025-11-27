@@ -32,7 +32,7 @@ class User extends Authenticatable
     public function client() {
         return $this->hasMany(Laporan::class, 'client_id');
     }
-    public function developer() {
+    public function laporan() {
         return $this->hasMany(Laporan::class, 'developer_id');
     }
 

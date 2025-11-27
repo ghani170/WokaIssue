@@ -89,7 +89,7 @@
             </thead>
 
             <tbody class="divide-y divide-gray-200">
-                @forelse ($project as $data)
+                @foreach ($project as $data)
                 <tr>
                     <td class="text text-center">{{ $loop->iteration }}</td>
                     <td class="text text-center">{{ $data->company->name }}</td>
@@ -126,14 +126,7 @@
                         </div>
                     </td>
                 </tr>
-                @empty
-                <tr>
-                    <td colspan="8" class="text-center text-muted py-4">
-                        <i class="bi bi-info-circle"></i> Belum ada data Project.
-                    </td>
-                </tr>
-                @endforelse
-
+                @endforeach
             </tbody>
         </table>
     </div>

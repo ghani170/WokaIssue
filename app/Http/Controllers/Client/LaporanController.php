@@ -19,8 +19,8 @@ class LaporanController extends Controller
     {
         //
         $user = Auth::user();
-        $laporans = Laporan::where('client_id', $user->id)->get();
-       
+        $laporans = Laporan::where('client_id', $user->id)->orderBy('created_at', 'DESC')->get();
+
 
         return view('clients.laporan.index', compact('laporans', 'user'));
     }
@@ -67,19 +67,19 @@ class LaporanController extends Controller
 
         if ($request->hasFile('dokumentasi')) {
 
-        foreach ($request->file('dokumentasi') as $file) {
+            foreach ($request->file('dokumentasi') as $file) {
 
-            $filename = time() . '_' . uniqid() . '.' . $file->getClientOriginalExtension();
+                $filename = time() . '_' . uniqid() . '.' . $file->getClientOriginalExtension();
 
-            // File disimpan di storage/app/public/lampiran
-            $path = $file->storeAs('lampiran', $filename, 'public');
+                // File disimpan di storage/app/public/lampiran
+                $path = $file->storeAs('lampiran', $filename, 'public');
 
-            Lampiran::create([
-                'laporan_id' => $data->id,
-                'dokumentasi' => $path,
-            ]);
+                Lampiran::create([
+                    'laporan_id' => $data->id,
+                    'dokumentasi' => $path,
+                ]);
+            }
         }
-    }
 
         return redirect()->route('client.laporan.index')->with('success', 'Laporan berhasil dibuat.');
     }
@@ -104,19 +104,19 @@ class LaporanController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit( Laporan $laporan)
+    public function edit(Laporan $laporan)
     {
         $user = Auth::user();
         $lampiran = Lampiran::where('laporan_id', $laporan->id)->get();
         $projects = Project::where('company_id', $user->company_id)->get();
-    
+
         // ambil semua lampiran laporan
         $lampiran = Lampiran::where('laporan_id', $laporan->id)->get();
-    
+
         return view('clients.laporan.edit', compact('laporan', 'projects', 'lampiran'));
     }
-    
-    
+
+
 
     /**
      * Update the specified resource in storage.
@@ -124,17 +124,17 @@ class LaporanController extends Controller
     public function update(Request $request, $id)
     {
         $laporan = Laporan::findOrFail($id);
-    
+
         $request->validate([
             'project_id' => 'required',
             'title' => 'required|string|max:255',
             'deskripsi' => 'required|string',
             'tipe' => 'required',
-    
+
             // multiple file input
             'dokumentasi.*' => 'nullable|file|max:204800|mimes:jpg,jpeg,png,pdf,doc,docx,txt,mp4,mov,avi,mkv'
         ]);
-    
+
         // update laporan
         $laporan->update([
             'project_id' => $request->project_id,
@@ -142,35 +142,35 @@ class LaporanController extends Controller
             'deskripsi' => $request->deskripsi,
             'tipe' => $request->tipe,
         ]);
-    
+
         // HAPUS LAMPIRAN TERTENTU (berdasarkan checkbox)
         if ($request->has('delete_lampiran')) {
             foreach ($request->delete_lampiran as $lampiran_id) {
                 $lamp = Lampiran::find($lampiran_id);
-    
+
                 if ($lamp) {
                     if (Storage::disk('public')->exists($lamp->dokumentasi)) {
                         Storage::disk('public')->delete($lamp->dokumentasi);
                     }
-    
+
                     $lamp->delete();
                 }
             }
         }
-    
+
         // TAMBAHKAN FILE BARU
         if ($request->hasFile('dokumentasi')) {
             foreach ($request->file('dokumentasi') as $file) {
                 $filename = time() . '_' . uniqid() . '.' . $file->getClientOriginalExtension();
                 $path = $file->storeAs('lampiran', $filename, 'public');
-    
+
                 Lampiran::create([
                     'laporan_id' => $laporan->id,
                     'dokumentasi' => $path,
                 ]);
             }
         }
-    
+
         return redirect()->route('client.laporan.index')
             ->with('success', 'Laporan berhasil diperbarui.');
     }
@@ -181,16 +181,15 @@ class LaporanController extends Controller
     public function destroy($id)
     {
         $laporan = Laporan::findOrFail($id);
-    
+
         $lampiran = Lampiran::where('laporan_id', $laporan->id)->first();
         if ($lampiran && $lampiran->dokumentasi) {
-            \Illuminate\Support\Facades\Storage::disk('public')->delete($lampiran->dokumentasi);
+            Storage::disk('public')->delete($lampiran->dokumentasi);
             $lampiran->delete();
         }
-    
+
         $laporan->delete();
-    
+
         return redirect()->route('client.laporan.index')->with('success', 'Laporan berhasil dihapus.');
     }
-    
 }

@@ -107,7 +107,7 @@ class ProjectController extends Controller
         if ($project->status == 'Stop') {
             Laporan::where('project_id', $project->id)
                 ->update(['status' => 'Rejected']);
-        }elseif ($project->status == 'Active' || $project->status == 'Maintenance') {
+        } elseif ($project->status == 'Active' || $project->status == 'Maintenance') {
             Laporan::where('project_id', $project->id)
                 ->where('status', 'Rejected')
                 ->update(['status' => 'Pending']);
@@ -121,7 +121,16 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
+        // Cek apakah project memiliki laporan
+        if ($project->laporan()->count() > 0) {
+            return redirect()->route('admin.project.index')
+                ->with('error', 'Project tidak bisa dihapus karena masih memiliki laporan.');
+        }
+
+        // Jika tidak memiliki laporan → boleh hapus
         $project->delete();
-        return redirect()->route('admin.project.index')->with('success', 'Project berhasil dihapus');
+
+        return redirect()->route('admin.project.index')
+            ->with('success', 'Project berhasil dihapus.');
     }
 }
