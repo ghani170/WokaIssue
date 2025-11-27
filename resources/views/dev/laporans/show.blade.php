@@ -111,6 +111,10 @@
 
         </div>
     </div>
+    <a href="{{ route('dev.laporan.index') }}"
+        class="inline-flex items-center gap-2 bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 mt-4 rounded-lg mb-4">
+        <i class="mt-1 fa-solid fa-arrow-left"></i> Kembali
+    </a>
 
     {{-- Tailwind Tab Script --}}
     <script>
