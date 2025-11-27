@@ -20,6 +20,7 @@ class DashboardController extends Controller
             $totalLM = Laporan::count();
             $totalLK = Laporan::where('status', 'Done')->count();
             $totalLaporan = Laporan::count();
+            
             $laporanLow = Laporan::where('prioritas', 'Low')->count();
             $laporanMedium = Laporan::where('prioritas', 'Medium')->count();
             $laporanHigh = Laporan::where('prioritas', 'High')->count();
@@ -32,7 +33,12 @@ class DashboardController extends Controller
             $totalLS = Laporan::where('status', 'Done')->where('developer_id', Auth::user()->id)->count();
             $totalLD = Laporan::where('status', 'Rejected')->where('developer_id', Auth::user()->id)->count();
 
-            return view('dev.dashboard', compact('totalLM', 'totalLS', 'totalLD'));
+            $laporanLow = Laporan::where('prioritas', 'Low')->where('developer_id', Auth::user()->id)->count();
+            $laporanMedium = Laporan::where('prioritas', 'Medium')->where('developer_id', Auth::user()->id)->count();
+            $laporanHigh = Laporan::where('prioritas', 'High')->where('developer_id', Auth::user()->id)->count();
+            $laporanCritical = Laporan::where('prioritas', 'Critical')->where('developer_id', Auth::user()->id)->count();
+            $laporanLatest = Laporan::latest()->take(10)->where('developer_id', Auth::user()->id)->get();
+            return view('dev.dashboard', compact('totalLM', 'totalLS', 'totalLD', 'laporanLow', 'laporanMedium', 'laporanHigh', 'laporanCritical', 'laporanLatest'));
         } else if ($user->role === 'client') {
             $totalLaporan = Laporan::where('client_id', $user->id)->count();
             $totalProject = Project::where('company_id', $user->company->id)->count();
