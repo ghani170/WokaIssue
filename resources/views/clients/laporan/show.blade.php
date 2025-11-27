@@ -3,16 +3,16 @@
 @section('content')
 
 <div class="w-full mt-6">
-    <div class="bg-gray-900 rounded-xl p-6 shadow-lg text-white">
+    <div class="bg-blue-600 rounded-xl p-6 shadow-lg text-white">
         <div class="flex justify-between items-start">
             <div>
                 <h2 class="text-xl font-semibold">{{ $laporan->title }}</h2>
                 <div class="flex gap-2 mt-2">
-                    <span class="px-3 py-1 bg-gray-700 rounded text-sm">{{ $laporan->client->name }}</span>
+                    <span class="px-3 py-1 bg-blue-800 rounded text-sm">{{ $laporan->client->name }}</span>
                 </div>
             </div>
             <div>
-                <span class="px-4 py-1 bg-gray-700 rounded text-sm">{{ $laporan->project->company->name }}</span>
+                <span class="px-4 py-1 bg-blue-800 rounded text-sm">{{ $laporan->project->company->name }}</span>
             </div>
         </div>
     </div>
@@ -27,9 +27,9 @@
     </nav>
 </div>
 
+
 <!-- Tab Content -->
 <div class="mt-6">
-
     <!-- TAB 1 -->
     <div id="tab1" class="tab-content block">
         <div class="bg-white shadow rounded-lg p-6">
@@ -76,6 +76,7 @@
         </div>
     </div>
 
+
     <!-- TAB 2 -->
     <div id="tab2" class="tab-content hidden">
         <div class="bg-white shadow rounded-lg p-6">
@@ -111,37 +112,45 @@
 
         </div>
     </div>
+</div>
+<a href="{{ route('client.laporan.index') }}" 
+   class="inline-flex items-center gap-2 bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 mt-4 rounded-lg mb-4">
+   <i class="mt-1 fa-solid fa-arrow-left"></i> Kembali
+</a>
 
-    {{-- Tailwind Tab Script --}}
-    <script>
-        const tabButtons = document.querySelectorAll('.tab-btn');
-        const tabContents = document.querySelectorAll('.tab-content');
 
-        function activateTab(tab) {
-            tabButtons.forEach(btn => btn.classList.remove('active-tab'));
-            tabContents.forEach(c => c.classList.add('hidden'));
 
-            document.querySelector(`[data-tab="${tab}"]`).classList.add('active-tab');
-            document.getElementById(tab).classList.remove('hidden');
-        }
+{{-- Tailwind Tab Script --}}
+<script>
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    const tabContents = document.querySelectorAll('.tab-content');
 
-        tabButtons.forEach(btn => {
-            btn.addEventListener('click', () => activateTab(btn.dataset.tab));
-        });
-    </script>
+    function activateTab(tab) {
+        tabButtons.forEach(btn => btn.classList.remove('active-tab'));
+        tabContents.forEach(c => c.classList.add('hidden'));
 
-    <style>
-        .tab-btn {
-            padding: 0.75rem 1rem;
-            font-weight: 500;
-            border-bottom: 2px solid transparent;
-            color: #4b5563;
-        }
+        document.querySelector(`[data-tab="${tab}"]`).classList.add('active-tab');
+        document.getElementById(tab).classList.remove('hidden');
+    }
 
-        .active-tab {
-            color: #1f2937;
-            border-bottom-color: #1f2937;
-        }
-    </style>
+    tabButtons.forEach(btn => {
+        btn.addEventListener('click', () => activateTab(btn.dataset.tab));
+    });
+</script>
 
-    @endsection
+<style>
+    .tab-btn {
+        padding: 0.75rem 1rem;
+        font-weight: 500;
+        border-bottom: 2px solid transparent;
+        color: #4b5563;
+    }
+
+    .active-tab {
+        color: #1f2937;
+        border-bottom-color: #1f2937;
+    }
+</style>
+
+
+@endsection
