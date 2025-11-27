@@ -106,7 +106,7 @@
                     <td class="px-4 py-3">
                         <div class="flex justify-center items-center gap-2">
                             <a href="{{ route('client.laporan.show', $data->id) }}"
-                                class="px-3 py-1 bg-yellow-400 hover:bg-yellow-500 text-white rounded-md text-xs font-medium transition">
+                                class="px-3 py-1 bg-blue-400 hover:bg-blue-500 text-white rounded-md text-xs font-medium transition">
                                 Detail
                             </a>
                             <a href="{{ route('client.laporan.edit', $data->id) }}"

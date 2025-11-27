@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Lampiran;
 use App\Models\Laporan;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -41,10 +42,7 @@ class LaporanController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    {
-
-    }
+    public function store(Request $request) {}
 
     /**
      * Display the specified resource.
@@ -52,6 +50,11 @@ class LaporanController extends Controller
     public function show(string $id)
     {
         //
+        $user = auth()->user();
+        $laporan = Laporan::findOrFail($id);
+        $lampiran = Lampiran::where('laporan_id', $laporan->id)->get();
+        
+        return view('admin.laporans.show', compact('laporan', 'lampiran'));
     }
 
     /**
@@ -87,13 +90,14 @@ class LaporanController extends Controller
         if ($request->prioritas == 'Low' | $request->prioritas == 'Medium') {
             $laporan->deadline = null;
         }
-       
+
         $laporan->save();
 
         return redirect()->route('admin.laporan.index')->with('success', 'Prioritas berhasil diupdate');
     }
 
-    public function updateDeveloper(Request $request, Laporan $laporan){
+    public function updateDeveloper(Request $request, Laporan $laporan)
+    {
         $request->validate([
             'developer_id' => 'nullable|exists:users,id',
         ]);

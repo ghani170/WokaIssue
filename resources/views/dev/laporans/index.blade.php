@@ -9,12 +9,11 @@
                     <th class="px-4 py-3 text-center text-gray-600 font-semibold uppercase text-xs">no</th>
                     <th class="px-4 py-3 text-center text-gray-600 font-semibold uppercase text-xs">nama project</th>
                     <th class="px-4 py-3 text-center text-gray-600 font-semibold uppercase text-xs">nama client</th>
-                    <th class="px-4 py-3 text-center text-gray-600 font-semibold uppercase text-xs">title</th>
-                    <th class="px-4 py-3 text-center text-gray-600 font-semibold uppercase text-xs">deskripsi</th>
                     <th class="px-4 py-3 text-center text-gray-600 font-semibold uppercase text-xs">tipe</th>
                     <th class="px-4 py-3 text-center text-gray-600 font-semibold uppercase text-xs">prioritas</th>
                     <th class="px-4 py-3 text-center text-gray-600 font-semibold uppercase text-xs">deadline</th>
                     <th class="px-4 py-3 text-center text-gray-600 font-semibold uppercase text-xs">status</th>
+                    <th class="px-4 py-3 text-center text-gray-600 font-semibold uppercase text-xs">Action</th>
                 </tr>
             </thead>
 
@@ -26,8 +25,6 @@
                     <td class="px-4 py-3 text-center text-gray-800">{{ $loop->iteration }}</td>
                     <td class="px-4 py-3 text-center text-gray-800">{{ $l->project->nama_project }}</td>
                     <td class="px-4 py-3 text-center text-gray-800">{{ $l->client->name }}</td>
-                    <td class="px-4 py-3 text-center text-gray-800">{{ $l->title }}</td>
-                    <td class="px-4 py-3 text-center text-gray-800">{{ $l->deskripsi }}</td>
                     <td class="px-4 py-3 text-center text-gray-800">{{ $l->tipe }}</td>
                     <td class="text-center">
                         <span class="px-3 py-1 {{ $l->prioritas == 'Low' ? 'bg-yellow-500 inline-block w-20' : ($l->prioritas == 'Medium' ? 'bg-orange-500 inline-block w-20' : ($l->prioritas == 'High' ? 'bg-red-500 inline-block w-20' : 'bg-red-700 inline-block w-20')) }} text-white font-bold rounded-lg text-xs">
@@ -46,6 +43,14 @@
                                 <option value="Rejected" {{ $l->status == 'Rejected' ? 'selected' : '' }}>Reject</option>
                             </select>
                         </form>
+                    </td>
+                    <td class="px-4 py-3">
+                        <div class="flex justify-center items-center gap-2">
+                            <a href="{{ route('dev.laporan.show', $l->id) }}"
+                                class="px-3 py-1 bg-blue-400 hover:bg-blue-500 text-white rounded-md text-md font-medium transition">
+                                Detail
+                            </a>
+                        </div>
                     </td>
                 </tr>
                 @endif
