@@ -19,8 +19,13 @@ class DashboardController extends Controller
             $totalCompany = Company::count();
             $totalLM = Laporan::count();
             $totalLK = Laporan::where('status', 'Done')->count();
-
-            return view('admin.dashboard', compact('totalLM', 'totalLK', 'totalCompany', 'totalProject'));
+            $totalLaporan = Laporan::count();
+            $laporanLow = Laporan::where('prioritas', 'Low')->count();
+            $laporanMedium = Laporan::where('prioritas', 'Medium')->count();
+            $laporanHigh = Laporan::where('prioritas', 'High')->count();
+            $laporanCritical = Laporan::where('prioritas', 'Critical')->count();
+            $laporanLatest = Laporan::latest()->take(10)->get();
+            return view('admin.dashboard', compact('totalLM', 'totalLK', 'totalCompany', 'totalProject', 'totalLaporan', 'laporanLow', 'laporanMedium', 'laporanHigh', 'laporanCritical', 'laporanLatest'));
         } else if ($user->role === 'developer') {
 
             $totalLM = Laporan::where('developer_id', Auth::user()->id)->count();

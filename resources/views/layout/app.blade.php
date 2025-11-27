@@ -204,6 +204,7 @@
         </div>
     </div>
 
+    @yield('scripts')
     <script>
         // Toggle sidebar on mobile
         document.getElementById('sidebarToggle').addEventListener('click', function() {
