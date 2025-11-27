@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Developer;
 
 use App\Http\Controllers\Controller;
+use App\Models\Lampiran;
 use App\Models\Laporan;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -61,6 +62,11 @@ class LaporanController extends Controller
     public function show(string $id)
     {
         //
+        $user = auth()->user();
+        $laporan = Laporan::findOrFail($id);
+        $lampiran = Lampiran::where('laporan_id', $laporan->id)->get();
+
+        return view('dev.laporans.show', compact('laporan', 'lampiran'));
     }
 
     /**
