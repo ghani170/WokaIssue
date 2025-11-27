@@ -64,7 +64,7 @@
     </div>
 
     <div class="overflow-x-auto">
-        <table class="min-w-full text-sm" id="kelas">
+        <table class="min-w-full text-sm" id="table">
 
             <thead>
                 <tr class="bg-gray-100">
@@ -94,7 +94,7 @@
                     <td class="px-4 py-3">
                         <div class="flex justify-center items-center gap-2">
                             <a href="{{ route('admin.developer.edit', $data->id) }}"
-                                class="px-3 py-1 bg-yellow-400 hover:bg-yellow-500 text-white rounded-md text-xs font-medium transition">
+                                class="px-3 py-1 bg-yellow-400 hover:bg-yellow-500 text-white rounded-md text-md font-medium transition">
                                 Edit
                             </a>
                             <form action="{{ route('admin.developer.destroy', $data->id) }}" method="POST"
@@ -102,7 +102,7 @@
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit"
-                                    class="px-3 py-1 bg-red-500 hover:bg-red-600 text-white rounded-md text-xs font-medium transition"
+                                    class="px-3 py-1 bg-red-500 hover:bg-red-600 text-white rounded-md text-md font-medium transition"
                                     data-toggle="tooltip" data-original-title="Delete product">
                                     Delete
                                 </button>

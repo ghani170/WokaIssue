@@ -62,7 +62,7 @@
         <a href="{{ route('admin.company.create') }}" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">Create</a>
     </div>
     <div class="overflow-x-auto">
-        <table class="min-w-full text-sm" id="kelas">
+        <table class="min-w-full text-sm" id="table">
             <thead>
                 <tr class="bg-gray-100">
                     <th class="px-4 py-3 text-center text-gray-600 font-semibold uppercase text-xs">

@@ -65,7 +65,7 @@
 
 
     <div class="overflow-x-auto">
-        <table class="min-w-full text-sm" id="kelas">
+        <table class="min-w-full text-sm" id="table">
 
             <thead>
                 <tr class="bg-gray-100">

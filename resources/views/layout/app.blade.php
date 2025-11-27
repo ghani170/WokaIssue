@@ -6,11 +6,110 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title')</title>
     @vite('resources/css/app.css')
+    <!-- DataTables CDN -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+
+    <!-- jQuery + DataTables -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
         crossorigin="anonymous" />
 
     <script src="https://cdn.jsdelivr.net/npm/tailgrids@2.3.0/plugin.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/tailgrids@2.3.0/assets/css/tailwind.min.css" rel="stylesheet" />
+
+    <!-- Tailwind Override for DataTables -->
+    <style>
+        table.dataTable {
+            border-collapse: collapse !important;
+            width: 100%;
+        }
+
+        table.dataTable thead th {
+            background-color: #f3f4f6;
+            text-align: center;
+            /* bg-gray-100 */
+            color: #374151;
+            /* text-gray-700 */
+            font-weight: 600;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: 0.75rem;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        table.dataTable tbody td {
+            padding: 0.75rem;
+            font-size: 0.875rem;
+            color: #374151;
+        }
+
+        table.dataTable tbody tr:hover {
+            background-color: #f9fafb;
+            /* bg-gray-50 */
+        }
+
+        .dataTables_paginate {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            margin-top: 1rem;
+        }
+
+        .dataTables_paginate a {
+            padding: 0.25rem 0.75rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.5rem;
+            font-size: 0.875rem;
+            cursor: pointer;
+            color: #4b5563;
+        }
+
+        .dataTables_paginate a:hover {
+            background-color: #e5e7eb;
+        }
+
+        .dataTables_paginate .current {
+            background-color: #2563eb;
+            color: white;
+            border-color: #2563eb;
+        }
+
+        .dataTables_filter {
+            margin-bottom: 1rem;
+        }
+
+        .dataTables_filter input {
+            padding: 0.5rem 0.75rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.5rem;
+            outline: none;
+        }
+
+        .dataTables_filter input:focus {
+            box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.4);
+        }
+
+        .dataTables_length select {
+            padding: 0.25rem 0.5rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.5rem;
+            outline: none;
+        }
+
+        .dataTables_length select:focus {
+            box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.4);
+        }
+
+        .dataTables_info {
+            margin-top: 0.75rem;
+            font-size: 0.875rem;
+            color: #4b5563;
+        }
+    </style>
+
 </head>
 
 <body class="bg-gray-50 h-full">
@@ -18,7 +117,7 @@
     <div class="flex h-full">
         <!-- Overlay untuk mobile -->
         <div id="sidebarOverlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden lg:hidden"></div>
-        
+
         <!-- Sidebar -->
         <div id="sidebar" class="w-64 bg-gradient-to-b from-blue-800 to-blue-900 text-white flex flex-col transform transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static fixed inset-y-0 left-0 z-50 -translate-x-full">
             <!-- Logo -->
@@ -100,7 +199,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('client.project.index') }}" 
+                        <a href="{{ route('client.project.index') }}"
                             class="flex items-center p-3 rounded-lg transition-all duration-200 hover:bg-blue-700 hover:shadow-md {{ request()->routeIs('client.project*') ? 'bg-blue-700 shadow-md' : '' }}">
                             <i class="fa-solid fa-bars-progress mr-3 w-5 text-center"></i>
                             Project
@@ -119,7 +218,7 @@
                     </li>
                     <li>
                         <a href="{{route('dev.laporan.index')}}"
-                            class="flex items-center p-3 rounded-lg transition-all duration-200 hover:bg-blue-700 hover:shadow-md {{ request()->routeIs('dev.laporan.index') ? 'bg-blue-700 shadow-md' : '' }}" >
+                            class="flex items-center p-3 rounded-lg transition-all duration-200 hover:bg-blue-700 hover:shadow-md {{ request()->routeIs('dev.laporan.index') ? 'bg-blue-700 shadow-md' : '' }}">
                             <i class="fa-solid fa-folder-open mr-3 w-5 text-center"></i>
                             Laporan Client Masuk
                         </a>
@@ -139,7 +238,7 @@
                         </a>
                     </li>
                     @endif
-                    
+
                     <!-- Logout Button -->
                     <li class="mt-8 pt-4 border-t border-blue-700">
                         <form action="{{ route('logout') }}" method="POST"
@@ -157,8 +256,8 @@
             <!-- User Profile -->
             <div class="p-4 border-t border-blue-700">
                 <div class="flex items-center">
-                    <img src="https://ui-avatars.com/api/?name={{ urlencode(Auth::user()->name) }}&background=0D8ABC&color=fff" 
-                         alt="Profile" class="w-10 h-10 rounded-full ring-2 ring-blue-400">
+                    <img src="https://ui-avatars.com/api/?name={{ urlencode(Auth::user()->name) }}&background=0D8ABC&color=fff"
+                        alt="Profile" class="w-10 h-10 rounded-full ring-2 ring-blue-400">
                     <div class="ml-3">
                         <p class="font-medium truncate max-w-[140px]">{{ Auth::user()->name }}</p>
                         <p class="text-sm text-blue-200 truncate max-w-[140px]">{{ Auth::user()->email }}</p>
@@ -205,12 +304,20 @@
     </div>
 
     @yield('scripts')
+
+    <script>
+        $(document).ready(function() {
+            $('#table').DataTable();
+        });
+    </script>
+
+
     <script>
         // Toggle sidebar on mobile
         document.getElementById('sidebarToggle').addEventListener('click', function() {
             const sidebar = document.getElementById('sidebar');
             const overlay = document.getElementById('sidebarOverlay');
-            
+
             sidebar.classList.toggle('-translate-x-full');
             overlay.classList.toggle('hidden');
         });
@@ -219,7 +326,7 @@
         document.getElementById('sidebarOverlay').addEventListener('click', function() {
             const sidebar = document.getElementById('sidebar');
             const overlay = document.getElementById('sidebarOverlay');
-            
+
             sidebar.classList.add('-translate-x-full');
             overlay.classList.add('hidden');
         });
@@ -230,7 +337,7 @@
                 if (window.innerWidth < 1024) {
                     const sidebar = document.getElementById('sidebar');
                     const overlay = document.getElementById('sidebarOverlay');
-                    
+
                     sidebar.classList.add('-translate-x-full');
                     overlay.classList.add('hidden');
                 }
