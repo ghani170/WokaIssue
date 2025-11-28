@@ -69,8 +69,8 @@
         <!-- Tombol -->
         <div class="flex items-center gap-3 mt-5">
             <button type="submit"
-                class="bg-black text-white px-5 py-2 rounded-lg hover:bg-gray-900 transition">
-                Simpan
+                class="bg-blue-500 text-white px-5 py-2 rounded-lg hover:bg-blue-800 transition">
+                Update
             </button>
 
             <a href="{{ route('admin.client.index') }}"

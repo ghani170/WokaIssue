@@ -3,16 +3,16 @@
 @section('content')
 
 <div class="w-full mt-6">
-    <div class="bg-gray-900 rounded-xl p-6 shadow-lg text-white">
+    <div class="bg-blue-600 rounded-xl p-6 shadow-lg text-white">
         <div class="flex justify-between items-start">
             <div>
                 <h2 class="text-xl font-semibold">{{ $laporan->title }}</h2>
                 <div class="flex gap-2 mt-2">
-                    <span class="px-3 py-1 bg-gray-700 rounded text-sm">{{ $laporan->client->name }}</span>
+                    <span class="px-3 py-1 bg-blue-800 rounded text-sm">{{ $laporan->client->name }}</span>
                 </div>
             </div>
             <div>
-                <span class="px-4 py-1 bg-gray-700 rounded text-sm">{{ $laporan->project->company->name }}</span>
+                <span class="px-4 py-1 bg-blue-800 rounded text-sm">{{ $laporan->project->company->name }}</span>
             </div>
         </div>
     </div>
@@ -23,7 +23,6 @@
     <nav class="flex gap-6" aria-label="Tabs">
         <button class="tab-btn active-tab" data-tab="tab1">Keterangan</button>
         <button class="tab-btn" data-tab="tab2">Dokumentasi</button>
-        <button class="tab-btn" data-tab="tab3">Customer Service</button>
     </nav>
 </div>
 
@@ -94,23 +93,10 @@
             </div>
         </div>
     </div>
-
-    <!-- TAB 3 -->
-    <div id="tab3" class="tab-content hidden">
-        <div class="bg-white shadow rounded-lg p-6">
-
-            <h3 class="font-semibold mb-4">Customer Service</h3>
-
-            <div class="bg-gray-100 p-4 rounded">
-                <p class="text-sm text-gray-500">Komentar Pembimbing :</p>
-                <p class="mt-2 text-gray-700">
-                    Sudah cukup baik, namun pastikan dokumentasi error lebih lengkap
-                    agar debugging lebih mudah dilakukan. Tambahkan juga detail testing.
-                </p>
-            </div>
-
-        </div>
-    </div>
+    <a href="{{ route('admin.laporan.index') }}"
+        class="inline-flex items-center gap-2 bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 mt-4 rounded-lg mb-4">
+        <i class="mt-1 fa-solid fa-arrow-left"></i> Kembali
+    </a>
 
     {{-- Tailwind Tab Script --}}
     <script>

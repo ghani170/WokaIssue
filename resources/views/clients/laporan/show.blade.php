@@ -21,9 +21,9 @@
 <!-- Tabs -->
 <div class="mt-6 border-b border-gray-200">
     <nav class="flex gap-6" aria-label="Tabs">
-        <button class="tab-btn active-tab" data-tab="tab1">Keterangan</button>
+        <button class="tab-btn {{ session('active_tab') == null ? 'active-tab' : '' }}" data-tab="tab1">Keterangan</button>
         <button class="tab-btn" data-tab="tab2">Dokumentasi</button>
-        <button class="tab-btn" data-tab="tab3">Customer Service</button>
+        <button class="tab-btn {{ session('active_tab') == 'tab3' ? 'active-tab' : '' }}" data-tab="tab3">Customer Service</button>
     </nav>
 </div>
 
@@ -31,7 +31,7 @@
 <!-- Tab Content -->
 <div class="mt-6">
     <!-- TAB 1 -->
-    <div id="tab1" class="tab-content block">
+    <div id="tab1" class="tab-content {{ session('active_tab') == null ? 'block' : 'hidden' }}">
         <div class="bg-white shadow rounded-lg p-6">
 
             <h3 class="font-semibold mb-4">Detail Laporan</h3>
@@ -97,25 +97,57 @@
     </div>
 
     <!-- TAB 3 -->
-    <div id="tab3" class="tab-content hidden">
+    <div id="tab3" class="tab-content {{ session('active_tab') == 'tab3' ? 'block' : 'hidden' }}">
         <div class="bg-white shadow rounded-lg p-6">
 
             <h3 class="font-semibold mb-4">Customer Service</h3>
 
-            <div class="bg-gray-100 p-4 rounded">
-                <p class="text-sm text-gray-500">Komentar Pembimbing :</p>
-                <p class="mt-2 text-gray-700">
-                    Sudah cukup baik, namun pastikan dokumentasi error lebih lengkap
-                    agar debugging lebih mudah dilakukan. Tambahkan juga detail testing.
-                </p>
+            {{-- LIST PESAN --}}
+            <div class="bg-gray-100 p-4 rounded h-64 overflow-y-auto mb-4">
+                @foreach ($messages as $msg)
+
+                {{-- Pesan milik user yang sedang login --}}
+                @if ($msg->sender_id == auth()->id())
+
+                <div class="text-right mb-3">
+                    <div class="inline-block bg-blue-600 text-white px-3 py-2 rounded-lg">
+                        {{ $msg->message }}
+                    </div>
+                    <div class="text-xs text-gray-500">
+                        {{ \Carbon\Carbon::parse($msg->created_at)->diffForHumans() }}
+                    </div>
+                </div>
+
+                @else
+                {{-- Pesan dari developer --}}
+                <div class="text-left mb-3">
+                    <div class="inline-block bg-white text-gray-800 px-3 py-2 rounded-lg shadow">
+                        {{ $msg->message }}
+                    </div>
+                    <div class="text-xs text-gray-500">
+                        {{ \Carbon\Carbon::parse($msg->created_at)->diffForHumans() }}
+                    </div>
+                </div>
+                @endif
+
+                @endforeach
+
             </div>
+
+            {{-- FORM KIRIM PESAN --}}
+            <form action="{{ route('client.laporan.sendMessage', $laporan->id) }}" method="POST">
+                @csrf
+                <textarea name="message" class="w-full border p-2 rounded" placeholder="Tulis pesan..."></textarea>
+                <button type="submit" class="mt-2 px-4 py-2 bg-blue-600 text-white rounded">Kirim</button>
+            </form>
 
         </div>
     </div>
+
 </div>
-<a href="{{ route('client.laporan.index') }}" 
-   class="inline-flex items-center gap-2 bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 mt-4 rounded-lg mb-4">
-   <i class="mt-1 fa-solid fa-arrow-left"></i> Kembali
+<a href="{{ route('client.laporan.index') }}"
+    class="inline-flex items-center gap-2 bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 mt-4 rounded-lg mb-4">
+    <i class="mt-1 fa-solid fa-arrow-left"></i> Kembali
 </a>
 
 
@@ -136,6 +168,12 @@
     tabButtons.forEach(btn => {
         btn.addEventListener('click', () => activateTab(btn.dataset.tab));
     });
+    document.addEventListener('DOMContentLoaded', function() {
+    const activeTab = "{{ session('active_tab') }}";
+    if (activeTab) return;
+    activateTab("tab1");
+});
+
 </script>
 
 <style>

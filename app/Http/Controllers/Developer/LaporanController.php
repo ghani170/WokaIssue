@@ -8,6 +8,7 @@ use App\Models\Laporan;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class LaporanController extends Controller
 {
@@ -65,8 +66,12 @@ class LaporanController extends Controller
         $user = auth()->user();
         $laporan = Laporan::findOrFail($id);
         $lampiran = Lampiran::where('laporan_id', $laporan->id)->get();
+        $messages = DB::table('messages')
+        ->where('laporan_id', $laporan->id)
+        ->orderBy('created_at')
+        ->get();
 
-        return view('dev.laporans.show', compact('laporan', 'lampiran'));
+        return view('dev.laporans.show', compact('laporan', 'lampiran', 'messages'));
     }
 
     /**
@@ -104,4 +109,21 @@ class LaporanController extends Controller
     {
         //
     }
+    public function sendMessage(Request $request, $id)
+    {
+        $request->validate([
+            'message' => 'required|string',
+        ]);
+    
+        DB::table('messages')->insert([
+            'laporan_id' => $id,
+            'sender_id' => Auth::id(),
+            'message' => $request->message,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+    
+        return redirect()->back()->with('active_tab', 'tab3')->with('success', 'Pesan berhasil dikirim');
+    }
+    
 }

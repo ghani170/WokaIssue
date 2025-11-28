@@ -35,9 +35,12 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin'])->grou
 });
 
 Route::prefix('client')->name('client.')->middleware(['auth', 'role:client'])->group(function () {
+    Route::post('/laporan/{id}/send-message',[ClientLaporanController::class, 'sendMessage'])->name('laporan.sendMessage');
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('laporan', ClientLaporanController::class);
     Route::get('/project', [ClientProjectController::class, 'index'])->name('project.index');
+   
+
 
 });
 
@@ -45,6 +48,7 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middl
 
 Route::prefix('dev')->name('dev.')->middleware(['auth', 'role:developer'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::post('/dev/laporan/{id}/send-message', [DeveloperLaporanController::class, 'sendMessage'])->name('laporan.sendMessage');
     Route::put('/dev/laporan/status/{laporan}', [DeveloperLaporanController::class, 'updateStatus'])->name('laporan.updateStatus');
     Route::get('/laporan/selesai', [DeveloperLaporanController::class, 'selesai'])->name('laporan.selesai');
     Route::get('/laporan/ditolak', [DeveloperLaporanController::class, 'ditolak'])->name('laporan.ditolak');
