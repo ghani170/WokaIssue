@@ -62,7 +62,7 @@
         <a href="{{ route('admin.company.create') }}" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">Create</a>
     </div>
     <div class="overflow-x-auto">
-        <table class="min-w-full text-sm" id="kelas">
+        <table class="min-w-full text-sm" id="table">
             <thead>
                 <tr class="bg-gray-100">
                     <th class="px-4 py-3 text-center text-gray-600 font-semibold uppercase text-xs">
@@ -94,13 +94,19 @@
                     <td class="px-4 py-3">
                         <div class="flex justify-center items-center gap-2">
                             <a href="{{ route('admin.company.edit', $data->id ) }}"
-                                class="px-3 py-1 bg-yellow-400 hover:bg-yellow-500 text-white rounded-md text-xs font-medium transition">
+                                class="px-3 py-1 bg-yellow-400 hover:bg-yellow-500 text-white rounded-md text-md font-medium transition">
                                 Edit
                             </a>
-                            <button
-                                class="px-3 py-1 bg-red-500 hover:bg-red-600 text-white rounded-md text-xs font-medium transition">
-                                Hapus
-                            </button>
+                            <form action="{{ route('admin.company.destroy', $data->id) }}" method="POST"
+                                onsubmit="return confirm('Yakin ingin menghapus?')" style="display:inline;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit"
+                                    class="px-3 py-1 bg-red-500 hover:bg-red-600 text-white rounded-md text-md font-medium transition"
+                                    data-toggle="tooltip" data-original-title="Delete product">
+                                    Delete
+                                </button>
+                            </form>
                         </div>
                     </td>
                 </tr>

@@ -3,7 +3,7 @@
 @section('content')
 <div class="bg-white shadow-md rounded-xl p-4">
     <div class="overflow-x-auto">
-        <table class="min-w-full text-sm" id="table-laporan">
+        <table class="min-w-full text-sm" id="table">
             <thead>
                 <tr class="bg-gray-100">
                     <th class="px-4 py-3 text-center text-gray-600 font-semibold uppercase text-xs">no</th>
@@ -76,15 +76,6 @@
                 @endforeach
             </tbody>
         </table>
-        <script src="https://cdn.jsdelivr.net/npm/simple-datatables@9.0.3"></script>
-        <script>
-            if (document.getElementById("table-laporan") && typeof simpleDatatables.DataTable !== 'undefined') {
-                const dataTable = new simpleDatatables.DataTable("#search-table", {
-                    searchable: true,
-                    sortable: false
-                });
-            }
-        </script>
     </div>
 </div>
 

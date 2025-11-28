@@ -6,7 +6,7 @@
 
 <div class="bg-white shadow-md rounded-xl p-4">
     <div class="overflow-x-auto">
-        <table class="min-w-full text-sm" id="kelas">
+        <table class="min-w-full text-sm" id="table">
             <thead>
                 <tr class="bg-gray-100">
                     <th class="px-4 py-3 text-center text-gray-600 font-semibold uppercase text-xs">no</th>

@@ -3,7 +3,7 @@
 @section('content')
 <div class="bg-white shadow-md rounded-xl p-4">
     <div class="overflow-x-auto">
-        <table class="min-w-full text-sm" id="kelas">
+        <table class="min-w-full text-sm" id="table">
             <thead>
                 <tr class="bg-gray-100">
                     <th class="px-4 py-3 text-center text-gray-600 font-semibold uppercase text-xs">no</th>
@@ -23,7 +23,7 @@
                     <td class="px-4 py-3 text-center text-gray-800">{{ $l->nama_project }}</td>
                     <td class="px-4 py-3 text-center text-gray-800">{{ $l->deskripsi }}</td>
                     <td class="text-center">
-                        <span class="px-3 py-1 {{ $l->status == 'Active' ? 'bg-green-500' : ($l->status == 'Maintenance' ? 'bg-yellow-500' : 'bg-red-500') }} text-white rounded-lg text-xs">
+                        <span class="px-3 py-1 {{ $l->status == 'Active' ? 'bg-green-500' : ($l->status == 'Maintenance' ? 'bg-yellow-500' : 'bg-red-500') }} text-white font-bold rounded-lg text-md">
                             {{ $l->status }}
                         </span>
                     </td>

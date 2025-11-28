@@ -17,7 +17,7 @@ class LaporanController extends Controller
     public function index()
     {
         //  
-        $laporans = Laporan::all();
+        $laporans = Laporan::all()->sortByDesc('created_at');
         $client = User::where('role', 'client')->get();
         $developer = User::where('role', 'developer')->get();
         return view('admin.laporans.index', compact('laporans', 'client', 'developer'));
@@ -26,7 +26,7 @@ class LaporanController extends Controller
     public function activity()
     {
         //
-        $laporans = Laporan::all();
+        $laporans = Laporan::all()->sortByDesc('created_at');
         $client = User::where('role', 'client')->get();
         return view('admin.laporans.activity', compact('laporans', 'client'));
     }

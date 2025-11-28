@@ -76,7 +76,6 @@ class CompanyController extends Controller
             'alamat' => 'required|string',
             'telepon' => 'required|string',
         ]);
-       
 
         $company = Company::findOrFail($id);
 
@@ -89,9 +88,18 @@ class CompanyController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Company $company)
     {
-        //
+        // Cek apakah company memiliki project
+        if ($company->project()->count() > 0) {
+            return redirect()->route('admin.company.index')
+                ->with('error', 'Company tidak bisa dihapus karena masih memiliki project.');
+        }
 
+        // Jika tidak memiliki laporan → boleh hapus
+        $company->delete();
+
+        return redirect()->route('admin.project.index')
+            ->with('success', 'Project berhasil dihapus.');
     }
 }

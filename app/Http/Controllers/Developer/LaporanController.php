@@ -19,7 +19,7 @@ class LaporanController extends Controller
     {
         //
         $developerId = Auth::id();
-        $laporans = Laporan::where('developer_id', $developerId)->get();
+        $laporans = Laporan::where('developer_id', $developerId)->orderBy('created_at', 'DESC')->get();
         $client = User::where('role', 'client')->get();
 
         return view('dev.laporans.index', compact('laporans', 'client'));
@@ -28,7 +28,7 @@ class LaporanController extends Controller
     public function selesai()
     {
         $developerId = Auth::id();
-        $laporans = Laporan::where('developer_id', $developerId)->get();
+        $laporans = Laporan::where('developer_id', $developerId)->orderBy('created_at', 'DESC')->get();
         $client = User::where('role', 'client')->get();
         return view('dev.laporans.selesai', compact('laporans', 'client'));
     }
@@ -36,7 +36,7 @@ class LaporanController extends Controller
     public function ditolak()
     {
         $developerId = Auth::id();
-        $laporans = Laporan::where('developer_id', $developerId)->get();
+        $laporans = Laporan::where('developer_id', $developerId)->orderBy('created_at', 'DESC')->get();
         $client = User::where('role', 'client')->get();
         return view('dev.laporans.ditolak', compact('laporans', 'client'));
     }

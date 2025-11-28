@@ -20,8 +20,12 @@ class LaporanController extends Controller
     {
         //
         $user = Auth::user();
+<<<<<<< HEAD
         $laporans = Laporan::where('client_id', $user->id)->get();
 
+=======
+        $laporans = Laporan::where('client_id', $user->id)->orderBy('created_at', 'DESC')->get();
+>>>>>>> d0628cd494852beec01233adc6c70c6373e1bbcb
 
 
         return view('clients.laporan.index', compact('laporans', 'user'));
@@ -192,7 +196,7 @@ class LaporanController extends Controller
 
         $lampiran = Lampiran::where('laporan_id', $laporan->id)->first();
         if ($lampiran && $lampiran->dokumentasi) {
-            \Illuminate\Support\Facades\Storage::disk('public')->delete($lampiran->dokumentasi);
+            Storage::disk('public')->delete($lampiran->dokumentasi);
             $lampiran->delete();
         }
 
