@@ -10,6 +10,7 @@ use App\Http\Controllers\Client\LaporanController as ClientLaporanController;
 use App\Http\Controllers\Client\ProjectController as ClientProjectController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Developer\LaporanController as DeveloperLaporanController;
+use App\Http\Controllers\ProfilController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
@@ -39,12 +40,17 @@ Route::prefix('client')->name('client.')->middleware(['auth', 'role:client'])->g
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('laporan', ClientLaporanController::class);
     Route::get('/project', [ClientProjectController::class, 'index'])->name('project.index');
-   
-
 
 });
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/profile/update', function () {
+        return redirect()->back();
+    });
+    Route::put('/profile/update', [ProfilController::class, 'update'])->name('profil.update');
+});
 
 Route::prefix('dev')->name('dev.')->middleware(['auth', 'role:developer'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');

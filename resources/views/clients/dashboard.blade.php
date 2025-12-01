@@ -78,7 +78,7 @@
                                     {{ $loop->iteration }}
                                 </td>
                                 <td class="px-6 py-4 text-sm text-gray-500">
-                                    {{ $report->developer->name ?? '--//--' }}
+                                    {{ $report->developer->name ?? '--' }}
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                     {{ $report->project->nama_project }}
@@ -118,7 +118,7 @@
                 </table>
             </div>
             <div class="text-right mt-4">
-                <a href="{{ route('dev.laporan.index') }}" class="text-blue-600 hover:text-blue-800 text-sm font-medium">Lihat Semua Laporan →</a>
+                <a href="{{ route('client.laporan.index') }}" class="text-blue-600 hover:text-blue-800 text-sm font-medium">Lihat Semua Laporan →</a>
             </div>
         </div>
     </div>
