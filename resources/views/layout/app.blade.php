@@ -5,10 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title') | WokaIssue</title>
-    <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
     @vite('resources/css/app.css')
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
-
+    <link rel="icon" href="{{ asset('icon/logo-woka.png') }}" type="image/x-icon">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 
@@ -16,7 +15,7 @@
         crossorigin="anonymous" />
 
     {{-- Hapus CDN Tailgrids jika tidak digunakan, atau pastikan CSS-nya tidak bentrok --}}
-    
+
     <script src="https://cdn.jsdelivr.net/npm/tailgrids@2.3.0/plugin.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/tailgrids@2.3.0/assets/css/tailwind.min.css" rel="stylesheet" />
 
@@ -128,7 +127,7 @@
             <div id="sidebar"
                 class="w-64 bg-gradient-to-b from-blue-800 to-blue-900 text-white flex flex-col transform transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static fixed inset-y-0 left-0 z-50 -translate-x-full">
                 <div class="p-6 text-xl font-bold border-b border-blue-700 flex items-center">
-                    <i class="fas fa-chart-line mr-3 text-blue-300"></i>
+                    <img src="{{ asset('icon/logo-woka.png') }}" alt="WokaIssue Logo" class="w-12 h-8" />
                     <span class="bg-gradient-to-r from-white to-blue-200 bg-clip-text text-transparent">WokaIssue</span>
                 </div>
 
@@ -137,110 +136,110 @@
                         @php $user = Auth::user(); @endphp
 
                         @if ($user->role === 'admin')
-                            <li>
-                                <a href="{{ route('admin.dashboard') }}"
-                                    class="flex items-center p-3 rounded-lg transition-all duration-200 hover:bg-blue-700 hover:shadow-md {{ request()->routeIs('admin.dashboard*') ? 'bg-blue-700 shadow-md' : '' }}">
-                                    <i class="fas fa-home mr-3 w-5 text-center"></i>
-                                    Dashboard
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{{route('admin.developer.index')}}"
-                                    class="flex items-center p-3 rounded-lg transition-all duration-200 hover:bg-blue-700 hover:shadow-md {{ request()->routeIs('admin.developer*') ? 'bg-blue-700 shadow-md' : '' }}">
-                                    <i class="fa-solid fa-people-group mr-3 w-5 text-center"></i>
-                                    Kelola Developer
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{{route('admin.client.index')}}"
-                                    class="flex items-center p-3 rounded-lg transition-all duration-200 hover:bg-blue-700 hover:shadow-md {{ request()->routeIs('admin.client*') ? 'bg-blue-700 shadow-md' : '' }}">
-                                    <i class="fa-solid fa-people-group mr-3 w-5 text-center"></i>
-                                    Kelola Client
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{{route('admin.laporan.index')}}"
-                                    class="flex items-center p-3 rounded-lg transition-all duration-200 hover:bg-blue-700 hover:shadow-md {{ request()->routeIs('admin.laporan.index') ? 'bg-blue-700 shadow-md' : '' }}">
-                                    <i class="fa-solid fa-folder-plus mr-3 w-5 text-center"></i>
-                                    Laporan Masuk Client
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{{route('admin.laporan.activity')}}"
-                                    class="flex items-center p-3 rounded-lg transition-all duration-200 hover:bg-blue-700 hover:shadow-md {{ request()->routeIs('admin.laporan.activity') ? 'bg-blue-700 shadow-md' : '' }}">
-                                    <i class="fa-solid fa-folder-open mr-3 w-5 text-center"></i>
-                                    Laporan Activity
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{{ route('admin.project.index') }}"
-                                    class="flex items-center p-3 rounded-lg transition-all duration-200 hover:bg-blue-700 hover:shadow-md {{ request()->routeIs('admin.project*') ? 'bg-blue-700 shadow-md' : '' }}">
-                                    <i class="fa-solid fa-bars-progress mr-3 w-5 text-center"></i>
-                                    Project
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{{ route('admin.company.index') }}"
-                                    class="flex items-center p-3 rounded-lg transition-all duration-200 hover:bg-blue-700 hover:shadow-md {{ request()->routeIs('admin.company*') ? 'bg-blue-700 shadow-md' : '' }}">
-                                    <i class="fa-solid fa-building mr-3 w-5 text-center"></i>
-                                    Company
-                                </a>
-                            </li>
+                        <li>
+                            <a href="{{ route('admin.dashboard') }}"
+                                class="flex items-center p-3 rounded-lg transition-all duration-200 hover:bg-blue-700 hover:shadow-md {{ request()->routeIs('admin.dashboard*') ? 'bg-blue-700 shadow-md' : '' }}">
+                                <i class="fas fa-home mr-3 w-5 text-center"></i>
+                                Dashboard
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{route('admin.developer.index')}}"
+                                class="flex items-center p-3 rounded-lg transition-all duration-200 hover:bg-blue-700 hover:shadow-md {{ request()->routeIs('admin.developer*') ? 'bg-blue-700 shadow-md' : '' }}">
+                                <i class="fa-solid fa-people-group mr-3 w-5 text-center"></i>
+                                Kelola Developer
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{route('admin.client.index')}}"
+                                class="flex items-center p-3 rounded-lg transition-all duration-200 hover:bg-blue-700 hover:shadow-md {{ request()->routeIs('admin.client*') ? 'bg-blue-700 shadow-md' : '' }}">
+                                <i class="fa-solid fa-people-group mr-3 w-5 text-center"></i>
+                                Kelola Client
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{route('admin.laporan.index')}}"
+                                class="flex items-center p-3 rounded-lg transition-all duration-200 hover:bg-blue-700 hover:shadow-md {{ request()->routeIs('admin.laporan.index') ? 'bg-blue-700 shadow-md' : '' }}">
+                                <i class="fa-solid fa-folder-plus mr-3 w-5 text-center"></i>
+                                Laporan Masuk Client
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{route('admin.laporan.activity')}}"
+                                class="flex items-center p-3 rounded-lg transition-all duration-200 hover:bg-blue-700 hover:shadow-md {{ request()->routeIs('admin.laporan.activity') ? 'bg-blue-700 shadow-md' : '' }}">
+                                <i class="fa-solid fa-folder-open mr-3 w-5 text-center"></i>
+                                Laporan Activity
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('admin.project.index') }}"
+                                class="flex items-center p-3 rounded-lg transition-all duration-200 hover:bg-blue-700 hover:shadow-md {{ request()->routeIs('admin.project*') ? 'bg-blue-700 shadow-md' : '' }}">
+                                <i class="fa-solid fa-bars-progress mr-3 w-5 text-center"></i>
+                                Project
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('admin.company.index') }}"
+                                class="flex items-center p-3 rounded-lg transition-all duration-200 hover:bg-blue-700 hover:shadow-md {{ request()->routeIs('admin.company*') ? 'bg-blue-700 shadow-md' : '' }}">
+                                <i class="fa-solid fa-building mr-3 w-5 text-center"></i>
+                                Company
+                            </a>
+                        </li>
                         @endif
 
                         @if ($user->role === 'client')
-                            <li>
-                                <a href="{{ route('client.dashboard') }}"
-                                    class="flex items-center p-3 rounded-lg transition-all duration-200 hover:bg-blue-700 hover:shadow-md {{ request()->routeIs('client.dashboard*') ? 'bg-blue-700 shadow-md' : '' }}">
-                                    <i class="fas fa-home mr-3 w-5 text-center"></i>
-                                    Dashboard
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{{route('client.laporan.index')}}"
-                                    class="flex items-center p-3 rounded-lg transition-all duration-200 hover:bg-blue-700 hover:shadow-md {{ request()->routeIs('client.laporan*') ? 'bg-blue-700 shadow-md' : '' }}">
-                                    <i class="fa-solid fa-folder-open mr-3 w-5 text-center"></i>
-                                    Laporan
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{{ route('client.project.index') }}"
-                                    class="flex items-center p-3 rounded-lg transition-all duration-200 hover:bg-blue-700 hover:shadow-md {{ request()->routeIs('client.project*') ? 'bg-blue-700 shadow-md' : '' }}">
-                                    <i class="fa-solid fa-bars-progress mr-3 w-5 text-center"></i>
-                                    Project
-                                </a>
-                            </li>
+                        <li>
+                            <a href="{{ route('client.dashboard') }}"
+                                class="flex items-center p-3 rounded-lg transition-all duration-200 hover:bg-blue-700 hover:shadow-md {{ request()->routeIs('client.dashboard*') ? 'bg-blue-700 shadow-md' : '' }}">
+                                <i class="fas fa-home mr-3 w-5 text-center"></i>
+                                Dashboard
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{route('client.laporan.index')}}"
+                                class="flex items-center p-3 rounded-lg transition-all duration-200 hover:bg-blue-700 hover:shadow-md {{ request()->routeIs('client.laporan*') ? 'bg-blue-700 shadow-md' : '' }}">
+                                <i class="fa-solid fa-folder-open mr-3 w-5 text-center"></i>
+                                Laporan
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('client.project.index') }}"
+                                class="flex items-center p-3 rounded-lg transition-all duration-200 hover:bg-blue-700 hover:shadow-md {{ request()->routeIs('client.project*') ? 'bg-blue-700 shadow-md' : '' }}">
+                                <i class="fa-solid fa-bars-progress mr-3 w-5 text-center"></i>
+                                Project
+                            </a>
+                        </li>
                         @endif
 
                         @if ($user->role === 'developer')
-                            <li>
-                                <a href="{{ route('dev.dashboard') }}"
-                                    class="flex items-center p-3 rounded-lg transition-all duration-200 hover:bg-blue-700 hover:shadow-md {{ request()->routeIs('dev.dashboard*') ? 'bg-blue-700 shadow-md' : '' }}">
-                                    <i class="fas fa-home mr-3 w-5 text-center"></i>
-                                    Dashboard
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{{route('dev.laporan.index')}}"
-                                    class="flex items-center p-3 rounded-lg transition-all duration-200 hover:bg-blue-700 hover:shadow-md {{ request()->routeIs('dev.laporan.index') ? 'bg-blue-700 shadow-md' : '' }}">
-                                    <i class="fa-solid fa-folder-open mr-3 w-5 text-center"></i>
-                                    Laporan Client Masuk
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{{route('dev.laporan.selesai')}}"
-                                    class="flex items-center p-3 rounded-lg transition-all duration-200 hover:bg-blue-700 hover:shadow-md {{ request()->routeIs('dev.laporan.selesai') ? 'bg-blue-700 shadow-md' : '' }}">
-                                    <i class="fa-solid fa-folder-closed mr-3 w-5 text-center"></i>
-                                    Laporan Client Selesai
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{{route('dev.laporan.ditolak')}}"
-                                    class="flex items-center p-3 rounded-lg transition-all duration-200 hover:bg-blue-700 hover:shadow-md {{ request()->routeIs('dev.laporan.ditolak') ? 'bg-blue-700 shadow-md' : '' }}">
-                                    <i class="fa-solid fa-folder-closed mr-3 w-5 text-center"></i>
-                                    Laporan Client Ditolak
-                                </a>
-                            </li>
+                        <li>
+                            <a href="{{ route('dev.dashboard') }}"
+                                class="flex items-center p-3 rounded-lg transition-all duration-200 hover:bg-blue-700 hover:shadow-md {{ request()->routeIs('dev.dashboard*') ? 'bg-blue-700 shadow-md' : '' }}">
+                                <i class="fas fa-home mr-3 w-5 text-center"></i>
+                                Dashboard
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{route('dev.laporan.index')}}"
+                                class="flex items-center p-3 rounded-lg transition-all duration-200 hover:bg-blue-700 hover:shadow-md {{ request()->routeIs('dev.laporan.index') ? 'bg-blue-700 shadow-md' : '' }}">
+                                <i class="fa-solid fa-folder-open mr-3 w-5 text-center"></i>
+                                Laporan Client Masuk
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{route('dev.laporan.selesai')}}"
+                                class="flex items-center p-3 rounded-lg transition-all duration-200 hover:bg-blue-700 hover:shadow-md {{ request()->routeIs('dev.laporan.selesai') ? 'bg-blue-700 shadow-md' : '' }}">
+                                <i class="fa-solid fa-folder-closed mr-3 w-5 text-center"></i>
+                                Laporan Client Selesai
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{route('dev.laporan.ditolak')}}"
+                                class="flex items-center p-3 rounded-lg transition-all duration-200 hover:bg-blue-700 hover:shadow-md {{ request()->routeIs('dev.laporan.ditolak') ? 'bg-blue-700 shadow-md' : '' }}">
+                                <i class="fa-solid fa-folder-closed mr-3 w-5 text-center"></i>
+                                Laporan Client Ditolak
+                            </a>
+                        </li>
                         @endif
 
                         <li class="mt-8 pt-4 border-t border-blue-700">
@@ -313,7 +312,7 @@
 
                                     {{-- Menggunakan route yang disarankan pada jawaban sebelumnya, jika Anda membuatnya
                                     --}}
-                                    
+
 
                                     <button id="editProfileButton"
                                         class="flex items-center w-full px-4 py-2 text-sm text-blue-600 hover:bg-blue-50 border-t border-gray-100">
@@ -343,7 +342,7 @@
         </div>
     </div>
     <div id="editProfilePopup"
-        class="hidden fixed bg-white/30 inset-0 flex items-center justify-center p-4 z-[9999]"> 
+        class="hidden fixed bg-white/30 inset-0 flex items-center justify-center p-4 z-[9999]">
         <div class="bg-white rounded-xl shadow-2xl max-w-md w-full transform transition-all">
             <div class="flex justify-between items-center p-6 border-b border-gray-200">
                 <h3 class="text-xl font-bold text-gray-800">Edit Profil</h3>
@@ -357,13 +356,13 @@
                     <div class="relative inline-block">
                         <img src="https://ui-avatars.com/api/?name={{ urlencode($user->name) }}&background=0D8ABC&color=fff"
                             alt="Profile" class="w-24 h-24 rounded-full ring-4 ring-blue-100 mx-auto">
-                       
+
                     </div>
                 </div>
 
                 <form action="{{ route('profil.update') }}" method="POST" class="space-y-4">
                     @csrf
-                    @method('PUT') 
+                    @method('PUT')
 
                     <div>
                         <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Nama Lengkap</label>
@@ -410,13 +409,13 @@
         const dropdownMenu = document.getElementById('dropdownMenu');
 
         // Logika Dropdown
-        dropdownButton.addEventListener('click', function () {
+        dropdownButton.addEventListener('click', function() {
             // Memastikan dropdown berada di bawah elemen yang memicunya
             dropdownMenu.classList.toggle('hidden');
         });
 
         // Tutup dropdown saat klik di luar
-        document.addEventListener('click', function (event) {
+        document.addEventListener('click', function(event) {
             if (!dropdownButton.contains(event.target) && !dropdownMenu.contains(event.target)) {
                 dropdownMenu.classList.add('hidden');
             }
@@ -428,35 +427,35 @@
         const closePopup = document.getElementById('closePopup');
         const cancelEdit = document.getElementById('cancelEdit');
 
-        editProfileButton.addEventListener('click', function () {
+        editProfileButton.addEventListener('click', function() {
             editProfilePopup.classList.remove('hidden');
             dropdownMenu.classList.add('hidden'); // Tutup dropdown saat popup terbuka
         });
 
         // Tutup popup dari tombol X
-        closePopup.addEventListener('click', function () {
+        closePopup.addEventListener('click', function() {
             editProfilePopup.classList.add('hidden');
         });
 
         // Tutup popup dari tombol Batal
-        cancelEdit.addEventListener('click', function () {
+        cancelEdit.addEventListener('click', function() {
             editProfilePopup.classList.add('hidden');
         });
 
         // Tutup popup saat klik di luar konten (overlay)
-        editProfilePopup.addEventListener('click', function (event) {
+        editProfilePopup.addEventListener('click', function(event) {
             if (event.target === editProfilePopup) {
                 editProfilePopup.classList.add('hidden');
             }
         });
 
         // Script DataTables
-        $(document).ready(function () {
+        $(document).ready(function() {
             $('#table').DataTable();
         });
 
         // Script Sidebar Toggle
-        document.getElementById('sidebarToggle').addEventListener('click', function () {
+        document.getElementById('sidebarToggle').addEventListener('click', function() {
             const sidebar = document.getElementById('sidebar');
             const overlay = document.getElementById('sidebarOverlay');
 
@@ -464,7 +463,7 @@
             overlay.classList.toggle('hidden');
         });
 
-        document.getElementById('sidebarOverlay').addEventListener('click', function () {
+        document.getElementById('sidebarOverlay').addEventListener('click', function() {
             const sidebar = document.getElementById('sidebar');
             const overlay = document.getElementById('sidebarOverlay');
 
@@ -473,7 +472,7 @@
         });
 
         document.querySelectorAll('#sidebar a').forEach(link => {
-            link.addEventListener('click', function () {
+            link.addEventListener('click', function() {
                 if (window.innerWidth < 1024) {
                     const sidebar = document.getElementById('sidebar');
                     const overlay = document.getElementById('sidebarOverlay');
