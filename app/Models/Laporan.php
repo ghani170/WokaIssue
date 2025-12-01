@@ -37,6 +37,10 @@ class Laporan extends Model
         return $this->hasMany(Lampiran::class, 'laporan_id');
     }
 
+    public function lampiranDev() {
+        return $this->hasMany(LampiranDev::class, 'laporan_id');
+    }
+
     public function comments() {
         return $this->hasMany(Comment::class, 'laporan_id');
     }
