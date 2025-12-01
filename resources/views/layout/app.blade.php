@@ -144,6 +144,13 @@
                             </a>
                         </li>
                         <li>
+                            <a href="{{ route('admin.company.index') }}"
+                                class="flex items-center p-3 rounded-lg transition-all duration-200 hover:bg-blue-700 hover:shadow-md {{ request()->routeIs('admin.company*') ? 'bg-blue-700 shadow-md' : '' }}">
+                                <i class="fa-solid fa-building mr-3 w-5 text-center"></i>
+                                Company
+                            </a>
+                        </li>
+                        <li>
                             <a href="{{route('admin.developer.index')}}"
                                 class="flex items-center p-3 rounded-lg transition-all duration-200 hover:bg-blue-700 hover:shadow-md {{ request()->routeIs('admin.developer*') ? 'bg-blue-700 shadow-md' : '' }}">
                                 <i class="fa-solid fa-people-group mr-3 w-5 text-center"></i>
@@ -155,6 +162,13 @@
                                 class="flex items-center p-3 rounded-lg transition-all duration-200 hover:bg-blue-700 hover:shadow-md {{ request()->routeIs('admin.client*') ? 'bg-blue-700 shadow-md' : '' }}">
                                 <i class="fa-solid fa-people-group mr-3 w-5 text-center"></i>
                                 Kelola Client
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('admin.project.index') }}"
+                                class="flex items-center p-3 rounded-lg transition-all duration-200 hover:bg-blue-700 hover:shadow-md {{ request()->routeIs('admin.project*') ? 'bg-blue-700 shadow-md' : '' }}">
+                                <i class="fa-solid fa-bars-progress mr-3 w-5 text-center"></i>
+                                Project
                             </a>
                         </li>
                         <li>
@@ -171,20 +185,8 @@
                                 Laporan Activity
                             </a>
                         </li>
-                        <li>
-                            <a href="{{ route('admin.project.index') }}"
-                                class="flex items-center p-3 rounded-lg transition-all duration-200 hover:bg-blue-700 hover:shadow-md {{ request()->routeIs('admin.project*') ? 'bg-blue-700 shadow-md' : '' }}">
-                                <i class="fa-solid fa-bars-progress mr-3 w-5 text-center"></i>
-                                Project
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ route('admin.company.index') }}"
-                                class="flex items-center p-3 rounded-lg transition-all duration-200 hover:bg-blue-700 hover:shadow-md {{ request()->routeIs('admin.company*') ? 'bg-blue-700 shadow-md' : '' }}">
-                                <i class="fa-solid fa-building mr-3 w-5 text-center"></i>
-                                Company
-                            </a>
-                        </li>
+                        
+                        
                         @endif
 
                         @if ($user->role === 'client')
