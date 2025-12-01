@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title') | WokaIssue</title>
+    <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
     @vite('resources/css/app.css')
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
 
@@ -325,7 +326,7 @@
                                         <button type="submit"
                                             class="flex items-center w-full px-4 py-2 text-sm text-red-600 hover:bg-red-100 border-t border-gray-100">
                                             <i class="fas fa-sign-out-alt mr-3"></i>
-                                            Keluar
+                                            logout
                                         </button>
                                     </form>
                                 </div>
