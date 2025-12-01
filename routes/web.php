@@ -39,9 +39,6 @@ Route::prefix('client')->name('client.')->middleware(['auth', 'role:client'])->g
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('laporan', ClientLaporanController::class);
     Route::get('/project', [ClientProjectController::class, 'index'])->name('project.index');
-   
-
-
 });
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');

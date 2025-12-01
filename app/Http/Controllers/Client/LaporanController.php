@@ -20,12 +20,7 @@ class LaporanController extends Controller
     {
         //
         $user = Auth::user();
-<<<<<<< HEAD
-        $laporans = Laporan::where('client_id', $user->id)->get();
-
-=======
         $laporans = Laporan::where('client_id', $user->id)->orderBy('created_at', 'DESC')->get();
->>>>>>> d0628cd494852beec01233adc6c70c6373e1bbcb
 
 
         return view('clients.laporan.index', compact('laporans', 'user'));
@@ -100,10 +95,8 @@ class LaporanController extends Controller
         $laporan = Laporan::findOrFail($id);
         $lampiran = Lampiran::where('laporan_id', $laporan->id)->get();
 
-        $messages = DB::table('messages')
-        ->where('laporan_id', $laporan->id)
-        ->orderBy('created_at')
-        ->get();
+        $messages = DB::table('messages')->where('laporan_id', $laporan->id)->orderBy('created_at')->get();
+
     
 
         // Pastikan hanya pemilik kegiatan yang bisa lihat

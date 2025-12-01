@@ -21,17 +21,16 @@
 <!-- Tabs -->
 <div class="mt-6 border-b border-gray-200">
     <nav class="flex gap-6" aria-label="Tabs">
-        <button class="tab-btn active-tab" data-tab="tab1">Keterangan</button>
+        <button class="tab-btn {{ session('active_tab') == null ? 'active-tab' : '' }}" data-tab="tab1">Keterangan</button>
         <button class="tab-btn" data-tab="tab2">Dokumentasi</button>
-        <button class="tab-btn" data-tab="tab3">Customer Service</button>
+        <button class="tab-btn {{ session('active_tab') == 'tab3' ? 'active-tab' : '' }}" data-tab="tab3">Customer Service</button>
     </nav>
 </div>
-
 <!-- Tab Content -->
 <div class="mt-6">
 
     <!-- TAB 1 -->
-    <div id="tab1" class="tab-content block">
+     <div id="tab1" class="tab-content {{ session('active_tab') == null ? 'block' : 'hidden' }}">
         <div class="bg-white shadow rounded-lg p-6">
 
             <h3 class="font-semibold mb-4">Detail Laporan</h3>
@@ -96,7 +95,7 @@
     </div>
 
     <!-- TAB 3 -->
-    <div id="tab3" class="tab-content hidden">
+     <div id="tab3" class="tab-content {{ session('active_tab') == 'tab3' ? 'block' : 'hidden' }}">
         <div class="bg-white shadow rounded-lg p-6">
 
             <h3 class="font-semibold mb-4">Customer Service</h3>

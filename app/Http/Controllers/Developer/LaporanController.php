@@ -66,10 +66,8 @@ class LaporanController extends Controller
         $user = auth()->user();
         $laporan = Laporan::findOrFail($id);
         $lampiran = Lampiran::where('laporan_id', $laporan->id)->get();
-        $messages = DB::table('messages')
-        ->where('laporan_id', $laporan->id)
-        ->orderBy('created_at')
-        ->get();
+
+        $messages = DB::table('messages')->where('laporan_id', $laporan->id)->orderBy('created_at')->get();
 
         return view('dev.laporans.show', compact('laporan', 'lampiran', 'messages'));
     }
