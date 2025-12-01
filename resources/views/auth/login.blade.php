@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     @vite('resources/css/app.css')
+    <link rel="icon" href="{{ asset('icon/logo-woka.png') }}" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
@@ -55,8 +56,8 @@
                 @endif
                 <div class="text-center mb-8">
                     <div
-                        class="w-20 h-20 rounded-full bg-blue-400 flex items-center justify-center mx-auto mb-4 shadow-lg">
-                        <i class="fas fa-user-lock text-white text-3xl"></i>
+                        class="w-23 h-23 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
+                        <img src="{{ asset('icon/logo-woka.png') }}" alt="WokaIssue Logo" class="w-18 h-12" />
                     </div>
                     <h1 class="text-3xl font-bold text-gray-800">Welcome In WokaIssue</h1>
                     <p class="text-gray-500 mt-2">Sign in to access your account</p>
