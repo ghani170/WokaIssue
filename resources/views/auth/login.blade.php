@@ -8,7 +8,7 @@
     @vite('resources/css/app.css')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
+
     <script>
         tailwind.config = {
             theme: {
@@ -40,8 +40,22 @@
     <div class="relative z-10 w-full max-w-md">
         <div class="bg-white/20 backdrop-blur-md rounded-2xl shadow-xl overflow-hidden border border-white/20">
             <div class="p-8">
+                @if ($errors->any())
+                    <div class="mb-6 bg-red-100 border-l-4 border-red-500 text-red-700 p-4 rounded-lg shadow">
+                        <div class="flex items-center">
+                            <i class="fas fa-triangle-exclamation mr-2"></i>
+                            <p class="font-semibold">Login gagal!</p>
+                        </div>
+                        <ul class="mt-2 ml-6 list-disc text-sm">
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 <div class="text-center mb-8">
-                    <div class="w-20 h-20 rounded-full bg-blue-400 flex items-center justify-center mx-auto mb-4 shadow-lg">
+                    <div
+                        class="w-20 h-20 rounded-full bg-blue-400 flex items-center justify-center mx-auto mb-4 shadow-lg">
                         <i class="fas fa-user-lock text-white text-3xl"></i>
                     </div>
                     <h1 class="text-3xl font-bold text-gray-800">Welcome In WokaIssue</h1>
@@ -56,7 +70,7 @@
                             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                 <i class="fas fa-envelope text-gray-400"></i>
                             </div>
-                            <input type="email" id="email" name="email" placeholder="Enter your email"
+                            <input type="email" id="email" name="email" value="{{ old('email') }}" placeholder="Enter your email"
                                 class="pl-10 w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors duration-200 outline-none">
                         </div>
                     </div>
@@ -67,8 +81,9 @@
                         <div class="relative">
                             <i class="fas fa-lock absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
 
-                            <input type="password" id="password" name="password"
-                                class="pl-10 w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors duration-200 outline-none" placeholder="Enter your passwword">
+                            <input type="password" id="password" name="password" value="{{ old('password') }}"
+                                class="pl-10 w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors duration-200 outline-none"
+                                placeholder="Enter your passwword">
 
                             <button type="button" id="togglePassword"
                                 class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500">
@@ -78,7 +93,7 @@
                     </div>
 
                     <script>
-                        document.getElementById('togglePassword').onclick = function() {
+                        document.getElementById('togglePassword').onclick = function () {
                             const pwd = document.getElementById('password');
                             const icon = this.querySelector('i');
 
