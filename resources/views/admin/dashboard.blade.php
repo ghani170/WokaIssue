@@ -5,9 +5,6 @@
 @section('content')
 
     <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
-
-
-        <!-- Card 1 -->
         <div class="bg-white rounded-xl shadow-md p-4">
             <div class="flex justify-between items-center">
                 <div>
@@ -22,11 +19,11 @@
             <hr class="my-3">
 
             <p class="text-sm">
-                Lihat <span class="font-semibold text-yellow-600"><a href="{{ route('admin.laporan.index') }}">Laporan</a></span> Client
+                Lihat <span class="font-semibold text-yellow-600"><a
+                        href="{{ route('admin.laporan.index') }}">Laporan</a></span> Client
             </p>
         </div>
 
-        <!-- Card 2 -->
         <div class="bg-white rounded-xl shadow-md p-4">
             <div class="flex justify-between items-center">
                 <div>
@@ -41,11 +38,11 @@
             <hr class="my-3">
 
             <p class="text-sm">
-                Lihat <span class="font-semibold text-green-600"><a href="{{ route('admin.laporan.activity') }}">Laporan Client</a></span> Selesai
+                Lihat <span class="font-semibold text-green-600"><a href="{{ route('admin.laporan.activity') }}">Laporan
+                        Client</a></span> Selesai
             </p>
         </div>
 
-        <!-- Card 3 -->
         <div class="bg-white rounded-xl shadow-md p-4">
             <div class="flex justify-between items-center">
                 <div>
@@ -60,11 +57,11 @@
             <hr class="my-3">
 
             <p class="text-sm">
-                Lihat Daftar <span class="font-semibold text-cyan-600"><a href="{{ route('admin.project.index') }}">Project</a></span>
+                Lihat Daftar <span class="font-semibold text-cyan-600"><a
+                        href="{{ route('admin.project.index') }}">Project</a></span>
             </p>
         </div>
 
-        <!-- Card 4 -->
         <div class="bg-white rounded-xl shadow-md p-4">
             <div class="flex justify-between items-center">
                 <div>
@@ -79,12 +76,13 @@
             <hr class="my-3">
 
             <p class="text-sm">
-                LIhat <span class="font-semibold text-red-600"><a href="{{ route('admin.company.index') }}">Company</a></span>
+                LIhat <span class="font-semibold text-red-600"><a
+                        href="{{ route('admin.company.index') }}">Company</a></span>
             </p>
         </div>
 
-
     </div>
+
     <div class="mt-8 grid grid-cols-1 lg:grid-cols-3 gap-4">
 
         <div class="lg:col-span-1 bg-white rounded-xl shadow-md p-6">
@@ -105,13 +103,14 @@
                             </th>
                             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                 Nama Client</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nama Project
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nama
+                                Project
                             </th>
                             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                 Tanggal</th>
                             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                 Status</th>
-                            
+
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y divide-gray-200">
@@ -144,9 +143,9 @@
                                         {{ $report->status }}
                                     </span>
 
-                                    
+
                                 </td>
-                                
+
                             </tr>
                         @endforeach
 
@@ -162,17 +161,27 @@
                 </table>
             </div>
             <div class="text-right mt-4">
-                <a href="{{ route('admin.laporan.index') }}" class="text-blue-600 hover:text-blue-800 text-sm font-medium">Lihat Semua Laporan →</a>
+                <a href="{{ route('admin.laporan.index') }}"
+                    class="text-blue-600 hover:text-blue-800 text-sm font-medium">Lihat Semua Laporan →</a>
             </div>
         </div>
     </div>
+
+    <div class="mt-8 bg-white rounded-xl shadow-md p-6">
+        <h3 class="text-xl font-semibold mb-4 text-gray-700">Jumlah Laporan Masuk Per Hari (7 Hari Terakhir)</h3>
+        <hr class="mb-4">
+        <div class="relative h-96">
+            <canvas id="reportsPerDayChart"></canvas>
+        </div>
     </div>
+
 
     @section('scripts')
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
         <script>
-            // Data dari Controller
+            // --- 1. SCRIPT UNTUK GRAFIK PRIORITAS (DOUGHNUT CHART) ---
+            // Data dari Controller (Prioritas)
             const dataLow = {{ $laporanLow ?? 0 }};
             const dataMedium = {{ $laporanMedium ?? 0 }};
             const dataHigh = {{ $laporanHigh ?? 0 }};
@@ -189,24 +198,77 @@
                         label: 'Jumlah Laporan',
                         data: [dataLow, dataMedium, dataHigh, dataCritical],
                         backgroundColor: [
-                            'rgba(59, 130, 246, 0.8)',
-                            'rgba(245, 158, 11, 0.8)',
-                            'rgba(248, 97, 97, 0.8)',
-                            'rgba(185, 36, 16, 0.8)',
+                            'rgba(59, 130, 246, 0.8)', // Biru (Low)
+                            'rgba(245, 158, 11, 0.8)', // Kuning (Medium)
+                            'rgba(248, 97, 97, 0.8)', // Merah Muda (High)
+                            'rgba(185, 36, 16, 0.8)', // Merah Tua (Critical)
                         ],
                         hoverOffset: 4
                     }]
                 },
                 options: {
                     responsive: true,
-                    maintainAspectRatio: false, // Penting agar grafik mengisi div
+                    maintainAspectRatio: false,
                     plugins: {
                         legend: {
-                            position: 'bottom', // Letakkan legenda di bawah
+                            position: 'bottom',
                         },
                         title: {
                             display: false,
-                            text: 'Status Laporan'
+                        }
+                    }
+                }
+            });
+
+            // ------------------------------------------------------------------------------------------
+
+            // --- 2. SCRIPT BARU UNTUK GRAFIK LAPORAN PER HARI (LINE CHART) ---
+
+            // Data dari Controller (Laporan Per Hari)
+            // Pastikan variabel ini sudah di-pass dari Controller dan menggunakan json_encode
+            const reportsPerDayLabels = {!! json_encode($reportsPerDayLabels ?? []) !!};
+            const reportsPerDayData = {!! json_encode($reportsPerDayData ?? []) !!};
+
+            const lineCtx = document.getElementById('reportsPerDayChart'); // ID canvas baru
+
+            // Buat Grafik Garis (Line Chart)
+            new Chart(lineCtx, {
+                type: 'line',
+                data: {
+                    labels: reportsPerDayLabels,
+                    datasets: [{
+                        label: 'Laporan Baru Masuk',
+                        data: reportsPerDayData,
+                        borderColor: 'rgb(59, 130, 246)', // Warna garis (Biru Tailwind-500)
+                        backgroundColor: 'rgba(59, 130, 246, 0.2)', // Area di bawah garis
+                        tension: 0.3, // Kehalusan garis
+                        fill: true, // Mengisi area di bawah garis
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false,
+                        },
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Jumlah Laporan'
+                            },
+                            ticks: {
+                                precision: 0 // Pastikan nilai Y adalah bilangan bulat
+                            }
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Tanggal'
+                            }
                         }
                     }
                 }
