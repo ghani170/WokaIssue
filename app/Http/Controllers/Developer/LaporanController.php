@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Developer;
 
 use App\Http\Controllers\Controller;
 use App\Models\Lampiran;
+use App\Models\LampiranDev;
 use App\Models\Laporan;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -20,9 +21,10 @@ class LaporanController extends Controller
         //
         $developerId = Auth::id();
         $laporans = Laporan::where('developer_id', $developerId)->orderBy('created_at', 'DESC')->get();
+        $lampiran = LampiranDev::whereIn('laporan_id', $laporans->pluck('id'))->get();
         $client = User::where('role', 'client')->get();
 
-        return view('dev.laporans.index', compact('laporans', 'client'));
+        return view('dev.laporans.index', compact('laporans', 'client', 'lampiran'));
     }
 
     public function selesai()
@@ -101,6 +103,26 @@ class LaporanController extends Controller
         $laporan->status = $request->status;
         $laporan->save();
         return redirect()->route('dev.laporan.index')->with('success', 'Status berhasil diupdate');
+    }
+
+    public function uploadLampiran(Request $request, $id)
+    {
+        $request->validate([
+            'file' => 'required|mimes:jpg,png,pdf,docx|max:2048',
+        ]);
+
+        $laporan = Laporan::findOrFail($id);
+
+        // Simpan file ke storage
+        $filePath = $request->file('file')->store('lampiran_dev', 'public');
+
+        // Simpan ke table lampiran_dev
+        LampiranDev::create([
+            'laporan_id' => $laporan->id,
+            'dokumentasi_developer'  => $filePath,
+        ]);
+
+        return back()->with('success', 'Lampiran berhasil diupload.');
     }
 
     public function destroy(string $id)

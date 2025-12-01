@@ -23,6 +23,7 @@
     <nav class="flex gap-6" aria-label="Tabs">
         <button class="tab-btn {{ session('active_tab') == null ? 'active-tab' : '' }}" data-tab="tab1">Keterangan</button>
         <button class="tab-btn" data-tab="tab2">Dokumentasi</button>
+        <button class="tab-btn" data-tab="tab4">Lampiran Developer</button>
         <button class="tab-btn {{ session('active_tab') == 'tab3' ? 'active-tab' : '' }}" data-tab="tab3">Customer Service</button>
     </nav>
 </div>
@@ -81,13 +82,32 @@
     <div id="tab2" class="tab-content hidden">
         <div class="bg-white shadow rounded-lg p-6">
 
-            <h3 class="font-semibold mb-4">Dokumentasi Kegiatan</h3>
+            <h3 class="font-semibold mb-4">Lampiran Laporan</h3>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-2 mb-2">
                 <span class="font-medium">Foto Dokumentasi :</span>
                 <div class="md:col-span-2 flex gap-3">
                     @foreach ($lampiran as $lam)
                     <img src="{{ asset('storage/' . $lam->dokumentasi ?? 'Tidak Ada Lampiran') }}"
+                        class="w-32 h-32 object-cover rounded-lg mb-3 border">
+                    @endforeach
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- TAB 2 -->
+    <div id="tab4" class="tab-content hidden">
+        <div class="bg-white shadow rounded-lg p-6">
+
+            <h3 class="font-semibold mb-4">Lampiran Developer</h3>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-2 mb-2">
+                <span class="font-medium">Foto Dokumentasi :</span>
+                <div class="md:col-span-2 flex gap-3">
+                    @foreach ($lampiranDev as $lamp)
+                    <img src="{{ asset('storage/' . $lamp->dokumentasi_developer ?? 'Tidak Ada Lampiran') }}"
                         class="w-32 h-32 object-cover rounded-lg mb-3 border">
                     @endforeach
                 </div>

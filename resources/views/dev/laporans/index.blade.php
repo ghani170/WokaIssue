@@ -13,6 +13,7 @@
                     <th class="px-4 py-3 text-center text-gray-600 font-semibold uppercase text-xs">prioritas</th>
                     <th class="px-4 py-3 text-center text-gray-600 font-semibold uppercase text-xs">deadline</th>
                     <th class="px-4 py-3 text-center text-gray-600 font-semibold uppercase text-xs">status</th>
+                    <th class="px-4 py-3 text-center text-gray-600 font-semibold uppercase text-xs">lampiran</th>
                     <th class="px-4 py-3 text-center text-gray-600 font-semibold uppercase text-xs">Action</th>
                 </tr>
             </thead>
@@ -20,7 +21,10 @@
             <tbody class="divide-y divide-gray-200">
 
                 @foreach ($laporans as $l)
-                @if ($l->status === 'Pending' || $l->status === 'Working')
+                {{-- jika DONE dan lampiran SUDAH ADA (via relasi) → jangan tampilkan --}}
+                @if ($l->status === 'Done' && $l->lampiranDev->isNotEmpty())
+                @continue
+                @endif
                 <tr class="hover:bg-gray-50 transition">
                     <td class="px-4 py-3 text-center text-gray-800">{{ $loop->iteration }}</td>
                     <td class="px-4 py-3 text-center text-gray-800">{{ $l->project->nama_project }}</td>
@@ -44,6 +48,17 @@
                             </select>
                         </form>
                     </td>
+                    <td>
+                        @if ($l->status === 'Done' && !$l->lampiranDev->isNotEmpty())
+                        <form action="{{ route('dev.laporan.uploadLampiran', $l->id) }}"
+                            method="POST" enctype="multipart/form-data" class="flex border">
+                            @csrf
+                            @method('PUT')
+                            <input type="file" name="file" class="mt-2">
+                            <button class="px-3 py-1 bg-green-500 text-white rounded-md">Upload</button>
+                        </form>
+                        @endif
+                    </td>
                     <td class="px-4 py-3">
                         <div class="flex justify-center items-center gap-2">
                             <a href="{{ route('dev.laporan.show', $l->id) }}"
@@ -53,7 +68,6 @@
                         </div>
                     </td>
                 </tr>
-                @endif
                 @endforeach
             </tbody>
         </table>
