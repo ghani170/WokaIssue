@@ -11,6 +11,8 @@ use App\Http\Controllers\Client\ProjectController as ClientProjectController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Developer\LaporanController as DeveloperLaporanController;
 use App\Http\Controllers\ProfilController;
+use App\Models\Laporan;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
@@ -36,7 +38,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin'])->grou
 });
 
 Route::prefix('client')->name('client.')->middleware(['auth', 'role:client'])->group(function () {
-    Route::post('/laporan/{id}/send-message',[ClientLaporanController::class, 'sendMessage'])->name('laporan.sendMessage');
+    Route::post('/laporan/{id}/send-message', [ClientLaporanController::class, 'sendMessage'])->name('laporan.sendMessage');
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('laporan', ClientLaporanController::class);
     Route::get('/project', [ClientProjectController::class, 'index'])->name('project.index');
@@ -59,4 +61,10 @@ Route::prefix('dev')->name('dev.')->middleware(['auth', 'role:developer'])->grou
     Route::get('/laporan/selesai', [DeveloperLaporanController::class, 'selesai'])->name('laporan.selesai');
     Route::get('/laporan/ditolak', [DeveloperLaporanController::class, 'ditolak'])->name('laporan.ditolak');
     Route::resource('laporan', DeveloperLaporanController::class);
+});
+
+Route::post('/notif/mark-done-read', function () {
+    $user = Auth::user();
+    Laporan::where('status', 'Done')->where('client_id', $user->id)->update(['is_read' => true]);
+    return response()->json(['status' => 'ok']);
 });

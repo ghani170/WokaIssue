@@ -22,6 +22,7 @@ return new class extends Migration
             $table->enum('prioritas', ['Low', 'Medium', 'High', 'Critical'])->nullable();
             $table->enum('status', ['Pending', 'Working', 'Done', 'Rejected'])->default('Pending');
             $table->date('deadline')->nullable();
+            $table->boolean('is_read')->default(false);
             $table->timestamps();
         });
     }
