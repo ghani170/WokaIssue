@@ -185,8 +185,8 @@
                                 Laporan Activity
                             </a>
                         </li>
-                        
-                        
+
+
                         @endif
 
                         @if ($user->role === 'client')
@@ -289,12 +289,52 @@
                             <i class="fas fa-bell text-lg"></i>
                             <span class="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
                         </button>
+
                         {{-- Pesan --}}
-                        <button
-                            class="text-gray-500 hover:text-blue-600 p-2 rounded-full hover:bg-blue-50 transition-colors relative">
-                            <i class="fas fa-envelope text-lg"></i>
-                            <span class="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
-                        </button>
+                        <div class="relative header-dropdown-container">
+                            <button id="messagedropdownButton"
+                                class="text-gray-500 hover:text-blue-600 p-2 rounded-full hover:bg-blue-50 transition-colors relative">
+                                <i class="fas fa-envelope text-lg"></i>
+                                @if($showDot)
+                                <span class="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+                                @endif
+                            </button>
+                            <div id="messagedropdownMenu"
+                                class="absolute right-0 mt-2 w-80 bg-white border rounded-xl shadow-lg hidden">
+
+                                <div class="p-4 border-b">
+                                    <h3 class="font-semibold text-gray-700 text-sm">Latest Completed Reports</h3>
+                                </div>
+
+                                @if($doneReports->count() > 0)
+                                <ul class="max-h-64 overflow-y-auto">
+                                    @foreach($doneReports as $report)
+
+                                    <li>
+                                        <a href="{{ route('client.laporan.show', $report->id) }}"
+                                            class="block p-4 border-b hover:bg-gray-50 transition">
+
+                                            <p class="text-sm font-semibold text-gray-800">
+                                                {{ Str::limit($report->title, 30, '...') }}
+                                            </p>
+
+                                            <p class="text-xs text-gray-500">
+                                                {{ $report->updated_at->format('d M Y, H:i') }}
+                                            </p>
+
+                                        </a>
+                                    </li>
+
+                                    @endforeach
+                                </ul>
+                                @else
+                                <div class="p-4 text-center text-sm text-gray-500">
+                                    No completed reports yet.
+                                </div>
+                                @endif
+                            </div>
+
+                        </div>
 
                         {{-- Dropdown Profil --}}
                         <div class="relative header-dropdown-container">
@@ -406,20 +446,46 @@
         const userName = "{{ Auth::user()->name }}";
         const userEmail = "{{ Auth::user()->email }}";
 
-        // Perbaikan: Tempatkan logika untuk dropdown di dalam container dropdownnya, bukan di luar.
+        // === PROFILE DROPDOWN ===
         const dropdownButton = document.getElementById('dropdownButton');
         const dropdownMenu = document.getElementById('dropdownMenu');
 
-        // Logika Dropdown
-        dropdownButton.addEventListener('click', function() {
-            // Memastikan dropdown berada di bawah elemen yang memicunya
+        dropdownButton.addEventListener('click', function(e) {
+            e.stopPropagation(); // cegah klik bocor
             dropdownMenu.classList.toggle('hidden');
+
+            // Tutup dropdown pesan jika profile dibuka
+            messagedropdownMenu.classList.add('hidden');
         });
 
-        // Tutup dropdown saat klik di luar
-        document.addEventListener('click', function(event) {
-            if (!dropdownButton.contains(event.target) && !dropdownMenu.contains(event.target)) {
+        // === MESSAGE DROPDOWN ===
+        const messagedropdownButton = document.getElementById('messagedropdownButton');
+        const messagedropdownMenu = document.getElementById('messagedropdownMenu');
+
+        messagedropdownButton.addEventListener('click', function(e) {
+            e.stopPropagation(); // cegah klik bocor
+            messagedropdownMenu.classList.toggle('hidden');
+
+            // Tutup dropdown profile jika message dibuka
+            dropdownMenu.classList.add('hidden');
+        });
+
+        document.getElementById('messagedropdownButton').addEventListener('click', function() {
+            fetch('/notif/mark-done-read', {
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                }
+            });
+        });
+
+        // === CLOSE BOTH WHEN CLICK OUTSIDE ===
+        document.addEventListener('click', function(e) {
+            if (!dropdownButton.contains(e.target)) {
                 dropdownMenu.classList.add('hidden');
+            }
+            if (!messagedropdownButton.contains(e.target)) {
+                messagedropdownMenu.classList.add('hidden');
             }
         });
 

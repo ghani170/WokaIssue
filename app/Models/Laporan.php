@@ -19,6 +19,7 @@ class Laporan extends Model
         'prioritas',
         'status',
         'deadline',
+        'is_read',
     ];
 
     public function client() {
