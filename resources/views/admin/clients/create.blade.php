@@ -62,7 +62,7 @@
                 @endisset
             </select>
 
-            @error('password')
+            @error('company_id')
                 <small class="text-red-600">{{ $message }}</small>
             @enderror
         </div>

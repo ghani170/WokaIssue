@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
 use App\Models\Lampiran;
+use App\Models\LampiranDev;
 use App\Models\Laporan;
 use App\Models\Project;
 use Illuminate\Http\Request;
@@ -94,6 +95,7 @@ class LaporanController extends Controller
         $user = auth()->user();
         $laporan = Laporan::findOrFail($id);
         $lampiran = Lampiran::where('laporan_id', $laporan->id)->get();
+        $lampiranDev = LampiranDev::where('laporan_id', $laporan->id)->get();
 
         $messages = DB::table('messages')->where('laporan_id', $laporan->id)->orderBy('created_at')->get();
 
@@ -103,7 +105,7 @@ class LaporanController extends Controller
         if ($laporan->client_id != Auth::user()->id) {
             abort(403);
         }
-        return view('clients.laporan.show', compact('laporan', 'lampiran', 'messages'));
+        return view('clients.laporan.show', compact('laporan', 'lampiran', 'lampiranDev', 'messages'));
     }
 
     /**

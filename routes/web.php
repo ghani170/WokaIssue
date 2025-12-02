@@ -56,6 +56,7 @@ Route::prefix('dev')->name('dev.')->middleware(['auth', 'role:developer'])->grou
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::post('/dev/laporan/{id}/send-message', [DeveloperLaporanController::class, 'sendMessage'])->name('laporan.sendMessage');
     Route::put('/dev/laporan/status/{laporan}', [DeveloperLaporanController::class, 'updateStatus'])->name('laporan.updateStatus');
+    Route::put('/dev/laporan/lampiran/{laporan}', [DeveloperLaporanController::class, 'uploadLampiran'])->name('laporan.uploadLampiran');
     Route::get('/laporan/selesai', [DeveloperLaporanController::class, 'selesai'])->name('laporan.selesai');
     Route::get('/laporan/ditolak', [DeveloperLaporanController::class, 'ditolak'])->name('laporan.ditolak');
     Route::resource('laporan', DeveloperLaporanController::class);
