@@ -76,7 +76,6 @@
         </div>
     </div>
 
-
     <!-- TAB 2 -->
     <div id="tab2" class="tab-content hidden">
         <div class="bg-white shadow rounded-lg p-6">
@@ -85,15 +84,42 @@
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-2 mb-2">
                 <span class="font-medium">Foto Dokumentasi :</span>
-                <div class="md:col-span-2 flex gap-3">
+
+                <div class="md:col-span-2 flex gap-3 flex-wrap">
                     @foreach ($lampiran as $lam)
-                    <img src="{{ asset('storage/' . $lam->dokumentasi ?? 'Tidak Ada Lampiran') }}"
-                        class="w-32 h-32 object-cover rounded-lg mb-3 border">
+                    @if (Str::endsWith($lam->dokumentasi, ['jpg','jpeg','png']))
+                    <img src="{{ asset('storage/' . $lam->dokumentasi) }}"
+                        class="w-32 h-32 object-cover rounded-lg border cursor-pointer preview-image2">
+                    @else
+                    <a href="{{ asset('storage/' . $lam->dokumentasi) }}"
+                        target="_blank"
+                        class="text-blue-500 underline">
+                        Lihat File
+                    </a>
+                    @endif
                     @endforeach
                 </div>
-
             </div>
+
         </div>
+    </div>
+    <!-- MODAL ELEGAN UNTUK SEMUA GAMBAR -->
+    <div id="image-modal"
+        class="hidden fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
+
+        <div class="relative bg-white rounded-xl shadow-xl p-3 max-w-[600px] max-h-[85vh]">
+
+            <button type="button" id="close-modal"
+                class="absolute -top-4 -right-4 bg-white shadow-lg text-gray-700 w-9 h-9 rounded-full 
+                       flex items-center justify-center hover:bg-gray-100 transition text-2xl">
+                &times;
+            </button>
+
+            <img id="modal-image"
+                src=""
+                class="max-h-[80vh] max-w-full object-contain rounded-lg">
+        </div>
+
     </div>
 
     <!-- TAB 3 -->
@@ -101,8 +127,6 @@
         <div class="bg-white shadow rounded-lg p-6">
 
             <h3 class="font-semibold mb-4">Customer Service</h3>
-
-            {{-- LIST PESAN --}}
             <div class="bg-gray-100 p-4 rounded h-64 overflow-y-auto mb-4">
                 @foreach ($messages as $msg)
 
@@ -134,7 +158,6 @@
 
             </div>
 
-            {{-- FORM KIRIM PESAN --}}
             <form action="{{ route('client.laporan.sendMessage', $laporan->id) }}" method="POST">
                 @csrf
                 <textarea name="message" class="w-full border p-2 rounded" placeholder="Tulis pesan..."></textarea>
@@ -151,8 +174,6 @@
 </a>
 
 
-
-{{-- Tailwind Tab Script --}}
 <script>
     const tabButtons = document.querySelectorAll('.tab-btn');
     const tabContents = document.querySelectorAll('.tab-content');
@@ -169,11 +190,35 @@
         btn.addEventListener('click', () => activateTab(btn.dataset.tab));
     });
     document.addEventListener('DOMContentLoaded', function() {
-    const activeTab = "{{ session('active_tab') }}";
-    if (activeTab) return;
-    activateTab("tab1");
-});
+        const activeTab = "{{ session('active_tab') }}";
+        if (activeTab) return;
+        activateTab("tab1");
+    });
 
+    document.addEventListener('DOMContentLoaded', function() {
+
+        const modal = document.getElementById('image-modal');
+        const modalImg = document.getElementById('modal-image');
+        const closeBtn = document.getElementById('close-modal');
+
+      
+        document.querySelectorAll('.preview-image2').forEach(img => {
+            img.addEventListener('click', () => {
+                modalImg.src = img.src;
+                modal.classList.remove('hidden');
+            });
+        });
+
+    
+        closeBtn.addEventListener('click', () => modal.classList.add('hidden'));
+        modal.addEventListener('click', e => {
+            if (e.target === modal) modal.classList.add('hidden');
+        });
+        document.addEventListener('keydown', e => {
+            if (e.key === "Escape") modal.classList.add('hidden');
+        });
+
+    });
 </script>
 
 <style>

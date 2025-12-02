@@ -51,7 +51,7 @@
         <!-- Tombol -->
         <div class="flex items-center gap-3 mt-5">
             <button type="submit"
-                class="bg-blue-500 text-white px-5 py-2 rounded-lg hover:bg-gray-900 transition">
+                class="bg-blue-500 text-white px-5 py-2 rounded-lg hover:bg-blue-700 transition">
                 Simpan
             </button>
 
