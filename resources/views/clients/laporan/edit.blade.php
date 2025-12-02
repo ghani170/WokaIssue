@@ -78,7 +78,7 @@
         <div class="mb-5">
             <label class="block text-sm font-medium text-gray-700 mb-2">Dokumentasi Lama</label>
 
-            <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
                 @foreach ($lampiran as $lam)
                 <div class="border p-2 rounded-lg relative">
                     <!-- Checkbox Hapus -->
@@ -90,7 +90,7 @@
                     <!-- Preview -->
                     @if (Str::endsWith($lam->dokumentasi, ['jpg','jpeg','png']))
                     <img src="{{ asset('storage/' . $lam->dokumentasi) }}"
-                        class="w-full h-32 object-cover rounded-lg">
+                        class="w-full h-32 object-cover rounded-lg preview-image cursor-pointer">
                     @else
                     <a href="{{ asset('storage/' . $lam->dokumentasi) }}"
                         target="_blank"
@@ -123,10 +123,9 @@
             </button>
         </div>
 
-
         <div class="flex items-center gap-3 mt-5">
             <button type="submit"
-                class="bg-blue-500 text-white px-5 py-2 rounded-lg hover:bg-gray-900 transition">
+                class="bg-blue-500 text-white px-5 py-2 rounded-lg hover:bg-blue-700 transition">
                 Update
             </button>
 
@@ -136,6 +135,19 @@
             </a>
         </div>
 
+        <!-- LIGHTBOX MODAL ELEGAN -->
+        <div id="image-modal" class="hidden fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
+            <div class="relative bg-white rounded-lg shadow-lg p-2 max-w-[600px] max-h-[80vh] flex flex-col items-center">
+                <!-- Tombol Close -->
+                <button type="button" id="close-modal"
+                    class="absolute -top-3 -right-3 bg-gray-200 text-gray-800 w-8 h-8 rounded-full flex items-center justify-center hover:bg-gray-300 transition">
+                    &times;
+                </button>
+
+                <!-- Gambar -->
+                <img id="modal-image" src="" class="max-h-[75vh] max-w-full object-contain rounded-lg">
+            </div>
+        </div>
     </form>
 
     <script>
@@ -150,6 +162,35 @@
 
             wrapper.appendChild(input);
         });
+        
+         document.addEventListener('DOMContentLoaded', function() {
+                const modal = document.getElementById('image-modal');
+                const modalImg = document.getElementById('modal-image');
+                const closeBtn = document.getElementById('close-modal');
+
+                document.querySelectorAll('.preview-image').forEach(img => {
+                    img.addEventListener('click', () => {
+                        modalImg.src = img.src;
+                        modal.classList.remove('hidden');
+                    });
+                });
+
+                closeBtn.addEventListener('click', () => {
+                    modal.classList.add('hidden');
+                });
+
+                modal.addEventListener('click', (e) => {
+                    if (e.target === modal) {
+                        modal.classList.add('hidden');
+                    }
+                });
+
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === "Escape") {
+                        modal.classList.add('hidden');
+                    }
+                });
+            });
     </script>
 </div>
 @endsection

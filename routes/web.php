@@ -11,8 +11,7 @@ use App\Http\Controllers\Client\ProjectController as ClientProjectController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Developer\LaporanController as DeveloperLaporanController;
 use App\Http\Controllers\ProfilController;
-use App\Models\Laporan;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\NotificationController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
