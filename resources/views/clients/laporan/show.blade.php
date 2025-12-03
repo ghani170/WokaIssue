@@ -104,7 +104,6 @@
 
         </div>
     </div>
-    <!-- MODAL ELEGAN UNTUK SEMUA GAMBAR -->
     <div id="image-modal"
         class="hidden fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
 
@@ -123,18 +122,26 @@
 
     </div>
 
-    <!-- TAB 2 -->
+    <!-- TAB 3 -->
     <div id="tab4" class="tab-content hidden">
         <div class="bg-white shadow rounded-lg p-6">
-
             <h3 class="font-semibold mb-4">Lampiran Developer</h3>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-2 mb-2">
                 <span class="font-medium">Foto Dokumentasi :</span>
-                <div class="md:col-span-2 flex gap-3">
+
+                <div class="md:col-span-2 flex gap-3 flex-wrap">
                     @foreach ($lampiranDev as $lamp)
-                    <img src="{{ asset('storage/' . $lamp->dokumentasi_developer ?? 'Tidak Ada Lampiran') }}"
-                        class="w-32 h-32 object-cover rounded-lg mb-3 border">
+                    @if (Str::endsWith($lamp->dokumentasi_developer, ['jpg','jpeg','png']))
+                    <img src="{{ asset('storage/' . $lamp->dokumentasi_developer) }}"
+                        class="w-32 h-32 object-cover rounded-lg border cursor-pointer preview-image2">
+                    @else
+                    <a href="{{ asset('storage/' . $lamp->dokumentasi_developer) }}"
+                        target="_blank"
+                        class="text-blue-500 underline">
+                        Lihat File
+                    </a>
+                    @endif
                     @endforeach
                 </div>
 
@@ -142,7 +149,7 @@
         </div>
     </div>
 
-    <!-- TAB 3 -->
+    <!-- TAB 4 -->
     <div id="tab3" class="tab-content {{ session('active_tab') == 'tab3' ? 'block' : 'hidden' }}">
         <div class="bg-white shadow rounded-lg p-6">
 
@@ -163,7 +170,6 @@
                 </div>
 
                 @else
-                {{-- Pesan dari developer --}}
                 <div class="text-left mb-3">
                     <div class="inline-block bg-white text-gray-800 px-3 py-2 rounded-lg shadow">
                         {{ $msg->message }}
@@ -221,7 +227,7 @@
         const modalImg = document.getElementById('modal-image');
         const closeBtn = document.getElementById('close-modal');
 
-      
+
         document.querySelectorAll('.preview-image2').forEach(img => {
             img.addEventListener('click', () => {
                 modalImg.src = img.src;
@@ -229,7 +235,7 @@
             });
         });
 
-    
+
         closeBtn.addEventListener('click', () => modal.classList.add('hidden'));
         modal.addEventListener('click', e => {
             if (e.target === modal) modal.classList.add('hidden');

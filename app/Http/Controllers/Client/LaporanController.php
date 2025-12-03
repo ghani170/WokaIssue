@@ -185,20 +185,24 @@ class LaporanController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id)
-    {
-        $laporan = Laporan::findOrFail($id);
+   public function destroy($id)
+{
+    $laporan = Laporan::findOrFail($id);
+    $lampirans = Lampiran::where('laporan_id', $laporan->id)->get();
 
-        $lampiran = Lampiran::where('laporan_id', $laporan->id)->first();
-        if ($lampiran && $lampiran->dokumentasi) {
-            Storage::disk('public')->delete($lampiran->dokumentasi);
-            $lampiran->delete();
-        }
+    foreach ($lampirans as $lampiran) {
 
-        $laporan->delete();
-
-        return redirect()->route('client.laporan.index')->with('success', 'Laporan berhasil dihapus.');
+        Storage::disk('public')->delete($lampiran->dokumentasi);
+        $lampiran->delete();
     }
+
+    $laporan->delete();
+
+    return redirect()
+        ->route('client.laporan.index')
+        ->with('success', 'Laporan berhasil dihapus.');
+}
+
 
     public function sendMessage(Request $request, $id)
     {

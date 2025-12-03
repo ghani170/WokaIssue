@@ -105,30 +105,39 @@
 
                     <td class="px-4 py-3">
                         <div class="flex justify-center items-center gap-2">
+                            @if (($data->status === 'Working' || $data->status === 'Done') && auth()->user()->role === 'client')
                             <a href="{{ route('client.laporan.show', $data->id) }}"
-                                class="px-3 py-1 bg-blue-400 hover:bg-blue-500 text-white rounded-md text-xs font-medium transition">
+                                class="px-3 py-1 bg-blue-500 hover:bg-blue-600 text-white rounded-md text-sm">
                                 Detail
                             </a>
+                            @else
+                            <a href="{{ route('client.laporan.show', $data->id) }}"
+                                class="px-3 py-1 bg-blue-500 hover:bg-blue-600 text-white rounded-md text-sm">
+                                Detail
+                            </a>
+
                             <a href="{{ route('client.laporan.edit', $data->id) }}"
-                                class="px-3 py-1 bg-yellow-400 hover:bg-yellow-500 text-white rounded-md text-xs font-medium transition">
+                                class="px-3 py-1 bg-yellow-500 hover:bg-yellow-600 text-white rounded-md text-sm">
                                 Edit
                             </a>
+
                             <form action="{{ route('client.laporan.destroy', $data->id) }}" method="POST"
-                                onsubmit="return confirm('Yakin ingin menghapus laporan ini?')">
+                                onsubmit="return confirm('Yakin menghapus laporan ini?');">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit"
-                                    class="px-3 py-1 bg-red-500 hover:bg-red-600 text-white rounded-md text-xs font-medium transition">
+                                <button
+                                    class="px-3 py-1 bg-red-600 hover:bg-red-700 text-white rounded-md text-sm">
                                     Hapus
                                 </button>
                             </form>
+                            @endif
 
                         </div>
                     </td>
                 </tr>
 
                 @endforeach
-            
+
 
             </tbody>
         </table>
