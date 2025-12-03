@@ -100,7 +100,7 @@ class LaporanController extends Controller
 
         $messages = DB::table('messages')->where('laporan_id', $laporan->id)->orderBy('created_at')->get();
 
-    
+
 
         // Pastikan hanya pemilik kegiatan yang bisa lihat
         if ($laporan->client_id != Auth::user()->id) {
@@ -186,54 +186,58 @@ class LaporanController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-   public function destroy($id)
-{
-    $laporan = Laporan::findOrFail($id);
-    $lampirans = Lampiran::where('laporan_id', $laporan->id)->get();
+    public function destroy($id)
+    {
+        $laporan = Laporan::findOrFail($id);
+        $lampirans = Lampiran::where('laporan_id', $laporan->id)->get();
+        $lampiranDevs = LampiranDev::where('laporan_id', $laporan->id)->get();
 
-    foreach ($lampirans as $lampiran) {
+        foreach ($lampirans as $lampiran) {
 
-        Storage::disk('public')->delete($lampiran->dokumentasi);
-        $lampiran->delete();
+            Storage::disk('public')->delete($lampiran->dokumentasi);
+            $lampiran->delete();
+        }
+
+        foreach ($lampiranDevs as $lampiranDev) {
+            Storage::disk('public')->delete($lampiranDev->dokumentasi_developer);
+            $lampiranDev->delete();
+        }
+
+        $laporan->delete();
+
+        return redirect()
+            ->route('client.laporan.index')
+            ->with('success', 'Laporan berhasil dihapus.');
     }
-
-    $laporan->delete();
-
-    return redirect()
-        ->route('client.laporan.index')
-        ->with('success', 'Laporan berhasil dihapus.');
-}
 
 
     public function sendMessage(Request $request, $id)
-{
-    $request->validate([
-        'message' => 'required|string'
-    ]);
+    {
+        $request->validate([
+            'message' => 'required|string'
+        ]);
 
-    $laporan = Laporan::with(['client', 'developer'])->findOrFail($id);
+        $laporan = Laporan::with(['client', 'developer'])->findOrFail($id);
 
-    $sender = Auth::id();
+        $sender = Auth::id();
 
-    // Tentukan penerima berdasarkan siapa yang mengirim
-    if ($sender == $laporan->client_id) {
-        // Jika pengirim client → penerima developer
-        $receiver = $laporan->developer_id;
-    } else {
-        // Jika pengirim developer → penerima client
-        $receiver = $laporan->client_id;
+        // Tentukan penerima berdasarkan siapa yang mengirim
+        if ($sender == $laporan->client_id) {
+            // Jika pengirim client → penerima developer
+            $receiver = $laporan->developer_id;
+        } else {
+            // Jika pengirim developer → penerima client
+            $receiver = $laporan->client_id;
+        }
+
+        Message::create([
+            'laporan_id' => $id,
+            'sender_id'  => $sender,
+            'receiver_id' => $receiver,
+            'message'    => $request->message,
+            'is_read'    => 0,
+        ]);
+
+        return back()->with('active_tab', 'tab3')->with('success', 'Pesan berhasil dikirim');
     }
-
-    Message::create([
-        'laporan_id' => $id,
-        'sender_id'  => $sender,
-        'receiver_id'=> $receiver,
-        'message'    => $request->message,
-        'is_read'    => 0,
-    ]);
-
-    return back()->with('active_tab', 'tab3')->with('success', 'Pesan berhasil dikirim');
-}
-
-
 }
