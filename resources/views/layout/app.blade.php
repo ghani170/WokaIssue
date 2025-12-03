@@ -291,7 +291,7 @@
                             <button id="msgDropdownButton"
                                 class="text-gray-500 hover:text-blue-600 p-2 rounded-full hover:bg-blue-50 transition-colors relative">
 
-                                <i class="fas fa-envelope text-lg"></i>
+                                <i class="fas fa-bell text-lg"></i>
 
                                 @if($unreadMessages > 0)
                                     <span class="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full" id="msgDot"></span>
