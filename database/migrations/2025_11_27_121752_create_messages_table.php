@@ -14,7 +14,9 @@ return new class extends Migration
         Schema::create('messages', function (Blueprint $table) {
             $table->id();
             $table->foreignId('laporan_id')->constrained()->onDelete('cascade');
-            $table->foreignId('sender_id');
+            $table->foreignId('sender_id')->nullable();
+            $table->foreignId('receiver_id')->nullable();
+            $table->boolean('is_read')->default(false);
             $table->text('message');
             $table->timestamps();
         });

@@ -10,8 +10,10 @@ use App\Http\Controllers\Client\LaporanController as ClientLaporanController;
 use App\Http\Controllers\Client\ProjectController as ClientProjectController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Developer\LaporanController as DeveloperLaporanController;
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\NotificationController;
+use App\Models\Laporan;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
@@ -50,6 +52,8 @@ Route::middleware(['auth'])->group(function () {
         return redirect()->back();
     });
     Route::put('/profile/update', [ProfilController::class, 'update'])->name('profil.update');
+    Route::get('/messages/unread-count', [MessageController::class, 'unreadCount']);
+    Route::get('/messages/unread-list', [MessageController::class, 'unreadList']);
 });
 
 Route::prefix('dev')->name('dev.')->middleware(['auth', 'role:developer'])->group(function () {
@@ -61,6 +65,23 @@ Route::prefix('dev')->name('dev.')->middleware(['auth', 'role:developer'])->grou
     Route::get('/laporan/ditolak', [DeveloperLaporanController::class, 'ditolak'])->name('laporan.ditolak');
     Route::resource('laporan', DeveloperLaporanController::class);
 });
+
+Route::post('/notif/messages/mark-read', function () {
+    $user = Auth::user();
+
+    \App\Models\Message::where('receiver_id', $user->id)
+        ->where('is_read', false)
+        ->update(['is_read' => true]);
+
+    return response()->json(['status' => 'ok']);
+    
+});
+
+// web.php
+Route::post('/messages/mark-read', [App\Http\Controllers\MessageController::class, 'markAllRead'])
+    ->name('messages.markRead');
+
+
 
 Route::post('/notif/mark-done-read', function () {
     $user = Auth::user();

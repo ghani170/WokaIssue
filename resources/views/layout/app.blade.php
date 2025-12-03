@@ -136,112 +136,112 @@
                         @php $user = Auth::user(); @endphp
 
                         @if ($user->role === 'admin')
-                        <li>
-                            <a href="{{ route('admin.dashboard') }}"
-                                class="flex items-center p-3 rounded-lg transition-all duration-200 hover:bg-blue-700 hover:shadow-md {{ request()->routeIs('admin.dashboard*') ? 'bg-blue-700 shadow-md' : '' }}">
-                                <i class="fas fa-home mr-3 w-5 text-center"></i>
-                                Dashboard
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ route('admin.company.index') }}"
-                                class="flex items-center p-3 rounded-lg transition-all duration-200 hover:bg-blue-700 hover:shadow-md {{ request()->routeIs('admin.company*') ? 'bg-blue-700 shadow-md' : '' }}">
-                                <i class="fa-solid fa-building mr-3 w-5 text-center"></i>
-                                Company
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{route('admin.developer.index')}}"
-                                class="flex items-center p-3 rounded-lg transition-all duration-200 hover:bg-blue-700 hover:shadow-md {{ request()->routeIs('admin.developer*') ? 'bg-blue-700 shadow-md' : '' }}">
-                                <i class="fa-solid fa-people-group mr-3 w-5 text-center"></i>
-                                Kelola Developer
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{route('admin.client.index')}}"
-                                class="flex items-center p-3 rounded-lg transition-all duration-200 hover:bg-blue-700 hover:shadow-md {{ request()->routeIs('admin.client*') ? 'bg-blue-700 shadow-md' : '' }}">
-                                <i class="fa-solid fa-people-group mr-3 w-5 text-center"></i>
-                                Kelola Client
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ route('admin.project.index') }}"
-                                class="flex items-center p-3 rounded-lg transition-all duration-200 hover:bg-blue-700 hover:shadow-md {{ request()->routeIs('admin.project*') ? 'bg-blue-700 shadow-md' : '' }}">
-                                <i class="fa-solid fa-bars-progress mr-3 w-5 text-center"></i>
-                                Project
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{route('admin.laporan.index')}}"
-                                class="flex items-center p-3 rounded-lg transition-all duration-200 hover:bg-blue-700 hover:shadow-md {{ request()->routeIs('admin.laporan.index') ? 'bg-blue-700 shadow-md' : '' }}">
-                                <i class="fa-solid fa-folder-plus mr-3 w-5 text-center"></i>
-                                Laporan Masuk Client
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{route('admin.laporan.activity')}}"
-                                class="flex items-center p-3 rounded-lg transition-all duration-200 hover:bg-blue-700 hover:shadow-md {{ request()->routeIs('admin.laporan.activity') ? 'bg-blue-700 shadow-md' : '' }}">
-                                <i class="fa-solid fa-folder-open mr-3 w-5 text-center"></i>
-                                Laporan Activity
-                            </a>
-                        </li>
+                            <li>
+                                <a href="{{ route('admin.dashboard') }}"
+                                    class="flex items-center p-3 rounded-lg transition-all duration-200 hover:bg-blue-700 hover:shadow-md {{ request()->routeIs('admin.dashboard*') ? 'bg-blue-700 shadow-md' : '' }}">
+                                    <i class="fas fa-home mr-3 w-5 text-center"></i>
+                                    Dashboard
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('admin.company.index') }}"
+                                    class="flex items-center p-3 rounded-lg transition-all duration-200 hover:bg-blue-700 hover:shadow-md {{ request()->routeIs('admin.company*') ? 'bg-blue-700 shadow-md' : '' }}">
+                                    <i class="fa-solid fa-building mr-3 w-5 text-center"></i>
+                                    Company
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{route('admin.developer.index')}}"
+                                    class="flex items-center p-3 rounded-lg transition-all duration-200 hover:bg-blue-700 hover:shadow-md {{ request()->routeIs('admin.developer*') ? 'bg-blue-700 shadow-md' : '' }}">
+                                    <i class="fa-solid fa-people-group mr-3 w-5 text-center"></i>
+                                    Kelola Developer
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{route('admin.client.index')}}"
+                                    class="flex items-center p-3 rounded-lg transition-all duration-200 hover:bg-blue-700 hover:shadow-md {{ request()->routeIs('admin.client*') ? 'bg-blue-700 shadow-md' : '' }}">
+                                    <i class="fa-solid fa-people-group mr-3 w-5 text-center"></i>
+                                    Kelola Client
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('admin.project.index') }}"
+                                    class="flex items-center p-3 rounded-lg transition-all duration-200 hover:bg-blue-700 hover:shadow-md {{ request()->routeIs('admin.project*') ? 'bg-blue-700 shadow-md' : '' }}">
+                                    <i class="fa-solid fa-bars-progress mr-3 w-5 text-center"></i>
+                                    Project
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{route('admin.laporan.index')}}"
+                                    class="flex items-center p-3 rounded-lg transition-all duration-200 hover:bg-blue-700 hover:shadow-md {{ request()->routeIs('admin.laporan.index') ? 'bg-blue-700 shadow-md' : '' }}">
+                                    <i class="fa-solid fa-folder-plus mr-3 w-5 text-center"></i>
+                                    Laporan Masuk Client
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{route('admin.laporan.activity')}}"
+                                    class="flex items-center p-3 rounded-lg transition-all duration-200 hover:bg-blue-700 hover:shadow-md {{ request()->routeIs('admin.laporan.activity') ? 'bg-blue-700 shadow-md' : '' }}">
+                                    <i class="fa-solid fa-folder-open mr-3 w-5 text-center"></i>
+                                    Laporan Activity
+                                </a>
+                            </li>
 
 
                         @endif
 
                         @if ($user->role === 'client')
-                        <li>
-                            <a href="{{ route('client.dashboard') }}"
-                                class="flex items-center p-3 rounded-lg transition-all duration-200 hover:bg-blue-700 hover:shadow-md {{ request()->routeIs('client.dashboard*') ? 'bg-blue-700 shadow-md' : '' }}">
-                                <i class="fas fa-home mr-3 w-5 text-center"></i>
-                                Dashboard
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{route('client.laporan.index')}}"
-                                class="flex items-center p-3 rounded-lg transition-all duration-200 hover:bg-blue-700 hover:shadow-md {{ request()->routeIs('client.laporan*') ? 'bg-blue-700 shadow-md' : '' }}">
-                                <i class="fa-solid fa-folder-open mr-3 w-5 text-center"></i>
-                                Laporan
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ route('client.project.index') }}"
-                                class="flex items-center p-3 rounded-lg transition-all duration-200 hover:bg-blue-700 hover:shadow-md {{ request()->routeIs('client.project*') ? 'bg-blue-700 shadow-md' : '' }}">
-                                <i class="fa-solid fa-bars-progress mr-3 w-5 text-center"></i>
-                                Project
-                            </a>
-                        </li>
+                            <li>
+                                <a href="{{ route('client.dashboard') }}"
+                                    class="flex items-center p-3 rounded-lg transition-all duration-200 hover:bg-blue-700 hover:shadow-md {{ request()->routeIs('client.dashboard*') ? 'bg-blue-700 shadow-md' : '' }}">
+                                    <i class="fas fa-home mr-3 w-5 text-center"></i>
+                                    Dashboard
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{route('client.laporan.index')}}"
+                                    class="flex items-center p-3 rounded-lg transition-all duration-200 hover:bg-blue-700 hover:shadow-md {{ request()->routeIs('client.laporan*') ? 'bg-blue-700 shadow-md' : '' }}">
+                                    <i class="fa-solid fa-folder-open mr-3 w-5 text-center"></i>
+                                    Laporan
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('client.project.index') }}"
+                                    class="flex items-center p-3 rounded-lg transition-all duration-200 hover:bg-blue-700 hover:shadow-md {{ request()->routeIs('client.project*') ? 'bg-blue-700 shadow-md' : '' }}">
+                                    <i class="fa-solid fa-bars-progress mr-3 w-5 text-center"></i>
+                                    Project
+                                </a>
+                            </li>
                         @endif
 
                         @if ($user->role === 'developer')
-                        <li>
-                            <a href="{{ route('dev.dashboard') }}"
-                                class="flex items-center p-3 rounded-lg transition-all duration-200 hover:bg-blue-700 hover:shadow-md {{ request()->routeIs('dev.dashboard*') ? 'bg-blue-700 shadow-md' : '' }}">
-                                <i class="fas fa-home mr-3 w-5 text-center"></i>
-                                Dashboard
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{route('dev.laporan.index')}}"
-                                class="flex items-center p-3 rounded-lg transition-all duration-200 hover:bg-blue-700 hover:shadow-md {{ request()->routeIs('dev.laporan.index') ? 'bg-blue-700 shadow-md' : '' }}">
-                                <i class="fa-solid fa-folder-open mr-3 w-5 text-center"></i>
-                                Laporan Client Masuk
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{route('dev.laporan.selesai')}}"
-                                class="flex items-center p-3 rounded-lg transition-all duration-200 hover:bg-blue-700 hover:shadow-md {{ request()->routeIs('dev.laporan.selesai') ? 'bg-blue-700 shadow-md' : '' }}">
-                                <i class="fa-solid fa-folder-closed mr-3 w-5 text-center"></i>
-                                Laporan Client Selesai
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{route('dev.laporan.ditolak')}}"
-                                class="flex items-center p-3 rounded-lg transition-all duration-200 hover:bg-blue-700 hover:shadow-md {{ request()->routeIs('dev.laporan.ditolak') ? 'bg-blue-700 shadow-md' : '' }}">
-                                <i class="fa-solid fa-folder-closed mr-3 w-5 text-center"></i>
-                                Laporan Client Ditolak
-                            </a>
-                        </li>
+                            <li>
+                                <a href="{{ route('dev.dashboard') }}"
+                                    class="flex items-center p-3 rounded-lg transition-all duration-200 hover:bg-blue-700 hover:shadow-md {{ request()->routeIs('dev.dashboard*') ? 'bg-blue-700 shadow-md' : '' }}">
+                                    <i class="fas fa-home mr-3 w-5 text-center"></i>
+                                    Dashboard
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{route('dev.laporan.index')}}"
+                                    class="flex items-center p-3 rounded-lg transition-all duration-200 hover:bg-blue-700 hover:shadow-md {{ request()->routeIs('dev.laporan.index') ? 'bg-blue-700 shadow-md' : '' }}">
+                                    <i class="fa-solid fa-folder-open mr-3 w-5 text-center"></i>
+                                    Laporan Client Masuk
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{route('dev.laporan.selesai')}}"
+                                    class="flex items-center p-3 rounded-lg transition-all duration-200 hover:bg-blue-700 hover:shadow-md {{ request()->routeIs('dev.laporan.selesai') ? 'bg-blue-700 shadow-md' : '' }}">
+                                    <i class="fa-solid fa-folder-closed mr-3 w-5 text-center"></i>
+                                    Laporan Client Selesai
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{route('dev.laporan.ditolak')}}"
+                                    class="flex items-center p-3 rounded-lg transition-all duration-200 hover:bg-blue-700 hover:shadow-md {{ request()->routeIs('dev.laporan.ditolak') ? 'bg-blue-700 shadow-md' : '' }}">
+                                    <i class="fa-solid fa-folder-closed mr-3 w-5 text-center"></i>
+                                    Laporan Client Ditolak
+                                </a>
+                            </li>
                         @endif
 
                         <li class="mt-8 pt-4 border-t border-blue-700">
@@ -284,11 +284,84 @@
 
                     <div class="flex items-center space-x-4">
                         {{-- Notifikasi --}}
-                        <button
-                            class="text-gray-500 hover:text-blue-600 p-2 rounded-full hover:bg-blue-50 transition-colors relative">
-                            <i class="fas fa-bell text-lg"></i>
-                            <span class="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
-                        </button>
+
+                        <div class="relative header-dropdown-container" id="msgNotifContainer">
+
+                            <!-- BUTTON MESSAGE -->
+                            <button id="msgDropdownButton"
+                                class="text-gray-500 hover:text-blue-600 p-2 rounded-full hover:bg-blue-50 transition-colors relative">
+
+                                <i class="fas fa-envelope text-lg"></i>
+
+                                @if($unreadMessages > 0)
+                                    <span class="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full" id="msgDot"></span>
+                                @endif
+                            </button>
+
+
+
+                            <!-- DROPDOWN -->
+                            <div id="msgDropdownMenu"
+                                class="absolute right-0 mt-2 w-80 bg-white border rounded-xl shadow-lg hidden z-50">
+
+                                <div class="p-4 border-b flex justify-between items-center">
+                                    <h3 class="font-semibold text-gray-700 text-sm">Latest Messages</h3>
+
+                                    @if($unreadMessages > 0)
+                                        <button onclick="markMsgRead()" class="text-xs text-blue-600 hover:underline">
+                                            Mark all read
+                                        </button>
+                                    @endif
+                                </div>
+
+                                <!-- LIST PESAN -->
+                                @if($latestMessages->count() > 0)
+                                    <ul class="max-h-64 overflow-y-auto">
+
+                                        @foreach($latestMessages as $msg)
+
+                                            @php
+                                                // Tentukan URL berdasarkan role
+                                                if (auth()->user()->role === 'developer') {
+                                                    $url = route('dev.laporan.show', $msg->laporan_id);
+                                                } else {
+                                                    $url = route('client.laporan.show', $msg->laporan_id);
+                                                }
+                                            @endphp
+
+                                            <li>
+                                                <a href="{{ $url }}" class="block p-4 border-b hover:bg-gray-50 transition">
+
+                                                    <p class="text-sm font-semibold text-gray-800">
+                                                        {{ Str::limit($msg->sender->name ?? 'Unknown Sender', 30) }}
+                                                    </p>
+
+                                                    <p class="text-xs text-gray-600">
+                                                        {{ Str::limit($msg->message, 40, '...') }}
+                                                    </p>
+
+                                                    <p class="text-xs text-gray-400 mt-1">
+                                                        {{ $msg->created_at->format('d M Y, H:i') }}
+                                                    </p>
+
+                                                </a>
+                                            </li>
+
+                                        @endforeach
+
+                                    </ul>
+
+                                @else
+                                    <div class="p-4 text-center text-sm text-gray-500">
+                                        No messages yet.
+                                    </div>
+                                @endif
+
+                            </div>
+
+                        </div>
+
+
 
                         {{-- Pesan --}}
                         <div class="relative header-dropdown-container">
@@ -296,8 +369,10 @@
                                 class="text-gray-500 hover:text-blue-600 p-2 rounded-full hover:bg-blue-50 transition-colors relative">
                                 <i class="fas fa-envelope text-lg"></i>
                                 @if($showDot)
-                                <span class="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+                                    <span id="laporanDot"
+                                        class="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
                                 @endif
+
                             </button>
                             <div id="messagedropdownMenu"
                                 class="absolute right-0 mt-2 w-80 bg-white border rounded-xl shadow-lg hidden">
@@ -307,30 +382,30 @@
                                 </div>
 
                                 @if($doneReports->count() > 0)
-                                <ul class="max-h-64 overflow-y-auto">
-                                    @foreach($doneReports as $report)
+                                    <ul class="max-h-64 overflow-y-auto">
+                                        @foreach($doneReports as $report)
 
-                                    <li>
-                                        <a href="{{ route('client.laporan.show', $report->id) }}"
-                                            class="block p-4 border-b hover:bg-gray-50 transition">
+                                            <li>
+                                                <a href="{{ route('client.laporan.show', $report->id) }}"
+                                                    class="block p-4 border-b hover:bg-gray-50 transition">
 
-                                            <p class="text-sm font-semibold text-gray-800">
-                                                {{ Str::limit($report->title, 30, '...') }}
-                                            </p>
+                                                    <p class="text-sm font-semibold text-gray-800">
+                                                        {{ Str::limit($report->title, 30, '...') }}
+                                                    </p>
 
-                                            <p class="text-xs text-gray-500">
-                                                {{ $report->updated_at->format('d M Y, H:i') }}
-                                            </p>
+                                                    <p class="text-xs text-gray-500">
+                                                        {{ $report->updated_at->format('d M Y, H:i') }}
+                                                    </p>
 
-                                        </a>
-                                    </li>
+                                                </a>
+                                            </li>
 
-                                    @endforeach
-                                </ul>
+                                        @endforeach
+                                    </ul>
                                 @else
-                                <div class="p-4 text-center text-sm text-gray-500">
-                                    No completed reports yet.
-                                </div>
+                                    <div class="p-4 text-center text-sm text-gray-500">
+                                        No completed reports yet.
+                                    </div>
                                 @endif
                             </div>
 
@@ -383,8 +458,7 @@
 
         </div>
     </div>
-    <div id="editProfilePopup"
-        class="hidden fixed bg-white/30 inset-0 flex items-center justify-center p-4 z-[9999]">
+    <div id="editProfilePopup" class="hidden fixed bg-white/30 inset-0 flex items-center justify-center p-4 z-[9999]">
         <div class="bg-white rounded-xl shadow-2xl max-w-md w-full transform transition-all">
             <div class="flex justify-between items-center p-6 border-b border-gray-200">
                 <h3 class="text-xl font-bold text-gray-800">Edit Profil</h3>
@@ -442,6 +516,92 @@
     @yield('scripts')
 
     <script>
+        document.getElementById('messagedropdownButton').addEventListener('click', function () {
+
+            // hilangkan UI dot langsung tanpa reload
+            const dot = document.getElementById('laporanDot');
+            if (dot) dot.style.display = 'none';
+
+            // AJAX untuk update is_read di database
+            fetch("{{ url('/notif/mark-done-read') }}", {
+                method: "POST",
+                headers: {
+                    "X-CSRF-TOKEN": "{{ csrf_token() }}",
+                },
+            })
+                .then(res => res.json())
+                .then(data => {
+                    console.log("Marked as read");
+                });
+        });
+    </script>
+
+
+    <script>
+        document.getElementById("msgDropdownButton").addEventListener("click", function () {
+
+            // Jika dot tidak ada, berarti sudah read → jangan request lagi
+            const dot = document.getElementById("msgDot");
+            if (!dot) return;
+
+            fetch("{{ route('messages.markRead') }}", {
+                method: "POST",
+                headers: {
+                    "X-CSRF-TOKEN": "{{ csrf_token() }}",
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({})
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success) {
+                        dot.remove(); // HILANGKAN DOT DARI NAVBAR
+                    }
+                });
+        });
+    </script>
+
+
+
+    <script>
+        // Toggle dropdown
+        document.getElementById('msgDropdownButton').addEventListener('click', function () {
+            document.getElementById('msgDropdownMenu').classList.toggle('hidden');
+        });
+
+        // Close when click outside
+        document.addEventListener('click', function (e) {
+            const dropdown = document.getElementById('msgDropdownMenu');
+            const button = document.getElementById('msgDropdownButton');
+
+            if (!dropdown.contains(e.target) && !button.contains(e.target)) {
+                dropdown.classList.add('hidden');
+            }
+        });
+
+        // Mark messages as read
+        function markMsgRead() {
+            fetch('/notif/messages/mark-read', {
+                method: 'POST',
+                headers: {
+                    "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').content,
+                    "Accept": "application/json"
+                }
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.status === 'ok') {
+                        // Remove red dot
+                        let dot = document.getElementById('msgDot');
+                        if (dot) dot.remove();
+                    }
+                })
+                .catch(err => console.error(err));
+        }
+    </script>
+
+
+    <script>
         // Ambil data user dari PHP/Laravel
         const userName = "{{ Auth::user()->name }}";
         const userEmail = "{{ Auth::user()->email }}";
@@ -450,7 +610,7 @@
         const dropdownButton = document.getElementById('dropdownButton');
         const dropdownMenu = document.getElementById('dropdownMenu');
 
-        dropdownButton.addEventListener('click', function(e) {
+        dropdownButton.addEventListener('click', function (e) {
             e.stopPropagation(); // cegah klik bocor
             dropdownMenu.classList.toggle('hidden');
 
@@ -462,7 +622,7 @@
         const messagedropdownButton = document.getElementById('messagedropdownButton');
         const messagedropdownMenu = document.getElementById('messagedropdownMenu');
 
-        messagedropdownButton.addEventListener('click', function(e) {
+        messagedropdownButton.addEventListener('click', function (e) {
             e.stopPropagation(); // cegah klik bocor
             messagedropdownMenu.classList.toggle('hidden');
 
@@ -470,7 +630,7 @@
             dropdownMenu.classList.add('hidden');
         });
 
-        document.getElementById('messagedropdownButton').addEventListener('click', function() {
+        document.getElementById('messagedropdownButton').addEventListener('click', function () {
             fetch('/notif/mark-done-read', {
                 method: 'POST',
                 headers: {
@@ -480,7 +640,7 @@
         });
 
         // === CLOSE BOTH WHEN CLICK OUTSIDE ===
-        document.addEventListener('click', function(e) {
+        document.addEventListener('click', function (e) {
             if (!dropdownButton.contains(e.target)) {
                 dropdownMenu.classList.add('hidden');
             }
@@ -495,35 +655,35 @@
         const closePopup = document.getElementById('closePopup');
         const cancelEdit = document.getElementById('cancelEdit');
 
-        editProfileButton.addEventListener('click', function() {
+        editProfileButton.addEventListener('click', function () {
             editProfilePopup.classList.remove('hidden');
             dropdownMenu.classList.add('hidden'); // Tutup dropdown saat popup terbuka
         });
 
         // Tutup popup dari tombol X
-        closePopup.addEventListener('click', function() {
+        closePopup.addEventListener('click', function () {
             editProfilePopup.classList.add('hidden');
         });
 
         // Tutup popup dari tombol Batal
-        cancelEdit.addEventListener('click', function() {
+        cancelEdit.addEventListener('click', function () {
             editProfilePopup.classList.add('hidden');
         });
 
         // Tutup popup saat klik di luar konten (overlay)
-        editProfilePopup.addEventListener('click', function(event) {
+        editProfilePopup.addEventListener('click', function (event) {
             if (event.target === editProfilePopup) {
                 editProfilePopup.classList.add('hidden');
             }
         });
 
         // Script DataTables
-        $(document).ready(function() {
+        $(document).ready(function () {
             $('#table').DataTable();
         });
 
         // Script Sidebar Toggle
-        document.getElementById('sidebarToggle').addEventListener('click', function() {
+        document.getElementById('sidebarToggle').addEventListener('click', function () {
             const sidebar = document.getElementById('sidebar');
             const overlay = document.getElementById('sidebarOverlay');
 
@@ -531,7 +691,7 @@
             overlay.classList.toggle('hidden');
         });
 
-        document.getElementById('sidebarOverlay').addEventListener('click', function() {
+        document.getElementById('sidebarOverlay').addEventListener('click', function () {
             const sidebar = document.getElementById('sidebar');
             const overlay = document.getElementById('sidebarOverlay');
 
@@ -540,7 +700,7 @@
         });
 
         document.querySelectorAll('#sidebar a').forEach(link => {
-            link.addEventListener('click', function() {
+            link.addEventListener('click', function () {
                 if (window.innerWidth < 1024) {
                     const sidebar = document.getElementById('sidebar');
                     const overlay = document.getElementById('sidebarOverlay');

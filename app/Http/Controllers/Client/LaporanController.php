@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Lampiran;
 use App\Models\LampiranDev;
 use App\Models\Laporan;
+use App\Models\Message;
 use App\Models\Project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -201,19 +202,34 @@ class LaporanController extends Controller
     }
 
     public function sendMessage(Request $request, $id)
-    {
-        $request->validate([
-            'message' => 'required|string'
-        ]);
-    
-        DB::table('messages')->insert([
-            'laporan_id' => $id,
-            'sender_id'  => Auth::id(),
-            'message'    => $request->message,
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
-    
-       return redirect()->back()->with('active_tab', 'tab3')->with('success', 'Pesan berhasil dikirim');
+{
+    $request->validate([
+        'message' => 'required|string'
+    ]);
+
+    $laporan = Laporan::with(['client', 'developer'])->findOrFail($id);
+
+    $sender = Auth::id();
+
+    // Tentukan penerima berdasarkan siapa yang mengirim
+    if ($sender == $laporan->client_id) {
+        // Jika pengirim client → penerima developer
+        $receiver = $laporan->developer_id;
+    } else {
+        // Jika pengirim developer → penerima client
+        $receiver = $laporan->client_id;
     }
+
+    Message::create([
+        'laporan_id' => $id,
+        'sender_id'  => $sender,
+        'receiver_id'=> $receiver,
+        'message'    => $request->message,
+        'is_read'    => 0,
+    ]);
+
+    return back()->with('active_tab', 'tab3')->with('success', 'Pesan berhasil dikirim');
+}
+
+
 }

@@ -3,50 +3,70 @@
 namespace App\Providers;
 
 use App\Models\Laporan;
+use App\Models\Message;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
-    /**
-     * Register any application services.
-     */
     public function register(): void
     {
         //
     }
 
-    /**
-     * Bootstrap any application services.
-     */
     public function boot()
     {
         View::composer('*', function ($view) {
 
-            $user = Auth::user();
+    $user = Auth::user();
 
-            $doneReports = collect();
-            $showDot = false;
+    $doneReports = collect();
+    $showDot = false;
 
-            if ($user && $user->role === 'client') {
+    // 🔵 Tambahan untuk messages
+    $latestMessages = collect();
+    $unreadMessages = 0;
 
-                // Ambil laporan DONE
-                $doneReports = Laporan::where('status', 'Done')
-                    ->where('client_id', $user->id)
-                    ->latest()
-                    ->take(5)
-                    ->get();
+    if ($user) {
 
-                // Cek apakah ada laporan done yang belum dibaca
-                $showDot = Laporan::where('status', 'Done')
-                    ->where('client_id', $user->id)
-                    ->where('is_read', false)
-                    ->exists();
-            }
+        // ==========================
+        //  LAPORAN (SUDAH OK)
+        // ==========================
+        if ($user->role === 'client') {
+            $doneReports = Laporan::where('status', 'Done')
+                ->where('client_id', $user->id)
+                ->latest()
+                ->take(5)
+                ->get();
 
-            $view->with('doneReports', $doneReports)
-                ->with('showDot', $showDot);
-        });
+            $showDot = Laporan::where('status', 'Done')
+                ->where('client_id', $user->id)
+                ->where('is_read', false)
+                ->exists();
+        }
+
+        // ==========================
+        //  🔵 MESSAGE (TABEL TERPISAH)
+        // ==========================
+        $latestMessages = Message::where('receiver_id', $user->id)
+            ->with('sender') // agar bisa memanggil $msg->sender->name
+            ->latest()
+            ->take(5)
+            ->get();
+
+        $unreadMessages = Message::where('receiver_id', $user->id)
+            ->where('is_read', false)
+            ->count();
+    }
+
+    // Kirim ke semua view
+    $view->with([
+        'doneReports'    => $doneReports,
+        'showDot'        => $showDot,
+        'latestMessages' => $latestMessages,
+        'unreadMessages' => $unreadMessages,
+    ]);
+});
     }
 }
