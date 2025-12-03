@@ -594,25 +594,26 @@
         });
 
         // === MESSAGE DROPDOWN ===
+        // === MESSAGE DROPDOWN ===
         const messagedropdownButton = document.getElementById('messagedropdownButton');
         const messagedropdownMenu = document.getElementById('messagedropdownMenu');
 
-        messagedropdownButton.addEventListener('click', function(e) {
-            e.stopPropagation(); // cegah klik bocor
-            messagedropdownMenu.classList.toggle('hidden');
-
-            // Tutup dropdown profile jika message dibuka
-            dropdownMenu.classList.add('hidden');
-        });
-
-        document.getElementById('messagedropdownButton').addEventListener('click', function() {
-            fetch('/notif/mark-done-read', {
-                method: 'POST',
-                headers: {
-                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                }
+        if (messagedropdownButton) {
+            messagedropdownButton.addEventListener('click', function(e) {
+                e.stopPropagation();
+                messagedropdownMenu.classList.toggle('hidden');
+                dropdownMenu.classList.add('hidden');
             });
-        });
+
+            messagedropdownButton.addEventListener('click', function() {
+                fetch('/notif/mark-done-read', {
+                    method: 'POST',
+                    headers: { 'X-CSRF-TOKEN': '{{ csrf_token() }}' }
+                });
+            });
+        }
+
+
 
         // === CLOSE BOTH WHEN CLICK OUTSIDE ===
         document.addEventListener('click', function(e) {
