@@ -117,7 +117,7 @@
                             </a>
 
                             <a href="{{ route('client.laporan.edit', $data->id) }}"
-                                class="px-3 py-1 bg-yellow-500 hover:bg-yellow-600 text-white rounded-md text-sm">
+                                class="px-3 py-1 bg-yellow-500 hover:bg-yellow-600 text-white rounded-md text-sm cursor-pointer">
                                 Edit
                             </a>
 
@@ -126,7 +126,7 @@
                                 @csrf
                                 @method('DELETE')
                                 <button
-                                    class="px-3 py-1 bg-red-600 hover:bg-red-700 text-white rounded-md text-sm">
+                                    class="px-3 py-1 bg-red-600 hover:bg-red-700 text-white rounded-md text-sm cursor-pointer">
                                     Hapus
                                 </button>
                             </form>

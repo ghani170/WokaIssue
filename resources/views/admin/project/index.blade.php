@@ -118,7 +118,7 @@
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit"
-                                    class="px-3 py-1 bg-red-500 hover:bg-red-600 text-white rounded-md text-md font-medium transition"
+                                    class="px-3 py-1 bg-red-500 hover:bg-red-600 text-white rounded-md text-md font-medium transition cursor-pointer"
                                     data-toggle="tooltip" data-original-title="Delete product">
                                     Delete
                                 </button>
