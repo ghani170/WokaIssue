@@ -19,7 +19,7 @@ class RoleMidlleware
         if (Auth::check() && Auth::user()->role === $role) {
             return $next($request);
         }else{
-            abort(403, 'Akses ditolak');
+            abort(404, 'NOT FOUND');
         } 
     }
 }
