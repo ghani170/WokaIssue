@@ -173,14 +173,14 @@
                         </li>
                         <li>
                             <a href="{{route('admin.laporan.index')}}"
-                                class="flex items-center p-3 rounded-lg transition-all duration-200 hover:bg-blue-700 hover:shadow-md {{ request()->routeIs('admin.laporan.index') ? 'bg-blue-700 shadow-md' : '' }}">
+                                class="flex items-center p-3 rounded-lg transition-all duration-200 hover:bg-blue-700 hover:shadow-md {{ request()->routeIs('admin.laporan.*') ? 'bg-blue-700 shadow-md' : '' }}">
                                 <i class="fa-solid fa-folder-plus mr-3 w-5 text-center"></i>
                                 Laporan Masuk Client
                             </a>
                         </li>
                         <li>
-                            <a href="{{route('admin.laporan.activity')}}"
-                                class="flex items-center p-3 rounded-lg transition-all duration-200 hover:bg-blue-700 hover:shadow-md {{ request()->routeIs('admin.laporan.activity') ? 'bg-blue-700 shadow-md' : '' }}">
+                            <a href="{{route('admin.laporanActivity')}}"
+                                class="flex items-center p-3 rounded-lg transition-all duration-200 hover:bg-blue-700 hover:shadow-md {{ request()->routeIs('admin.laporanActivity') ? 'bg-blue-700 shadow-md' : '' }}">
                                 <i class="fa-solid fa-folder-open mr-3 w-5 text-center"></i>
                                 Laporan Activity
                             </a>
@@ -223,21 +223,21 @@
                         </li>
                         <li>
                             <a href="{{route('dev.laporan.index')}}"
-                                class="flex items-center p-3 rounded-lg transition-all duration-200 hover:bg-blue-700 hover:shadow-md {{ request()->routeIs('dev.laporan.index') ? 'bg-blue-700 shadow-md' : '' }}">
+                                class="flex items-center p-3 rounded-lg transition-all duration-200 hover:bg-blue-700 hover:shadow-md {{ request()->routeIs('dev.laporan.*') ? 'bg-blue-700 shadow-md' : '' }}">
                                 <i class="fa-solid fa-folder-open mr-3 w-5 text-center"></i>
                                 Laporan Client Masuk
                             </a>
                         </li>
                         <li>
-                            <a href="{{route('dev.laporan.selesai')}}"
-                                class="flex items-center p-3 rounded-lg transition-all duration-200 hover:bg-blue-700 hover:shadow-md {{ request()->routeIs('dev.laporan.selesai') ? 'bg-blue-700 shadow-md' : '' }}">
+                            <a href="{{route('dev.laporanSelesai')}}"
+                                class="flex items-center p-3 rounded-lg transition-all duration-200 hover:bg-blue-700 hover:shadow-md {{ request()->routeIs('dev.laporanSelesai') ? 'bg-blue-700 shadow-md' : '' }}">
                                 <i class="fa-solid fa-folder-closed mr-3 w-5 text-center"></i>
                                 Laporan Client Selesai
                             </a>
                         </li>
                         <li>
-                            <a href="{{route('dev.laporan.ditolak')}}"
-                                class="flex items-center p-3 rounded-lg transition-all duration-200 hover:bg-blue-700 hover:shadow-md {{ request()->routeIs('dev.laporan.ditolak') ? 'bg-blue-700 shadow-md' : '' }}">
+                            <a href="{{route('dev.laporanDitolak')}}"
+                                class="flex items-center p-3 rounded-lg transition-all duration-200 hover:bg-blue-700 hover:shadow-md {{ request()->routeIs('dev.laporanDitolak') ? 'bg-blue-700 shadow-md' : '' }}">
                                 <i class="fa-solid fa-folder-closed mr-3 w-5 text-center"></i>
                                 Laporan Client Ditolak
                             </a>
@@ -574,7 +574,7 @@
                 .catch(err => console.error(err));
         }
     </script>
-    
+
     <script>
         // Ambil data user dari PHP/Laravel
         const userName = "{{ Auth::user()->name }}";

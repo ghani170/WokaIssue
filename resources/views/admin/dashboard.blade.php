@@ -38,7 +38,7 @@
             <hr class="my-3">
 
             <p class="text-sm">
-                Lihat <span class="font-semibold text-green-600"><a href="{{ route('admin.laporan.activity') }}">Laporan
+                Lihat <span class="font-semibold text-green-600"><a href="{{ route('admin.laporanActivity') }}">Laporan
                         Client</a></span> Selesai
             </p>
         </div>

@@ -30,7 +30,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin'])->grou
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     route::resource('project', ProjectController::class)->parameters(['project' => 'project',]);
     Route::put('/admin/project/status/{project}', [ProjectController::class, 'updateStatus'])->name('project.updateStatus');
-    Route::get('/laporan/activity', [LaporanController::class, 'activity'])->name('laporan.activity');
+    Route::get('/laporan/activity', [LaporanController::class, 'activity'])->name('laporanActivity');
     route::resource('company', CompanyController::class);
     Route::resource('client', ClientController::class);
     Route::resource('developer', DeveloperController::class);
@@ -62,8 +62,8 @@ Route::prefix('dev')->name('dev.')->middleware(['auth', 'role:developer'])->grou
     Route::post('/dev/laporan/{id}/send-message', [DeveloperLaporanController::class, 'sendMessage'])->name('laporan.sendMessage');
     Route::put('/dev/laporan/status/{laporan}', [DeveloperLaporanController::class, 'updateStatus'])->name('laporan.updateStatus');
     Route::put('/dev/laporan/lampiran/{laporan}', [DeveloperLaporanController::class, 'uploadLampiran'])->name('laporan.uploadLampiran');
-    Route::get('/laporan/selesai', [DeveloperLaporanController::class, 'selesai'])->name('laporan.selesai');
-    Route::get('/laporan/ditolak', [DeveloperLaporanController::class, 'ditolak'])->name('laporan.ditolak');
+    Route::get('/laporan/selesai', [DeveloperLaporanController::class, 'selesai'])->name('laporanSelesai');
+    Route::get('/laporan/ditolak', [DeveloperLaporanController::class, 'ditolak'])->name('laporanDitolak');
     Route::resource('laporan', DeveloperLaporanController::class);
 });
 

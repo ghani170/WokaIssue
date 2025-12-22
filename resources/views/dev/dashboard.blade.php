@@ -38,7 +38,7 @@
         <hr class="my-3">
 
         <p class="text-sm">
-            Lihat <span class="font-semibold text-yellow-600"><a href="{{ route('dev.laporan.selesai') }}">Laporan</a></span>
+            Lihat <span class="font-semibold text-yellow-600"><a href="{{ route('dev.laporanDitolak') }}">Laporan</a></span>
         </p>
     </div>
 
@@ -57,7 +57,7 @@
         <hr class="my-3">
 
         <p class="text-sm">
-            Lihat <span class="font-semibold text-green-600"><a href="{{ route('dev.laporan.selesai') }}">Laporan Selesai</a></span>
+            Lihat <span class="font-semibold text-green-600"><a href="{{ route('dev.laporanSelesai') }}">Laporan Selesai</a></span>
         </p>
     </div>
 

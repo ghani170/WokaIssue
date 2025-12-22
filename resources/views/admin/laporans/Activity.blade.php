@@ -1,6 +1,6 @@
 @extends('layout.app')
 
-@section('title', 'Laporan Client Selesai')
+@section('title', 'Laporan Activity Client')
 
 @section('content')
 

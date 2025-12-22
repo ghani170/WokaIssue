@@ -1,5 +1,5 @@
 @extends('layout.app')
-
+@section('title', 'Detail Laporan Client')
 @section('content')
 
 <div class="w-full mt-6">
