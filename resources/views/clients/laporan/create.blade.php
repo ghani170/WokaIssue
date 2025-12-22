@@ -40,7 +40,7 @@
                 @endforeach
             </select>
 
-            @error('nama_project')
+            @error('project_id')
             <small class="text-red-600">{{ $message }}</small>
             @enderror
         </div>
