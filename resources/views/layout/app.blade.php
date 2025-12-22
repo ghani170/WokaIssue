@@ -248,12 +248,13 @@
                             <form action="{{ route('logout') }}" method="POST"
                                 class="flex items-center p-3 rounded-lg transition-all duration-200 hover:bg-blue-700 hover:shadow-md">
                                 @csrf
-                                <button type="submit" class="flex items-center w-full">
+                                <button type="submit" class="flex items-center w-full cursor-pointer">
                                     <i class="fa-solid fa-arrow-right-from-bracket mr-3 w-5 text-center"></i>
                                     Logout
                                 </button>
                             </form>
                         </li>
+
                     </ul>
                 </nav>
 
@@ -289,7 +290,7 @@
                         <div class="relative header-dropdown-container" id="msgNotifContainer">
                             <!-- BUTTON MESSAGE -->
                             <button id="msgDropdownButton"
-                                class="text-gray-500 hover:text-blue-600 p-2 rounded-full hover:bg-blue-50 transition-colors relative">
+                                class="text-gray-500 hover:text-blue-600 p-2 rounded-full hover:bg-blue-50 transition-colors relative cursor-pointer">
                                 <i class="fas fa-bell text-lg"></i>
                                 @if($unreadMessages > 0)
                                 <span class="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full" id="msgDot"></span>
@@ -348,7 +349,7 @@
                         @if (Auth::user()->role === 'client')
                         <div class="relative header-dropdown-container">
                             <button id="messagedropdownButton"
-                                class="text-gray-500 hover:text-blue-600 p-2 rounded-full hover:bg-blue-50 transition-colors relative">
+                                class="text-gray-500 hover:text-blue-600 p-2 rounded-full hover:bg-blue-50 transition-colors relative cursor-pointer">
                                 <i class="fas fa-envelope text-lg"></i>
                                 @if($showDot)
                                 <span id="laporanDot"
@@ -389,7 +390,7 @@
                         {{-- Dropdown Profil --}}
                         <div class="relative header-dropdown-container">
                             <button id="dropdownButton"
-                                class="flex items-center text-gray-700 hover:text-blue-600 focus:outline-none p-1 rounded-full hover:bg-blue-50 transition-colors">
+                                class="cursor-pointer flex items-center text-gray-700 hover:text-blue-600 focus:outline-none p-1 rounded-full hover:bg-blue-50 transition-colors">
                                 <img src="https://ui-avatars.com/api/?name={{ urlencode($user->name) }}&background=0D8ABC&color=fff"
                                     alt="Profile" class="w-9 h-9 rounded-full ring-2 ring-blue-200">
                             </button>
@@ -407,33 +408,23 @@
 
 
                                     <button id="editProfileButton"
-                                        class="flex items-center w-full px-4 py-2 text-sm text-blue-600 hover:bg-blue-50 border-t border-gray-100">
+                                        class="flex items-center w-full px-4 py-2 text-sm text-blue-600 hover:bg-blue-50 border-t border-gray-100 cursor-pointer">
                                         <i class="fas fa-edit mr-3"></i>
                                         Edit Profil
                                     </button>
-
-                                    <form action="{{ route('logout') }}" method="POST">
-                                        @csrf
-                                        <button type="submit"
-                                            class="flex items-center w-full px-4 py-2 text-sm text-red-600 hover:bg-red-100 border-t border-gray-100">
-                                            <i class="fas fa-sign-out-alt mr-3"></i>
-                                            logout
-                                        </button>
-                                    </form>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </header>
-
             <main class="flex-1 p-4 sm:p-6 overflow-y-auto">
                 @yield('content')
             </main>
-
         </div>
     </div>
-    <div id="editProfilePopup" class="hidden fixed bg-white/30 inset-0 flex items-center justify-center p-4 z-[9999]">
+    <div id="editProfilePopup"
+        class="{{ $errors->profile->any() ? '' : 'hidden' }} fixed bg-white/30 inset-0 flex items-center justify-center p-4 z-[9999]">
         <div class="bg-white rounded-xl shadow-2xl max-w-md w-full transform transition-all">
             <div class="flex justify-between items-center p-6 border-b border-gray-200">
                 <h3 class="text-xl font-bold text-gray-800">Edit Profil</h3>
@@ -457,20 +448,29 @@
 
                     <div>
                         <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Nama Lengkap</label>
-                        <input type="text" id="name" name="name" value="{{ $user->name }}" required
+                        <input type="text" id="name" name="name" value="{{ old('name', $user->name) }}"
                             class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
+                        @error('name', 'profile')
+                        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     <div>
                         <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
-                        <input type="email" id="email" name="email" value="{{ $user->email }}" required
+                        <input type="email" id="email" name="email" value="{{ old('email', $user->email) }}"
                             class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
+                        @error('email', 'profile')
+                        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     <div>
                         <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Password</label>
                         <input type="password" id="password" name="password" placeholder="Masukan Password (Opsional)"
                             class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
+                        @error('password', 'profile')
+                        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                        @enderror
                     </div>
 
 
@@ -574,8 +574,7 @@
                 .catch(err => console.error(err));
         }
     </script>
-
-
+    
     <script>
         // Ambil data user dari PHP/Laravel
         const userName = "{{ Auth::user()->name }}";
@@ -608,7 +607,9 @@
             messagedropdownButton.addEventListener('click', function() {
                 fetch('/notif/mark-done-read', {
                     method: 'POST',
-                    headers: { 'X-CSRF-TOKEN': '{{ csrf_token() }}' }
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    }
                 });
             });
         }

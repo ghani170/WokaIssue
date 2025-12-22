@@ -16,7 +16,7 @@ class CompanyController extends Controller
     {
         //
         $company = Company::all();
-        return  view('admin.company.index',compact('company'));
+        return  view('admin.company.index', compact('company'));
     }
 
     /**
@@ -33,18 +33,29 @@ class CompanyController extends Controller
      */
     public function store(Request $request)
     {
-        //
         $data = $request->validate([
             'name' => 'required|string|max:255',
             'alamat' => 'required|string',
             'telepon' => 'required|string',
         ]);
-       
 
-       Company::create($data);
+     
+        $exists = Company::where('name', $request->name)
+            ->where('alamat', $request->alamat)
+            ->exists();
 
-        return redirect()->route('admin.company.index')->with('success', 'Company Berhasil ditambahkan');
+        if ($exists) {
+            return back()->withErrors([
+                'name' => 'Perusahaan dengan nama dan alamat ini sudah ada.',
+            ])->withInput();
+        }
+
+        Company::create($data);
+
+        return redirect()->route('admin.company.index')
+            ->with('success', 'Company Berhasil ditambahkan');
     }
+
 
     /**
      * Display the specified resource.
@@ -52,7 +63,7 @@ class CompanyController extends Controller
     public function show(string $id)
     {
         //
-     
+
     }
 
     /**
@@ -61,8 +72,8 @@ class CompanyController extends Controller
     public function edit(Company $company)
     {
         //
-        
-        return view('admin.company.edit',compact('company'));
+
+        return view('admin.company.edit', compact('company'));
     }
 
     /**
@@ -70,19 +81,28 @@ class CompanyController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
         $data = $request->validate([
             'name' => 'required|string|max:255',
             'alamat' => 'required|string',
             'telepon' => 'required|string',
         ]);
 
-        $company = Company::findOrFail($id);
+        $exists = Company::where('name', $request->name)
+            ->where('alamat', $request->alamat)
+            ->where('id', '!=', $id)
+            ->exists();
 
+        if ($exists) {
+            return back()->withErrors([
+                'name' => 'Perusahaan dengan nama dan alamat ini sudah terdaftar.',
+            ])->withInput();
+        }
+
+        $company = Company::findOrFail($id);
         $company->update($data);
 
-        return redirect()->route('admin.company.index')->with('success', 'Company Berhasil diupdate');
-
+        return redirect()->route('admin.company.index')
+            ->with('success', 'Company Berhasil diupdate');
     }
 
     /**
@@ -99,7 +119,7 @@ class CompanyController extends Controller
         // Jika tidak memiliki laporan → boleh hapus
         $company->delete();
 
-        return redirect()->route('admin.project.index')
-            ->with('success', 'Project berhasil dihapus.');
+        return redirect()->route('admin.company.index')
+            ->with('success', 'Company berhasil dihapus.');
     }
 }
