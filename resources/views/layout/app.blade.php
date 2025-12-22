@@ -389,7 +389,7 @@
                         {{-- Dropdown Profil --}}
                         <div class="relative header-dropdown-container">
                             <button id="dropdownButton"
-                                class="flex items-center text-gray-700 hover:text-blue-600 focus:outline-none p-1 rounded-full hover:bg-blue-50 transition-colors">
+                                class="cursor-pointer flex items-center text-gray-700 hover:text-blue-600 focus:outline-none p-1 rounded-full hover:bg-blue-50 transition-colors">
                                 <img src="https://ui-avatars.com/api/?name={{ urlencode($user->name) }}&background=0D8ABC&color=fff"
                                     alt="Profile" class="w-9 h-9 rounded-full ring-2 ring-blue-200">
                             </button>

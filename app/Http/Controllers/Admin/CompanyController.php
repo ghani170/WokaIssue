@@ -99,7 +99,7 @@ class CompanyController extends Controller
         // Jika tidak memiliki laporan → boleh hapus
         $company->delete();
 
-        return redirect()->route('admin.project.index')
-            ->with('success', 'Project berhasil dihapus.');
+        return redirect()->route('admin.company.index')
+            ->with('success', 'Company berhasil dihapus.');
     }
 }

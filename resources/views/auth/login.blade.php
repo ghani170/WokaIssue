@@ -42,17 +42,17 @@
         <div class="bg-white/20 backdrop-blur-md rounded-2xl shadow-xl overflow-hidden border border-white/20">
             <div class="p-8">
                 @if ($errors->any())
-                    <div class="mb-6 bg-red-100 border-l-4 border-red-500 text-red-700 p-4 rounded-lg shadow">
-                        <div class="flex items-center">
-                            <i class="fas fa-triangle-exclamation mr-2"></i>
-                            <p class="font-semibold">Login gagal!</p>
-                        </div>
-                        <ul class="mt-2 ml-6 list-disc text-sm">
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
+                <div class="mb-6 bg-red-100 border-l-4 border-red-500 text-red-700 p-4 rounded-lg shadow">
+                    <div class="flex items-center">
+                        <i class="fas fa-triangle-exclamation mr-2"></i>
+                        <p class="font-semibold">Login gagal!</p>
                     </div>
+                    <ul class="mt-2 ml-6 list-disc text-sm">
+                        @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
                 @endif
                 <div class="text-center mb-8">
                     <div
@@ -94,7 +94,7 @@
                     </div>
 
                     <script>
-                        document.getElementById('togglePassword').onclick = function () {
+                        document.getElementById('togglePassword').onclick = function() {
                             const pwd = document.getElementById('password');
                             const icon = this.querySelector('i');
 
@@ -103,10 +103,12 @@
                             icon.className = show ? "fas fa-eye-slash" : "fas fa-eye";
                         };
                     </script>
-                    <button type="submit"
-                        class=" bg-blue-500 text-white py-3 px-4 rounded-lg font-semibold hover:shadow-lg transition-all duration-200 transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">
-                        Sign In
-                    </button>
+                    <div class="flex justify-center">
+                        <button type="submit"
+                            class="cursor-pointer w-full bg-blue-500 text-white py-3 px-4 rounded-lg font-semibold hover:shadow-lg transition-all duration-200 transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">
+                            Sign In
+                        </button>
+                    </div>
                 </form>
 
 
