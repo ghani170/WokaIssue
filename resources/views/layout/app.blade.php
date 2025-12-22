@@ -418,14 +418,13 @@
                     </div>
                 </div>
             </header>
-
             <main class="flex-1 p-4 sm:p-6 overflow-y-auto">
                 @yield('content')
             </main>
-
         </div>
     </div>
-    <div id="editProfilePopup" class="hidden fixed bg-white/30 inset-0 flex items-center justify-center p-4 z-[9999]">
+    <div id="editProfilePopup"
+        class="{{ $errors->any() ? '' : 'hidden' }} fixed bg-white/30 inset-0 flex items-center justify-center p-4 z-[9999]">
         <div class="bg-white rounded-xl shadow-2xl max-w-md w-full transform transition-all">
             <div class="flex justify-between items-center p-6 border-b border-gray-200">
                 <h3 class="text-xl font-bold text-gray-800">Edit Profil</h3>
@@ -449,20 +448,29 @@
 
                     <div>
                         <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Nama Lengkap</label>
-                        <input type="text" id="name" name="name" value="{{ $user->name }}" required
+                        <input type="text" id="name" name="name" value="{{ old('name', $user->name) }}"
                             class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
+                        @error('name')
+                        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     <div>
                         <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
-                        <input type="email" id="email" name="email" value="{{ $user->email }}" required
+                        <input type="email" id="email" name="email" value="{{ old('email', $user->email) }}"
                             class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
+                        @error('email')
+                        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     <div>
                         <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Password</label>
                         <input type="password" id="password" name="password" placeholder="Masukan Password (Opsional)"
                             class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
+                        @error('password')
+                        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                        @enderror
                     </div>
 
 

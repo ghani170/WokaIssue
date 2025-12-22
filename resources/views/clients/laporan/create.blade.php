@@ -34,7 +34,9 @@
                 focus:ring-2 focus:ring-black focus:border-black transition">
                 <option value="" disabled selected>-- Pilih Project --</option>
                 @foreach ( $projects as $p)
+                @if ($p->status == 'active' | $p->status == 'maintenance')
                 <option value="{{ $p->id }}">{{ $p->nama_project }}</option>
+                @endif
                 @endforeach
             </select>
 
