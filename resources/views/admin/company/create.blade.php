@@ -20,7 +20,7 @@
                 value="{{ old('name') }}">
 
             @error('name')
-                <small class="text-red-600">{{ $message }}</small>
+            <small class="text-red-600">{{ $message }}</small>
             @enderror
         </div>
 
@@ -32,7 +32,7 @@
                 focus:ring-black focus:border-black transition">{{ old('alamat') }}</textarea>
 
             @error('alamat')
-                <small class="text-red-600">{{ $message }}</small>
+            <small class="text-red-600">{{ $message }}</small>
             @enderror
         </div>
 
@@ -46,13 +46,13 @@
                 value="{{ old('telepon') }}">
 
             @error('telepon')
-                <small class="text-red-600">{{ $message }}</small>
+            <small class="text-red-600">{{ $message }}</small>
             @enderror
         </div>
 
         <div class="flex items-center gap-3 mt-5">
             <button type="submit"
-                class="bg-blue-500 text-white px-5 py-2 rounded-lg hover:bg-blue-700 transition">
+                class="bg-blue-500 text-white px-5 py-2 rounded-lg hover:bg-blue-700 transition cursor-pointer">
                 Simpan
             </button>
 

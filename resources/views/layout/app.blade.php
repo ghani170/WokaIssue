@@ -248,12 +248,13 @@
                             <form action="{{ route('logout') }}" method="POST"
                                 class="flex items-center p-3 rounded-lg transition-all duration-200 hover:bg-blue-700 hover:shadow-md">
                                 @csrf
-                                <button type="submit" class="flex items-center w-full">
+                                <button type="submit" class="flex items-center w-full cursor-pointer">
                                     <i class="fa-solid fa-arrow-right-from-bracket mr-3 w-5 text-center"></i>
                                     Logout
                                 </button>
                             </form>
                         </li>
+
                     </ul>
                 </nav>
 
@@ -289,7 +290,7 @@
                         <div class="relative header-dropdown-container" id="msgNotifContainer">
                             <!-- BUTTON MESSAGE -->
                             <button id="msgDropdownButton"
-                                class="text-gray-500 hover:text-blue-600 p-2 rounded-full hover:bg-blue-50 transition-colors relative">
+                                class="text-gray-500 hover:text-blue-600 p-2 rounded-full hover:bg-blue-50 transition-colors relative cursor-pointer">
                                 <i class="fas fa-bell text-lg"></i>
                                 @if($unreadMessages > 0)
                                 <span class="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full" id="msgDot"></span>
@@ -348,7 +349,7 @@
                         @if (Auth::user()->role === 'client')
                         <div class="relative header-dropdown-container">
                             <button id="messagedropdownButton"
-                                class="text-gray-500 hover:text-blue-600 p-2 rounded-full hover:bg-blue-50 transition-colors relative">
+                                class="text-gray-500 hover:text-blue-600 p-2 rounded-full hover:bg-blue-50 transition-colors relative cursor-pointer">
                                 <i class="fas fa-envelope text-lg"></i>
                                 @if($showDot)
                                 <span id="laporanDot"
@@ -407,19 +408,10 @@
 
 
                                     <button id="editProfileButton"
-                                        class="flex items-center w-full px-4 py-2 text-sm text-blue-600 hover:bg-blue-50 border-t border-gray-100">
+                                        class="flex items-center w-full px-4 py-2 text-sm text-blue-600 hover:bg-blue-50 border-t border-gray-100 cursor-pointer">
                                         <i class="fas fa-edit mr-3"></i>
                                         Edit Profil
                                     </button>
-
-                                    <form action="{{ route('logout') }}" method="POST">
-                                        @csrf
-                                        <button type="submit"
-                                            class="flex items-center w-full px-4 py-2 text-sm text-red-600 hover:bg-red-100 border-t border-gray-100">
-                                            <i class="fas fa-sign-out-alt mr-3"></i>
-                                            logout
-                                        </button>
-                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -608,7 +600,9 @@
             messagedropdownButton.addEventListener('click', function() {
                 fetch('/notif/mark-done-read', {
                     method: 'POST',
-                    headers: { 'X-CSRF-TOKEN': '{{ csrf_token() }}' }
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    }
                 });
             });
         }

@@ -8,7 +8,7 @@
                     <tr class="bg-gray-100">
                         <th class="px-4 py-3 text-center text-gray-600 font-semibold uppercase text-xs">no</th>
                         <th class="px-4 py-3 text-center text-gray-600 font-semibold uppercase text-xs">nama project</th>
-                        <th class="px-4 py-3 text-center text-gray-600 font-semibold uppercase text-xs">nama client</th>
+                        <th class="px-4 py-3 text-centger text-gray-600 font-semibold uppercase text-xs">nama client</th>
                         <th class="px-4 py-3 text-center text-gray-600 font-semibold uppercase text-xs">tipe</th>
                         <th class="px-4 py-3 text-center text-gray-600 font-semibold uppercase text-xs">prioritas</th>
                         <th class="px-4 py-3 text-center text-gray-600 font-semibold uppercase text-xs">deadline</th>

@@ -62,7 +62,7 @@
 
         <div class="flex items-center gap-3 mt-5">
             <button type="submit"
-                class="bg-blue-500 hover:bg-blue-800 text-white px-5 py-2 rounded-lg transition">
+                class="bg-blue-500 hover:bg-blue-800 text-white px-5 py-2 rounded-lg transition cursor-pointer">
                 Update
             </button>
 
