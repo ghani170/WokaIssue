@@ -107,7 +107,7 @@
         <div class="bg-white shadow rounded-lg p-6">
             <h3 class="font-semibold mb-4">Customer Service</h3>
 
-            <div class="bg-gray-100 p-4 rounded h-64 overflow-y-auto mb-4">
+            <div id="chat-box" class="bg-gray-100 p-4 rounded h-64 overflow-y-auto mb-4">
                 @foreach ($messages as $msg)
                 @if ($msg->sender_id == auth()->id())
                 <div class="text-right mb-3">
@@ -123,6 +123,7 @@
                 </div>
                 @endif
                 @endforeach
+                <div id="chat-end"></div>
             </div>
 
             <form action="{{ route('dev.laporan.sendMessage', $laporan->id) }}" method="POST">
@@ -149,32 +150,58 @@
 </a>
 
 <script>
+    const activeTabFromSession = "{{ session('active_tab') }}";
+</script>
+
+
+<script>
     const tabs = document.querySelectorAll('.tab-btn');
     const contents = document.querySelectorAll('.tab-content');
 
+    function openTab(tabId) {
+        tabs.forEach(b => b.classList.remove('active-tab'));
+        contents.forEach(c => c.classList.add('hidden'));
+
+        const btn = document.querySelector(`[data-tab="${tabId}"]`);
+        const content = document.getElementById(tabId);
+
+        if (btn && content) {
+            btn.classList.add('active-tab');
+            content.classList.remove('hidden');
+        }
+    }
+
+    // TAB DEFAULT
+    if (activeTabFromSession) {
+        openTab(activeTabFromSession);
+    } else {
+        openTab('tab1');
+    }
+
+    // CLICK TAB
     tabs.forEach(btn => {
         btn.onclick = () => {
-            tabs.forEach(b => b.classList.remove('active-tab'));
-            contents.forEach(c => c.classList.add('hidden'));
-            btn.classList.add('active-tab');
-            document.getElementById(btn.dataset.tab).classList.remove('hidden');
+            openTab(btn.dataset.tab);
         };
     });
+</script>
 
-    const modal = document.getElementById('image-modal');
-    const modalImg = document.getElementById('modal-image');
+<script>
+    function scrollToLastChat() {
+        const chatBox = document.getElementById('chat-box');
+        const chatEnd = document.getElementById('chat-end');
 
-    document.querySelectorAll('.preview-image').forEach(img => {
-        img.onclick = () => {
-            modalImg.src = img.src;
-            modal.classList.remove('hidden');
-        };
-    });
+        if (chatBox && chatEnd) {
+            chatBox.scrollTop = chatBox.scrollHeight;
+            // alternatif smooth:
+            // chatEnd.scrollIntoView({ behavior: 'smooth' });
+        }
+    }
 
-    document.getElementById('close-image').onclick = () => {
-        modal.classList.add('hidden');
-        modalImg.src = '';
-    };
+    // Kalau aktif tab3 → scroll otomatis
+    if (activeTabFromSession === 'tab3') {
+        setTimeout(scrollToLastChat, 200);
+    }
 </script>
 
 <style>

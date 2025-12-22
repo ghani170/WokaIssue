@@ -105,16 +105,31 @@
     <div id="tab3" class="tab-content hidden">
         <div class="bg-white shadow rounded-lg p-6">
             <h3 class="font-semibold mb-4">Customer Service</h3>
-            <div class="bg-gray-100 p-4 rounded h-64 overflow-y-auto mb-4">
+
+            <div id="chat-box" class="bg-gray-100 p-4 rounded h-64 overflow-y-auto mb-4">
                 @foreach ($messages as $msg)
-                <div class="{{ $msg->sender_id == auth()->id() ? 'text-right' : 'text-left' }} mb-2">
-                    <div class="inline-block px-3 py-2 rounded-lg
-                            {{ $msg->sender_id == auth()->id() ? 'bg-blue-600 text-white' : 'bg-white shadow' }}">
+                @if ($msg->sender_id == auth()->id())
+                <div class="text-right mb-3">
+                    <div class="inline-block bg-green-600 text-white px-3 py-2 rounded-lg">
                         {{ $msg->message }}
                     </div>
                 </div>
+                @else
+                <div class="text-left mb-3">
+                    <div class="inline-block bg-gray-300 px-3 py-2 rounded-lg">
+                        {{ $msg->message }}
+                    </div>
+                </div>
+                @endif
                 @endforeach
+                <div id="chat-end"></div>
             </div>
+
+            <form action="{{ route('client.laporan.sendMessage', $laporan->id) }}" method="POST">
+                @csrf
+                <textarea name="message" class="w-full border p-2 rounded" placeholder="Tulis pesan..."></textarea>
+                <button class="mt-2 px-4 py-2 bg-blue-600 text-white rounded">Kirim</button>
+            </form>
         </div>
     </div>
 </div>
@@ -129,31 +144,66 @@
     </div>
 </div>
 
+<a href="{{ url()->previous() }}"
+    class="inline-flex items-center gap-2 bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 mt-4 rounded-lg mb-4">
+    <i class="mt-1 fa-solid fa-arrow-left"></i> Kembali
+</a>
+
 <script>
-    const tabBtns = document.querySelectorAll('.tab-btn');
-    const tabs = document.querySelectorAll('.tab-content');
+    const activeTabFromSession = "{{ session('active_tab') }}";
+</script>
 
-    tabBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            tabBtns.forEach(b => b.classList.remove('active-tab'));
-            tabs.forEach(t => t.classList.add('hidden'));
+
+<script>
+    const tabs = document.querySelectorAll('.tab-btn');
+    const contents = document.querySelectorAll('.tab-content');
+
+    function openTab(tabId) {
+        tabs.forEach(b => b.classList.remove('active-tab'));
+        contents.forEach(c => c.classList.add('hidden'));
+
+        const btn = document.querySelector(`[data-tab="${tabId}"]`);
+        const content = document.getElementById(tabId);
+
+        if (btn && content) {
             btn.classList.add('active-tab');
-            document.getElementById(btn.dataset.tab).classList.remove('hidden');
-        });
-    });
+            content.classList.remove('hidden');
+        }
+    }
 
-    const modal = document.getElementById('image-modal');
-    const modalImg = document.getElementById('modal-image');
+    // TAB DEFAULT
+    if (activeTabFromSession) {
+        openTab(activeTabFromSession);
+    } else {
+        openTab('tab1');
+    }
 
-    document.querySelectorAll('.preview-image2').forEach(img => {
-        img.onclick = () => {
-            modalImg.src = img.src;
-            modal.classList.remove('hidden');
+    // CLICK TAB
+    tabs.forEach(btn => {
+        btn.onclick = () => {
+            openTab(btn.dataset.tab);
         };
     });
-
-    document.getElementById('close-modal').onclick = () => modal.classList.add('hidden');
 </script>
+
+<script>
+    function scrollToLastChat() {
+        const chatBox = document.getElementById('chat-box');
+        const chatEnd = document.getElementById('chat-end');
+
+        if (chatBox && chatEnd) {
+            chatBox.scrollTop = chatBox.scrollHeight;
+            // alternatif smooth:
+            // chatEnd.scrollIntoView({ behavior: 'smooth' });
+        }
+    }
+
+    // Kalau aktif tab3 → scroll otomatis
+    if (activeTabFromSession === 'tab3') {
+        setTimeout(scrollToLastChat, 200);
+    }
+</script>
+
 
 <style>
     .tab-btn {
