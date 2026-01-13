@@ -204,6 +204,35 @@
     }
 </script>
 
+<script>
+    // Script untuk modal preview gambar
+    document.addEventListener('DOMContentLoaded', function() {
+        const modal = document.getElementById('image-modal');
+        const modalImage = document.getElementById('modal-image');
+        const closeModal = document.getElementById('close-modal');
+
+        // Event listener untuk gambar dengan class preview-image2
+        document.querySelectorAll('.preview-image2').forEach(img => {
+            img.addEventListener('click', function() {
+                modalImage.src = this.src;
+                modal.classList.remove('hidden');
+            });
+        });
+
+        // Tutup modal
+        closeModal.addEventListener('click', function() {
+            modal.classList.add('hidden');
+        });
+
+        // Tutup modal jika klik di luar gambar
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                modal.classList.add('hidden');
+            }
+        });
+    });
+</script>
+
 
 <style>
     .tab-btn {
